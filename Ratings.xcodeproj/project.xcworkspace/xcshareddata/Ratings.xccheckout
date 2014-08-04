@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>4802D151-1F7F-4ECF-A7BD-5706FE1AAAF0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Ratings</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>4FBEF78C-2EF5-4CF7-93E3-923F4AAC63D3</key>
+		<string>https://github.com/Marure-oga/picture.git</string>
+		<key>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</key>
+		<string>https://github.com/Marure-oga/MARURE.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Ratings.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>4FBEF78C-2EF5-4CF7-93E3-923F4AAC63D3</key>
+		<string>../../../picture</string>
+		<key>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Marure-oga/MARURE.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>4FBEF78C-2EF5-4CF7-93E3-923F4AAC63D3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>picture</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Ratings</string>
+		</dict>
+	</array>
+</dict>
+</plist>
