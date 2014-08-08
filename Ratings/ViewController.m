@@ -6,19 +6,21 @@
 @end
 
 @implementation ViewController
+//タイマー１
 NSTimer *ter;
+//タイマー２
 NSTimer *ter2;
+//イベント
 NSInteger event=0;
+//雰囲気
 NSInteger atomosphere = 0;
+//プログレスバー進捗度（０〜１）
 double progresslevel = 0;
-
+//ネットワークに接続しているかを判断する時間（秒）
 double searchTime = 5;
-
+//最初のネットワーク接続確認か
 Boolean first = true;
-Boolean bol = false;
-Boolean bol2 = false;
 
-int clickbuttonindex = -1;
 
 UIProgressView *progressView;
 
@@ -26,7 +28,6 @@ UIAlertView *alert;
 
 dispatch_queue_t mainQueue;
 dispatch_queue_t subQueue;
-//dispatch_queue_t subQueue2;
 
 - (void)viewDidLoad
 {
@@ -34,35 +35,33 @@ dispatch_queue_t subQueue;
     
     [self syokika];
     
+    //プログレスバーの作成
     progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault ];
     CGSize pSize = progressView.frame.size;
     CGSize vSize = self.view.frame.size;
-    progressView.frame = CGRectMake((vSize.width-pSize.width)/2,(vSize.height-pSize.height)/2+100,pSize.width,pSize.height);
+    progressView.frame = CGRectMake((vSize.width-pSize.width)/2,(vSize.height-pSize.height)/2+175,pSize.width,pSize.height);
+    progressView.transform = CGAffineTransformMakeScale(1.0f,2.0f);
     progressView.progress = 0.0;
     progressView.trackTintColor = [UIColor blackColor];
     [progressView setProgress:progresslevel animated:YES];
     [self.view addSubview:progressView];
     
+    
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);
-    //subQueue2 = dispatch_queue_create("sub2",0);
     
     [self Thread];
 }
 
+//メイン処理の実行
 -(void)Thread
 {
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
-
-    /*dispatch_async(subQueue,^{
-        [self subQueueMethod];
-        
-    });*/
-    
 }
 
+//メイン処理
 -(void)mainQueueMethod
 {
     
@@ -72,23 +71,10 @@ dispatch_queue_t subQueue;
     [self.view addSubview:progressView];
 }
 
+//サブ処理
 -(void)subQueueMethod
 {
-    while(true)
-    {
-        
-        if(clickbuttonindex == 1){
-            clickbuttonindex = -1;
-            NSLog(@"入った");
-            [self network];
-            if(bol){
-                bol = false;
-                [self networkaccessHantei:false];
-            }
-            break;
-            
-        }
-    }
+    [self network];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,17 +84,18 @@ dispatch_queue_t subQueue;
 }
 
 
-//初期化用
+//変数初期化
 -(void)syokika
 {
     event = 0;
     atomosphere = 0;
     progresslevel = 0;
-    clickbuttonindex = -1;
+    first = true;
+    
     progresslevel = progresslevel + 0.5;
 }
 
-//ネットワーク接続判定最初の一回
+//ネットワーク接続判定１回目
 -(void)network_first
 {
     Boolean accessstate = false;
@@ -119,6 +106,7 @@ dispatch_queue_t subQueue;
     
 }
 
+//ネットワーク接続判定２回目以降
 -(void)network
 {
     first = false;
@@ -128,8 +116,6 @@ dispatch_queue_t subQueue;
     NSDate *endDate;
     NSTimeInterval interval;
     
-    
-    clickbuttonindex = -1;
     startDate = [NSDate date];
     
     do{
@@ -138,12 +124,7 @@ dispatch_queue_t subQueue;
         interval = [endDate timeIntervalSinceDate:startDate];
     }while(accessstate == false && interval <= searchTime);
     
-    if(accessstate){
-        [self networkaccessHantei:accessstate];
-    }else{
-        bol = true;
-    }
-    
+    [self networkaccessHantei:accessstate];
 }
 
 
@@ -156,14 +137,18 @@ dispatch_queue_t subQueue;
     NetworkStatus netStatus =[curReach currentReachabilityStatus];
     
     if(netStatus == NotReachable){
+        
         networkaccess = false;
     }else{
+        //ネットワーク接続ができているとき
         networkaccess = true;
         if(first){
+            //最初のときプログレスバーの進行
             progresslevel = progresslevel + 0.5;
             [progressView setProgress:progresslevel animated:YES];
             [self.view addSubview:progressView];
         }else{
+            //２回目以降のときメイン処理でプログレスバーの進行
             dispatch_async(mainQueue,^{
                 progresslevel = progresslevel + 0.5;
                 [progressView setProgress:progresslevel animated:YES];
@@ -189,10 +174,6 @@ dispatch_queue_t subQueue;
     
     [alert show];
     
-    /*while(clickbuttonindex == -1){
-        [[NSRunLoop currentRunLoop]
-         runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5f]];
-    }*/
 }
 
 //アラートのボタンが押されたときの処理
@@ -200,17 +181,15 @@ dispatch_queue_t subQueue;
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     switch(buttonIndex){
         case 0:
-            clickbuttonindex = 0;
+            //いいえが押されたらアプリを終了
             exit(1);
             break;
         case 1:
-            //[self network];
-            clickbuttonindex = 1;
+            //はいが押されたらサブ処理でネットワーク接続確認を再試行
             dispatch_async(subQueue,^{
                 [self subQueueMethod];
                 
             });
-
             break;
     }
 }
@@ -221,12 +200,14 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 {
     if(accessstate){
         if(first){
+            //最初の時点でネットワーク接続ができているとき1.2秒後画面遷移
             ter = [NSTimer scheduledTimerWithTimeInterval:1.2
                                                target:self
                                              selector:@selector(nextPage:)
                                              userInfo:nil
                                               repeats:NO];
         }else{
+            //２回目以降でネットワーク接続ができたときメイン処理で0.7秒後画面遷移
             dispatch_async(mainQueue,^{
                 ter = [NSTimer scheduledTimerWithTimeInterval:0.7
                                                        target:self
@@ -238,12 +219,14 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         }
     }else{
         if(first){
+            //最初の時点でネットワーク接続ができていないときアラート表示
             ter2 = [NSTimer scheduledTimerWithTimeInterval:0.5
                                             target:self
                                              selector:@selector(showAlert)
                                             userInfo:nil
                                             repeats:NO];
         }else{
+            //２回目以降でネットワーク接続ができていないときメイン処理でアラート表示
             dispatch_async(mainQueue,^{
                 [self showAlert];
             });
@@ -256,7 +239,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 //次の画面へ遷移
 -(void)nextPage:(NSTimer*)timer{
     ViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"main"];
-    //[self.navigationItem setHidesBackButton:YES animated:YES];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController pushViewController:viewCont animated:YES];
 }
