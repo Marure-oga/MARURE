@@ -33,6 +33,8 @@
 		ABB83921197CFF9000878CB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB83903197CFF9000878CB0 /* UIKit.framework */; };
 		ABB83929197CFF9000878CB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABB83927197CFF9000878CB0 /* InfoPlist.strings */; };
 		ABB8392B197CFF9000878CB0 /* RatingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB8392A197CFF9000878CB0 /* RatingsTests.m */; };
+		F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2494D851994EB4900DD568A /* JsonSerchClass.m */; };
+		F2494D881994EB4900DD568A /* MARUREJson.json in Resources */ = {isa = PBXBuildFile; fileRef = F2494D861994EB4900DD568A /* MARUREJson.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,9 @@
 		ABB83926197CFF9000878CB0 /* RatingsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RatingsTests-Info.plist"; sourceTree = "<group>"; };
 		ABB83928197CFF9000878CB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ABB8392A197CFF9000878CB0 /* RatingsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatingsTests.m; sourceTree = "<group>"; };
+		F2494D841994EB4900DD568A /* JsonSerchClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonSerchClass.h; path = Ratings/JsonSerchClass.h; sourceTree = "<group>"; };
+		F2494D851994EB4900DD568A /* JsonSerchClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonSerchClass.m; path = Ratings/JsonSerchClass.m; sourceTree = "<group>"; };
+		F2494D861994EB4900DD568A /* MARUREJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MARUREJson.json; path = Ratings/MARUREJson.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +131,7 @@
 		ABB838F3197CFF9000878CB0 = {
 			isa = PBXGroup;
 			children = (
+				F2494D831994EB2B00DD568A /* Json */,
 				ABB83905197CFF9000878CB0 /* Ratings */,
 				ABB83924197CFF9000878CB0 /* RatingsTests */,
 				ABB838FE197CFF9000878CB0 /* Frameworks */,
@@ -198,6 +204,16 @@
 				ABB83927197CFF9000878CB0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F2494D831994EB2B00DD568A /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				F2494D841994EB4900DD568A /* JsonSerchClass.h */,
+				F2494D851994EB4900DD568A /* JsonSerchClass.m */,
+				F2494D861994EB4900DD568A /* MARUREJson.json */,
+			);
+			name = Json;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB3993621984F80C00D0F1FF /* Back.png in Resources */,
+				F2494D881994EB4900DD568A /* MARUREJson.json in Resources */,
 				AB71FC1D197FFAFD00F2A5BD /* Menu2.4.png in Resources */,
 				AB71FC1F197FFB7D00F2A5BD /* marure.png in Resources */,
 				ABB83918197CFF9000878CB0 /* Images.xcassets in Resources */,
@@ -310,6 +327,7 @@
 				ABB83916197CFF9000878CB0 /* ViewController.m in Sources */,
 				ABB83910197CFF9000878CB0 /* AppDelegate.m in Sources */,
 				AB818C15198E79930077E016 /* Reachability.m in Sources */,
+				F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */,
 				ABB8390C197CFF9000878CB0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
