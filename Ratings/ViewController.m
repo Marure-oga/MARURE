@@ -1,6 +1,6 @@
 
 #import "ViewController.h"
-
+#import "JsonSerchClass.h"
 @interface ViewController ()
 
 @end
@@ -16,7 +16,16 @@ NSInteger event=0;
 NSInteger atomosphere = 0;
 //プログレスバー進捗度（０〜１）
 double progresslevel = 0;
+<<<<<<< HEAD
 //ネットワークに接続しているかを判断する時間（秒）
+=======
+
+// 08/08 by yo
+MarureKeyS *mrks;
+
+//以上 08/08 by yo
+
+>>>>>>> FETCH_HEAD
 double searchTime = 5;
 //最初のネットワーク接続確認か
 Boolean first = true;
@@ -51,6 +60,20 @@ dispatch_queue_t subQueue;
     subQueue = dispatch_queue_create("sub1",0);
     
     [self Thread];
+    
+    
+    // 08/08 by yo
+    //イベントと雰囲気　を記録するファイルを呼び出す
+    //第一引数はイベントindex
+    //第二引数は雰囲気index
+    //追加の時MARUREJson例のように追加してください
+    //結果はログで確認してください　＝。＝
+    mrks = [MarureKeyS alloc];
+    [mrks SetEventAndMoody:0 moody:0];
+    NSLog(@"イベント　%@ , %@ , %@  ,%@  \n",mrks.eventName,mrks.ekey1,mrks.ekey2,mrks.ekey3);
+    NSLog(@"雰囲気　　%@ , %@ , %@  ,%@  \n",mrks.moodyName,mrks.mkey1,mrks.mkey2,mrks.mkey3);
+    
+    //以上 08/08 by yo
 }
 
 //メイン処理の実行
