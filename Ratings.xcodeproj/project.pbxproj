@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6338D64A1999048300C486A7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338D6491999048300C486A7 /* SearchViewController.m */; };
 		AB3993621984F80C00D0F1FF /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3993611984F80C00D0F1FF /* Back.png */; };
 		AB71FC16197FFAFD00F2A5BD /* Menu1.1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */; };
 		AB71FC17197FFAFD00F2A5BD /* Menu1.2.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */; };
@@ -48,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6338D6481999048300C486A7 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		6338D6491999048300C486A7 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		AB3993611984F80C00D0F1FF /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.1.png; sourceTree = "<group>"; };
 		AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.2.png; sourceTree = "<group>"; };
@@ -173,6 +176,8 @@
 				ABB83915197CFF9000878CB0 /* ViewController.m */,
 				ABB83917197CFF9000878CB0 /* Images.xcassets */,
 				ABB83906197CFF9000878CB0 /* Supporting Files */,
+				6338D6481999048300C486A7 /* SearchViewController.h */,
+				6338D6491999048300C486A7 /* SearchViewController.m */,
 			);
 			path = Ratings;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				ABB83910197CFF9000878CB0 /* AppDelegate.m in Sources */,
 				AB818C15198E79930077E016 /* Reachability.m in Sources */,
 				F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */,
+				6338D64A1999048300C486A7 /* SearchViewController.m in Sources */,
 				ABB8390C197CFF9000878CB0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
