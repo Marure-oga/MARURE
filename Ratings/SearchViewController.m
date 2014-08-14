@@ -43,12 +43,10 @@ UITableViewCell *bak_cell_2;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //デリゲートメソッドをこのクラスで実装する
+
     self.Event_Table.delegate = self;
     self.Event_Table.dataSource = self;
-    
-    //テーブルに表示したいデータソースをセット
+
     self.dataSourceEvent = @[@"女子会", @"誕生日", @"クリスマス"];
     self.dataSourceAmbience = @[@"わいわい", @"和やか", @"ロマンチック"];
     
@@ -68,8 +66,7 @@ UITableViewCell *bak_cell_2;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger dataCount;
-    
-    //テーブルに表示するデータ件数を返す
+
     switch (section) {
         case 0:
             dataCount = self.dataSourceEvent.count;
@@ -113,11 +110,8 @@ UITableViewCell *bak_cell_2;
 
 
 
-/**
- テーブルに表示するセクション（区切り）の件数を返します。（オプション）
- 
- @return NSInteger : セクションの数
- */
+
+//セクション件数を指定
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -125,9 +119,8 @@ UITableViewCell *bak_cell_2;
 
 
 
-/**
- セクション名を指定
- */
+
+//セクション名を指定
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {
 	switch(section) {
 		case 0:
@@ -217,9 +210,7 @@ UITableViewCell *bak_cell_2;
 }
 
 
-/**
- * ボタンがタップされたとき
- */
+//ボタンがタップされたとき
 - (IBAction)Button_Tapped:(id)sender {
     
     if (Selected_flag) {
