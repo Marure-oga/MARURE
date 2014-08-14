@@ -55,20 +55,22 @@ dispatch_queue_t subQueue;
     subQueue = dispatch_queue_create("sub1",0);
     
     [self Thread];
-    
-    
-    // 08/08 by yo
+    // 08/09 by yo
     //イベントと雰囲気　を記録するファイルを呼び出す
     //第一引数はイベントindex
     //第二引数は雰囲気index
     //追加の時MARUREJson例のように追加してください
     //結果はログで確認してください　＝。＝
-    mrks = [MarureKeyS alloc];
-    [mrks SetEventAndMoody:0 moody:0];
-    NSLog(@"イベント　%@ , %@ , %@  ,%@  \n",mrks.eventName,mrks.ekey1,mrks.ekey2,mrks.ekey3);
-    NSLog(@"雰囲気　　%@ , %@ , %@  ,%@  \n",mrks.moodyName,mrks.mkey1,mrks.mkey2,mrks.mkey3);
-    
-    //以上 08/08 by yo
+    //mrks = [[MarureKeyS alloc]init]; //インスタンスを生成して初期化
+    //[mrks SetEventAndMoody:0 moody:0];//ここでAPI呼び出す（今は仮データを呼び出す）画面遷移の時を呼び出してください
+    //apiの制限によって、１秒で４つのレシピを出せる、最大で６秒
+    //mrks.recipeNameArr   レシピ名配列
+    //mrks.recipeImgArr　レシピ画像配列
+    //mrks.recipUrlArr　　レシピurl配列
+    //配列は[mrks SetEventAndMoody:0 moody:0];を呼び出す後からデータが入るのでその前にnilになっている
+    //
+    //以上 08/09 by yo
+
 }
 
 //メイン処理の実行

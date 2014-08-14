@@ -34,6 +34,7 @@
 		ABB83921197CFF9000878CB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB83903197CFF9000878CB0 /* UIKit.framework */; };
 		ABB83929197CFF9000878CB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABB83927197CFF9000878CB0 /* InfoPlist.strings */; };
 		ABB8392B197CFF9000878CB0 /* RatingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB8392A197CFF9000878CB0 /* RatingsTests.m */; };
+		F22144DB199D0D490075D67B /* webapi.json in Resources */ = {isa = PBXBuildFile; fileRef = F22144DA199D0D490075D67B /* webapi.json */; };
 		F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2494D851994EB4900DD568A /* JsonSerchClass.m */; };
 		F2494D881994EB4900DD568A /* MARUREJson.json in Resources */ = {isa = PBXBuildFile; fileRef = F2494D861994EB4900DD568A /* MARUREJson.json */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		ABB83926197CFF9000878CB0 /* RatingsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RatingsTests-Info.plist"; sourceTree = "<group>"; };
 		ABB83928197CFF9000878CB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ABB8392A197CFF9000878CB0 /* RatingsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatingsTests.m; sourceTree = "<group>"; };
+		F22144DA199D0D490075D67B /* webapi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = webapi.json; path = Ratings/webapi.json; sourceTree = "<group>"; };
 		F2494D841994EB4900DD568A /* JsonSerchClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonSerchClass.h; path = Ratings/JsonSerchClass.h; sourceTree = "<group>"; };
 		F2494D851994EB4900DD568A /* JsonSerchClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonSerchClass.m; path = Ratings/JsonSerchClass.m; sourceTree = "<group>"; };
 		F2494D861994EB4900DD568A /* MARUREJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MARUREJson.json; path = Ratings/MARUREJson.json; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 		F2494D831994EB2B00DD568A /* Json */ = {
 			isa = PBXGroup;
 			children = (
+				F22144DA199D0D490075D67B /* webapi.json */,
 				F2494D841994EB4900DD568A /* JsonSerchClass.h */,
 				F2494D851994EB4900DD568A /* JsonSerchClass.m */,
 				F2494D861994EB4900DD568A /* MARUREJson.json */,
@@ -304,6 +307,7 @@
 				ABB83918197CFF9000878CB0 /* Images.xcassets in Resources */,
 				AB71FC1B197FFAFD00F2A5BD /* Menu2.2.png in Resources */,
 				AB71FC18197FFAFD00F2A5BD /* Menu1.3.png in Resources */,
+				F22144DB199D0D490075D67B /* webapi.json in Resources */,
 				AB71FC19197FFAFD00F2A5BD /* Menu1.4.png in Resources */,
 				AB71FC17197FFAFD00F2A5BD /* Menu1.2.png in Resources */,
 				AB71FC1A197FFAFD00F2A5BD /* Menu2.1.png in Resources */,

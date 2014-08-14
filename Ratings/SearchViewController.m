@@ -218,9 +218,8 @@ UITableViewCell *bak_cell_2;
         MarureKeyS *mrks;
         
         mrks = [MarureKeyS alloc];
-        [mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
-        NSLog(@"イベント　%@ , %@ , %@  ,%@  \n",mrks.eventName,mrks.ekey1,mrks.ekey2,mrks.ekey3);
-        NSLog(@"雰囲気　　%@ , %@ , %@  ,%@  \n",mrks.moodyName,mrks.mkey1,mrks.mkey2,mrks.mkey3);
+        //[mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
+        
     }
     else
     {
