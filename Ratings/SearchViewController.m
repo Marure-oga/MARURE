@@ -218,7 +218,7 @@ UITableViewCell *bak_cell_2;
         MarureKeyS *mrks;
         
         mrks = [MarureKeyS alloc];
-        //[mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
+        [mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
         
     }
     else
@@ -231,6 +231,7 @@ UITableViewCell *bak_cell_2;
                                          delegate:self cancelButtonTitle:@"確認" otherButtonTitles:nil];
         [alert show];
     }
+    Selected_flag = false;
 }
 
 /*

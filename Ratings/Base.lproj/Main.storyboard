@@ -44,10 +44,10 @@
             </objects>
             <point key="canvasLocation" x="-460" y="-19"/>
         </scene>
-        <!--View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="c1C-y5-EGe">
             <objects>
-                <viewController id="vAs-IH-Lcm" sceneMemberID="viewController">
+                <viewController id="vAs-IH-Lcm" customClass="MenuViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QSC-aC-DsG"/>
                         <viewControllerLayoutGuide type="bottom" id="S7n-K2-RaV"/>
@@ -151,10 +151,10 @@
             </objects>
             <point key="canvasLocation" x="843" y="-64"/>
         </scene>
-        <!--View Controller-->
+        <!--Recipe View Controller-->
         <scene sceneID="4gr-gW-39d">
             <objects>
-                <viewController id="5SS-wT-re8" sceneMemberID="viewController">
+                <viewController id="5SS-wT-re8" customClass="RecipeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1pt-S3-Pug"/>
                         <viewControllerLayoutGuide type="bottom" id="mRV-MB-UHT"/>
@@ -301,7 +301,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="h9W-c5-dN0"/>
-        <segue reference="46q-AA-z3Q"/>
+        <segue reference="JrG-8Q-Ubq"/>
         <segue reference="s1P-TL-iWa"/>
     </inferredMetricsTieBreakers>
 </document>
