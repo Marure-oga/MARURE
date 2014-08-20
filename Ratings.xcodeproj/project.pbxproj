@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6338D64A1999048300C486A7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338D6491999048300C486A7 /* SearchViewController.m */; };
+		6358762719A23DED0007EE28 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762619A23DED0007EE28 /* MenuViewController.m */; };
+		6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762919A23E410007EE28 /* RecipeViewController.m */; };
 		AB3993621984F80C00D0F1FF /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3993611984F80C00D0F1FF /* Back.png */; };
 		AB71FC16197FFAFD00F2A5BD /* Menu1.1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */; };
 		AB71FC17197FFAFD00F2A5BD /* Menu1.2.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */; };
@@ -52,6 +54,10 @@
 /* Begin PBXFileReference section */
 		6338D6481999048300C486A7 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		6338D6491999048300C486A7 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		6358762519A23DED0007EE28 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		6358762619A23DED0007EE28 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		6358762819A23E410007EE28 /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
+		6358762919A23E410007EE28 /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
 		AB3993611984F80C00D0F1FF /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.1.png; sourceTree = "<group>"; };
 		AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.2.png; sourceTree = "<group>"; };
@@ -115,6 +121,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6358762B19A23E710007EE28 /* View No4 */ = {
+			isa = PBXGroup;
+			children = (
+				6358762819A23E410007EE28 /* RecipeViewController.h */,
+				6358762919A23E410007EE28 /* RecipeViewController.m */,
+			);
+			name = "View No4";
+			sourceTree = "<group>";
+		};
+		6358762D19A23EBB0007EE28 /* View No3 */ = {
+			isa = PBXGroup;
+			children = (
+				6358762519A23DED0007EE28 /* MenuViewController.h */,
+				6358762619A23DED0007EE28 /* MenuViewController.m */,
+			);
+			name = "View No3";
+			sourceTree = "<group>";
+		};
+		6358762E19A23EC40007EE28 /* View No2 */ = {
+			isa = PBXGroup;
+			children = (
+				6338D6481999048300C486A7 /* SearchViewController.h */,
+				6338D6491999048300C486A7 /* SearchViewController.m */,
+			);
+			name = "View No2";
+			sourceTree = "<group>";
+		};
+		6358762F19A23F6C0007EE28 /* View No1 */ = {
+			isa = PBXGroup;
+			children = (
+				ABB83914197CFF9000878CB0 /* ViewController.h */,
+				ABB83915197CFF9000878CB0 /* ViewController.m */,
+			);
+			name = "View No1";
+			sourceTree = "<group>";
+		};
+		6358763019A23FFB0007EE28 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				ABB8390E197CFF9000878CB0 /* AppDelegate.h */,
+				ABB8390F197CFF9000878CB0 /* AppDelegate.m */,
+			);
+			name = Delegate;
+			sourceTree = "<group>";
+		};
+		6358763119A240610007EE28 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				AB818C13198E798C0077E016 /* Reachability.h */,
+				AB818C14198E79930077E016 /* Reachability.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
 		AB2B79D9197EB69400590026 /* picture */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,18 +228,16 @@
 		ABB83905197CFF9000878CB0 /* Ratings */ = {
 			isa = PBXGroup;
 			children = (
+				6358763119A240610007EE28 /* Reachability */,
+				6358763019A23FFB0007EE28 /* Delegate */,
+				6358762F19A23F6C0007EE28 /* View No1 */,
+				6358762E19A23EC40007EE28 /* View No2 */,
+				6358762D19A23EBB0007EE28 /* View No3 */,
+				6358762B19A23E710007EE28 /* View No4 */,
 				AB2B79D9197EB69400590026 /* picture */,
-				ABB8390E197CFF9000878CB0 /* AppDelegate.h */,
-				ABB8390F197CFF9000878CB0 /* AppDelegate.m */,
 				ABB83911197CFF9000878CB0 /* Main.storyboard */,
-				AB818C13198E798C0077E016 /* Reachability.h */,
-				AB818C14198E79930077E016 /* Reachability.m */,
-				ABB83914197CFF9000878CB0 /* ViewController.h */,
-				ABB83915197CFF9000878CB0 /* ViewController.m */,
 				ABB83917197CFF9000878CB0 /* Images.xcassets */,
 				ABB83906197CFF9000878CB0 /* Supporting Files */,
-				6338D6481999048300C486A7 /* SearchViewController.h */,
-				6338D6491999048300C486A7 /* SearchViewController.m */,
 			);
 			path = Ratings;
 			sourceTree = "<group>";
@@ -333,10 +391,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */,
 				ABB83916197CFF9000878CB0 /* ViewController.m in Sources */,
 				ABB83910197CFF9000878CB0 /* AppDelegate.m in Sources */,
 				AB818C15198E79930077E016 /* Reachability.m in Sources */,
 				F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */,
+				6358762719A23DED0007EE28 /* MenuViewController.m in Sources */,
 				6338D64A1999048300C486A7 /* SearchViewController.m in Sources */,
 				ABB8390C197CFF9000878CB0 /* main.m in Sources */,
 			);
