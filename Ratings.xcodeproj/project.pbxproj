@@ -39,6 +39,7 @@
 		F22144DB199D0D490075D67B /* webapi.json in Resources */ = {isa = PBXBuildFile; fileRef = F22144DA199D0D490075D67B /* webapi.json */; };
 		F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */ = {isa = PBXBuildFile; fileRef = F2494D851994EB4900DD568A /* JsonSerchClass.m */; };
 		F2494D881994EB4900DD568A /* MARUREJson.json in Resources */ = {isa = PBXBuildFile; fileRef = F2494D861994EB4900DD568A /* MARUREJson.json */; };
+		F2EB999919AB366C001B1F19 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EB999819AB366C001B1F19 /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		F2494D841994EB4900DD568A /* JsonSerchClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JsonSerchClass.h; path = Ratings/JsonSerchClass.h; sourceTree = "<group>"; };
 		F2494D851994EB4900DD568A /* JsonSerchClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JsonSerchClass.m; path = Ratings/JsonSerchClass.m; sourceTree = "<group>"; };
 		F2494D861994EB4900DD568A /* MARUREJson.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MARUREJson.json; path = Ratings/MARUREJson.json; sourceTree = "<group>"; };
+		F2EB999719AB366C001B1F19 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		F2EB999819AB366C001B1F19 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +231,7 @@
 		ABB83905197CFF9000878CB0 /* Ratings */ = {
 			isa = PBXGroup;
 			children = (
+				F2EB999619AB3639001B1F19 /* WEBVIEW */,
 				6358763119A240610007EE28 /* Reachability */,
 				6358763019A23FFB0007EE28 /* Delegate */,
 				6358762F19A23F6C0007EE28 /* View No1 */,
@@ -280,6 +284,15 @@
 				F2494D861994EB4900DD568A /* MARUREJson.json */,
 			);
 			name = Json;
+			sourceTree = "<group>";
+		};
+		F2EB999619AB3639001B1F19 /* WEBVIEW */ = {
+			isa = PBXGroup;
+			children = (
+				F2EB999719AB366C001B1F19 /* WebViewController.h */,
+				F2EB999819AB366C001B1F19 /* WebViewController.m */,
+			);
+			name = WEBVIEW;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,6 +408,7 @@
 				ABB83916197CFF9000878CB0 /* ViewController.m in Sources */,
 				ABB83910197CFF9000878CB0 /* AppDelegate.m in Sources */,
 				AB818C15198E79930077E016 /* Reachability.m in Sources */,
+				F2EB999919AB366C001B1F19 /* WebViewController.m in Sources */,
 				F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */,
 				6358762719A23DED0007EE28 /* MenuViewController.m in Sources */,
 				6338D64A1999048300C486A7 /* SearchViewController.m in Sources */,
