@@ -22,6 +22,7 @@
 		AB71FC1F197FFB7D00F2A5BD /* marure.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC1E197FFB7D00F2A5BD /* marure.png */; };
 		AB818C15198E79930077E016 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AB818C14198E79930077E016 /* Reachability.m */; };
 		AB818C17198E7B650077E016 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB818C16198E7B650077E016 /* SystemConfiguration.framework */; };
+		ABA2A71619AF7DA0005018F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA2A71519AF7DA0005018F7 /* QuartzCore.framework */; };
 		ABB83900197CFF9000878CB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB838FF197CFF9000878CB0 /* Foundation.framework */; };
 		ABB83902197CFF9000878CB0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB83901197CFF9000878CB0 /* CoreGraphics.framework */; };
 		ABB83904197CFF9000878CB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB83903197CFF9000878CB0 /* UIKit.framework */; };
@@ -72,6 +73,7 @@
 		AB818C13198E798C0077E016 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AB818C14198E79930077E016 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AB818C16198E7B650077E016 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		ABA2A71519AF7DA0005018F7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ABB838FC197CFF9000878CB0 /* Ratings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB838FF197CFF9000878CB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ABB83901197CFF9000878CB0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -104,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABA2A71619AF7DA0005018F7 /* QuartzCore.framework in Frameworks */,
 				AB818C17198E7B650077E016 /* SystemConfiguration.framework in Frameworks */,
 				ABB83902197CFF9000878CB0 /* CoreGraphics.framework in Frameworks */,
 				ABB83904197CFF9000878CB0 /* UIKit.framework in Frameworks */,
@@ -219,6 +222,7 @@
 		ABB838FE197CFF9000878CB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ABA2A71519AF7DA0005018F7 /* QuartzCore.framework */,
 				AB818C16198E7B650077E016 /* SystemConfiguration.framework */,
 				ABB838FF197CFF9000878CB0 /* Foundation.framework */,
 				ABB83901197CFF9000878CB0 /* CoreGraphics.framework */,

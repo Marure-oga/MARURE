@@ -7,12 +7,14 @@
 //
 
 #import "MenuViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface MenuViewController ()
 
 @end
 
 @implementation MenuViewController
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,12 +29,30 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //ナビゲーションバーの非表示
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//戻るボタンを押したとき左から前の画面を出す
+- (IBAction)BackButton:(id)sender {
+    CATransition * transition = [CATransition animation];
+    
+    transition.duration = 0.4;
+    
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    transition.type = kCATransitionMoveIn;
+    transition.subtype = kCATransitionFromLeft;
+    
+    MenuViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"search"];
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    [self.navigationController pushViewController:push animated:NO];
 }
 
 /*
@@ -45,5 +65,8 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
 
 @end

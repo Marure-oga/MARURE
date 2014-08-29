@@ -51,9 +51,11 @@ UITableViewCell *bak_cell_2;
     self.dataSourceAmbience = @[@"わいわい", @"和やか", @"ロマンチック"];
     
     self.Event_Table.bounces = NO;
+    
+    //ナビゲーションバーの非表示
+    [self.navigationController setNavigationBarHidden:YES];
+    
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -213,7 +215,9 @@ UITableViewCell *bak_cell_2;
 //ボタンがタップされたとき
 - (IBAction)Button_Tapped:(id)sender {
     
+    
     if (Selected_flag) {
+        
         
         MarureKeyS *mrks;
         

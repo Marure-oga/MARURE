@@ -258,7 +258,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
 //次の画面へ遷移
 -(void)nextPage:(NSTimer*)timer{
-    ViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"main"];
+    ViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"search"];
     [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController pushViewController:viewCont animated:YES];
 }
