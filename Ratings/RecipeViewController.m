@@ -10,7 +10,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface RecipeViewController ()
-
 @end
 
 @implementation RecipeViewController
@@ -26,10 +25,28 @@
 
 - (void)viewDidLoad
 {
+    NSMutableArray *_Select_URL;
+    _Select_URL = [NSMutableArray array];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     [self.navigationController setNavigationBarHidden:YES];
+    
+    //NSLog(@"\n【Fig4】Select_URL_COUNT = %d\n",[Select_URL count]);
+    
+    int i;
+    
+    if(Send_Flag == 1){
+        i = 0;
+    }
+    else{
+        i = 4;
+    }
+    self.Menu_Img01.image = [Select_URL objectAtIndex:0+i];
+    self.Menu_Img02.image = [Select_URL objectAtIndex:1+i];
+    self.Menu_Img03.image = [Select_URL objectAtIndex:2+i];
+    self.Menu_Img04.image = [Select_URL objectAtIndex:3+i];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,6 +57,9 @@
 
 //戻るボタンを押したとき左から前の画面を出す
 - (IBAction)BackButton:(id)sender {
+    
+    Send_Flag = -1;
+    
     CATransition * transition = [CATransition animation];
     
     transition.duration = 0.4;

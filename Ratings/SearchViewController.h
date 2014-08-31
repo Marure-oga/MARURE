@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuViewController.h"
 
 @interface SearchViewController : UIViewController
+
+extern int Event_NO;
+extern int Ambience_NO;
 
 @property (weak, nonatomic) IBOutlet UITableView *Event_Table;
 

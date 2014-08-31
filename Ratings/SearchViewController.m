@@ -216,17 +216,10 @@ UITableViewCell *bak_cell_2;
 - (IBAction)Button_Tapped:(id)sender {
     
     
-    if (Selected_flag) {
-        
-        
-        MarureKeyS *mrks;
-        
-        mrks = [MarureKeyS alloc];
-        [mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
+    if (Selected_flag){
         
     }
-    else
-    {
+    else {
         
         UIAlertView *alert;
         
