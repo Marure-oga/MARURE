@@ -15,6 +15,8 @@
 extern int Send_Flag;
 
 extern NSMutableArray *Select_URL;
+extern NSMutableArray *Recipe_URL;
+extern NSMutableArray *Recipe_Title_Arr;
 
 @property (weak, nonatomic) IBOutlet UIImageView *Menu_Image_01;
 @property (weak, nonatomic) IBOutlet UIImageView *Menu_Image_02;

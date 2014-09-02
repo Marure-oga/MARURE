@@ -17,11 +17,15 @@
 int Send_Flag;
 
 NSString *Url_Str;
+NSString *Name_Str;
+NSString *R_Url_Str;
 NSURL *Img_URL;
 NSData *Img_Data;
 UIImage *Recipe_Img;
 
 NSMutableArray *Select_URL;
+NSMutableArray *Recipe_URL;
+NSMutableArray *Recipe_Title_Arr;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,8 +42,12 @@ NSMutableArray *Select_URL;
     MarureKeyS *mrks;
     mrks = [[MarureKeyS alloc]init];
     
-    if([Select_URL count] == 0) Select_URL = [NSMutableArray array];
-    
+    if([Select_URL count] == 0){
+        Select_URL = [NSMutableArray array];
+        Recipe_URL = [NSMutableArray array];
+        Recipe_Title_Arr = [NSMutableArray array];
+    }
+
     if(Send_Flag != -1){
         Send_Flag = 0;
     }
@@ -52,22 +60,31 @@ NSMutableArray *Select_URL;
     }
     
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
+    //NSLog(@"recipeNameArr_COUNT：%d\n",[mrks.recipeNameArr count]);
     
     Img_Count = [mrks.recipeImgArr count];
-    Name_Count = [mrks.recipeNameArr count];
+    //Name_Count = [mrks.recipeNameArr count];
     
     if(Img_Count > 0 || Send_Flag == -1){
         int i;
         
         for(i = 0;i < 8;i++){
             if(Send_Flag == 0){
+                
                 Url_Str = [mrks.recipeImgArr objectAtIndex:i];
+                Name_Str = [mrks.recipeNameArr objectAtIndex:i];
+                R_Url_Str = [mrks.recipUrlArr objectAtIndex:i];
+                
                 Img_URL = [NSURL URLWithString:Url_Str];
                 Img_Data = [NSData dataWithContentsOfURL:Img_URL];
                 Recipe_Img = [UIImage imageWithData:Img_Data];
+                
                 [Select_URL addObject:Recipe_Img];
+                [Recipe_Title_Arr addObject:Name_Str];
+                [Recipe_URL addObject:R_Url_Str];
             }
-            //NSLog(@"カウント：%d\n",[Select_URL count]);
+            
+            NSLog(@"Recipe_Title_Arr_COUNT：%d\n",[Recipe_Title_Arr count]);
             
             switch (i) {
                 case 0:
@@ -190,6 +207,7 @@ NSMutableArray *Select_URL;
     
     Send_Flag = 0;
     [Select_URL removeAllObjects];
+    [Recipe_Title_Arr removeAllObjects];
 }
 
 
