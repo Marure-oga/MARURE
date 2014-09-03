@@ -144,7 +144,7 @@
         <!--Recipe View Controller-->
         <scene sceneID="4gr-gW-39d">
             <objects>
-                <viewController id="5SS-wT-re8" customClass="RecipeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="recipe" id="5SS-wT-re8" customClass="RecipeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1pt-S3-Pug"/>
                         <viewControllerLayoutGuide type="bottom" id="mRV-MB-UHT"/>

@@ -1,5 +1,6 @@
 
 #import "WebViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface WebViewController ()
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
@@ -20,6 +21,14 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
     
+    //右へスワイプしたときの処理
+    UISwipeGestureRecognizer *swiperight = [[UISwipeGestureRecognizer alloc]
+                                            initWithTarget:self action:@selector(swipe:)];
+    swiperight.direction = UISwipeGestureRecognizerDirectionRight;
+    swiperight.direction = UISwipeGestureRecognizerDirectionRight;
+    swiperight.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:swiperight];
+    
     
 }
 
@@ -27,6 +36,22 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//右スワイプを行ったとき画面４に遷移
+-(void)swipe:(UISwipeGestureRecognizer *)gesture
+{
+    CATransition *transition = [CATransition animation];
+    
+    transition.duration = 0.4;
+    
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    transition.type = kCATransitionMoveIn;
+    transition.subtype = kCATransitionFromLeft;
+    
+    WebViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    [self.navigationController pushViewController:push animated:NO];
 }
 
 
