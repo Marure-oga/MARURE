@@ -50,6 +50,7 @@ NSMutableArray *indexnumber;
         Select_URL = [NSMutableArray array];
         Recipe_URL = [NSMutableArray array];
         Recipe_Title_Arr = [NSMutableArray array];
+        
         indexnumber = [NSMutableArray array];
     }
 
@@ -101,7 +102,10 @@ NSMutableArray *indexnumber;
                     }
                     //戻るボタンでselfに遷移した場合
                     else{
-                        self.Menu_Image_01.image = [Select_URL objectAtIndex:0];
+                        //self.Menu_Image_01.image = [Select_URL objectAtIndex:0];
+                        self.Menu_Image_01.image =
+                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:0] intValue]];
+                        
                     }
                     break;
                 case 1:
@@ -110,7 +114,9 @@ NSMutableArray *indexnumber;
                         self.Menu_Image_02.image = Recipe_Img;
                     }
                     else{
-                        self.Menu_Image_02.image = [Select_URL objectAtIndex:1];
+                        //self.Menu_Image_02.image = [Select_URL objectAtIndex:1];
+                        self.Menu_Image_02.image =
+                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:1] intValue]];
                     }
                 case 2:
                     //self.Menu_Image_03.contentMode = UIViewContentModeScaleAspectFit;
@@ -118,7 +124,9 @@ NSMutableArray *indexnumber;
                         self.Menu_Image_03.image = Recipe_Img;
                     }
                     else{
-                        self.Menu_Image_03.image = [Select_URL objectAtIndex:2];
+                        //self.Menu_Image_03.image = [Select_URL objectAtIndex:2];
+                        self.Menu_Image_03.image =
+                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:2] intValue]];
                     }
                 case 3:
                     //self.Menu_Image_04.contentMode = UIViewContentModeScaleAspectFit;
@@ -126,7 +134,9 @@ NSMutableArray *indexnumber;
                         self.Menu_Image_04.image = Recipe_Img;
                     }
                     else{
-                        self.Menu_Image_04.image = [Select_URL objectAtIndex:3];
+                        //self.Menu_Image_04.image = [Select_URL objectAtIndex:3];
+                        self.Menu_Image_04.image =
+                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:3] intValue]];
                     }
                 case 4:
                     //self.Menu_Image_05.contentMode = UIViewContentModeScaleAspectFit;
@@ -134,7 +144,9 @@ NSMutableArray *indexnumber;
                         self.Menu_Image_05.image = Recipe_Img;
                     }
                     else{
-                        self.Menu_Image_05.image = [Select_URL objectAtIndex:4];
+                        //self.Menu_Image_05.image = [Select_URL objectAtIndex:4];
+                        self.Menu_Image_05.image =
+                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:4] intValue]];
                     }
                 case 5:
                     //self.Menu_Image_06.contentMode = UIViewContentModeScaleAspectFit;
@@ -142,7 +154,9 @@ NSMutableArray *indexnumber;
                         self.Menu_Image_06.image = Recipe_Img;
                     }
                     else{
-                        self.Menu_Image_06.image = [Select_URL objectAtIndex:5];
+                        //self.Menu_Image_06.image = [Select_URL objectAtIndex:5];
+                        self.Menu_Image_06.image =
+                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:5] intValue]];
                     }
                 case 6:
                     //self.Menu_Image_07.contentMode = UIViewContentModeScaleAspectFit;
@@ -150,7 +164,9 @@ NSMutableArray *indexnumber;
                         self.Menu_Image_07.image = Recipe_Img;
                     }
                     else{
-                        self.Menu_Image_07.image = [Select_URL objectAtIndex:6];
+                        //self.Menu_Image_07.image = [Select_URL objectAtIndex:6];
+                        self.Menu_Image_07.image =
+                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:6] intValue]];
                     }
                 case 7:
                     //self.Menu_Image_08.contentMode = UIViewContentModeScaleAspectFit;
@@ -158,7 +174,9 @@ NSMutableArray *indexnumber;
                         self.Menu_Image_08.image = Recipe_Img;
                     }
                     else{
-                        self.Menu_Image_08.image = [Select_URL objectAtIndex:7];
+                        //self.Menu_Image_08.image = [Select_URL objectAtIndex:7];
+                        self.Menu_Image_08.image =
+                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:7] intValue]];
                     }
                 default:
                     break;
