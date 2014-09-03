@@ -8,6 +8,8 @@
 extern int Send_Flag;
 
 extern NSMutableArray *Select_URL;
+extern NSMutableArray *Recipe_URL;
+extern NSMutableArray *Recipe_Title_Arr;
 
 extern NSMutableArray *indexnumber;
 

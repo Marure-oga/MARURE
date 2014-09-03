@@ -3,7 +3,7 @@
 
 @interface WebViewController ()
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
-@property NSString *getUrl;//segueで値をセットして表示できる
+//@property NSString *getUrl;//segueで値をセットして表示できる
 @end
 
 @implementation WebViewController
