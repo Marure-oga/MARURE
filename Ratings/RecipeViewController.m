@@ -1,10 +1,3 @@
-//
-//  RecipeViewController.m
-//  Ratings
-//
-//  Created by MASTER on 2014/08/18.
-//  Copyright (c) 2014年 ogaki.yusuke. All rights reserved.
-//
 
 #import "RecipeViewController.h"
 #import <QuartzCore/QuartzCore.h>
@@ -31,6 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //ナビゲーションバーの非表示
     [self.navigationController setNavigationBarHidden:YES];
     
     //NSLog(@"\n【Fig4】Select_URL_COUNT = %d\n",[Select_URL count]);
@@ -47,6 +41,11 @@
     self.Menu_Img02.image = [Select_URL objectAtIndex:1+i];
     self.Menu_Img03.image = [Select_URL objectAtIndex:2+i];
     self.Menu_Img04.image = [Select_URL objectAtIndex:3+i];
+    
+    /*self.Menu_Img01.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:0+i] intValue]];
+    self.Menu_Img02.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:1+i] intValue]];
+    self.Menu_Img03.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:2+i] intValue]];
+    self.Menu_Img04.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:3+i] intValue]];*/
 }
 
 - (void)didReceiveMemoryWarning

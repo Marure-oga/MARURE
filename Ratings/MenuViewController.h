@@ -1,10 +1,3 @@
-//
-//  MenuViewController.h
-//  Ratings
-//
-//  Created by MASTER on 2014/08/18.
-//  Copyright (c) 2014年 ogaki.yusuke. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 #import "JsonSerchClass.h"
@@ -15,6 +8,8 @@
 extern int Send_Flag;
 
 extern NSMutableArray *Select_URL;
+
+extern NSMutableArray *indexnumber;
 
 @property (weak, nonatomic) IBOutlet UIImageView *Menu_Image_01;
 @property (weak, nonatomic) IBOutlet UIImageView *Menu_Image_02;

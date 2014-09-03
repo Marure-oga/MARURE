@@ -23,6 +23,10 @@ UIImage *Recipe_Img;
 
 NSMutableArray *Select_URL;
 
+//Menu_Image_01〜Menu_Image_08に対応するレシピ番号
+NSMutableArray *indexnumber;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,6 +70,9 @@ NSMutableArray *Select_URL;
                 Img_Data = [NSData dataWithContentsOfURL:Img_URL];
                 Recipe_Img = [UIImage imageWithData:Img_Data];
                 [Select_URL addObject:Recipe_Img];
+                
+                [indexnumber addObject:[NSNumber numberWithInteger:i]];
+                
             }
             //NSLog(@"カウント：%d\n",[Select_URL count]);
             
@@ -165,8 +172,26 @@ NSMutableArray *Select_URL;
     //ナビゲーションバーの非表示
     [self.navigationController setNavigationBarHidden:YES];
     
+    
     [self Menu_Img_SET];
+    
+    //右へスワイプしたときの処理
+    UISwipeGestureRecognizer *swiperight = [[UISwipeGestureRecognizer alloc]
+                                            initWithTarget:self action:@selector(swipe:)];
+    swiperight.direction = UISwipeGestureRecognizerDirectionRight;
+    swiperight.direction = UISwipeGestureRecognizerDirectionRight;
+    swiperight.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:swiperight];
+    
+    //左へスワイプしたときの処理
+    UISwipeGestureRecognizer *swipeleft = [[UISwipeGestureRecognizer alloc]
+                                           initWithTarget:self action:@selector(swipe:)];
+    swipeleft.direction = UISwipeGestureRecognizerDirectionRight;
+    swipeleft.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeleft.numberOfTouchesRequired = 1;
+    [self.view addGestureRecognizer:swipeleft];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -201,6 +226,63 @@ NSMutableArray *Select_URL;
     Send_Flag = 2;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
+
+//スワイプしたときMenu_Img_Changeを呼び出す
+-(void)swipe:(UISwipeGestureRecognizer *)gesture
+{
+    [self Menu_Img_Change];
+}
+
+//表示されているメニューの画像をランダムに更新する
+-(void)Menu_Img_Change{
+    int i;
+    int random = 0;
+    bool hantei = true;
+    indexnumber = [NSMutableArray array];
+    for(i = 0;i < 8;i++){
+        do{
+            random = (int)(arc4random() %8);
+            hantei = false;
+            for(int j =0;j<i;j++){
+                if([[indexnumber objectAtIndex:j] intValue] == random){
+                    hantei = true;
+                    break;
+                }
+            }
+        }while(hantei);
+        [indexnumber addObject:[NSNumber numberWithInteger:random]];
+        
+        switch (i) {
+            case 0:
+                self.Menu_Image_01.image = [Select_URL objectAtIndex:random];
+                break;
+            case 1:
+                self.Menu_Image_02.image = [Select_URL objectAtIndex:random];
+                break;
+            case 2:
+                self.Menu_Image_03.image = [Select_URL objectAtIndex:random];
+                break;
+            case 3:
+                self.Menu_Image_04.image = [Select_URL objectAtIndex:random];
+                break;
+            case 4:
+                self.Menu_Image_05.image = [Select_URL objectAtIndex:random];
+                break;
+            case 5:
+                self.Menu_Image_06.image = [Select_URL objectAtIndex:random];
+                break;
+            case 6:
+                self.Menu_Image_07.image = [Select_URL objectAtIndex:random];
+                break;
+            case 7:
+                self.Menu_Image_08.image = [Select_URL objectAtIndex:random];
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 
 
 
