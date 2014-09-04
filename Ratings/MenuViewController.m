@@ -46,6 +46,8 @@ NSMutableArray *indexnumber;
     MarureKeyS *mrks;
     mrks = [[MarureKeyS alloc]init];
     
+    Boolean nil_Flag = false;
+    
     if([Select_URL count] == 0){
         Select_URL = [NSMutableArray array];
         Recipe_URL = [NSMutableArray array];
@@ -65,7 +67,6 @@ NSMutableArray *indexnumber;
         [mrks SetEventAndMoody:0 moody:0];
     }
     
-    //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
     //NSLog(@"recipeNameArr_COUNT：%d\n",[mrks.recipeNameArr count]);
     
     Img_Count = [mrks.recipeImgArr count];
@@ -74,15 +75,65 @@ NSMutableArray *indexnumber;
     if(Img_Count > 0 || Send_Flag == -1){
         int i;
         
+        //nilチェック
+        if(Send_Flag == 0){
+            for (i = 0; i < 8; i++) {
+                if (nil == [mrks.recipeImgArr objectAtIndex:i]) {
+                    NSLog(@"\nrecipeImgArr[%d] : nil\n",i);
+                    nil_Flag = true;
+                    return;
+                }
+                if (nil == [mrks.recipeNameArr objectAtIndex:i]) {
+                    NSLog(@"\nrecipeNameArr[%d] : nil\n",i);
+                    nil_Flag = true;
+                    return;
+                }
+                if (nil == [mrks.recipUrlArr objectAtIndex:i]) {
+                    NSLog(@"\nrecipeNameArr[%d] : nil\n",i);
+                    nil_Flag = true;
+                    return;
+                }
+            }
+        }
+        //
+        
         for(i = 0;i < 8;i++){
-            if(Send_Flag == 0){
+            if(Send_Flag == 0 && !nil_Flag){
                 Url_Str = [mrks.recipeImgArr objectAtIndex:i];
+                if(Url_Str == nil){
+                    NSLog(@"\nUrl_Str : nil\n");
+                    return;
+                }
+                
                 Name_Str = [mrks.recipeNameArr objectAtIndex:i];
+                if(Name_Str == nil){
+                    NSLog(@"\nName_Str : nil\n");
+                    return;
+                }
+                
                 R_Url_Str = [mrks.recipUrlArr objectAtIndex:i];
+                if(R_Url_Str == nil){
+                    NSLog(@"\nR_Url_Str : nil\n");
+                    return;
+                }
                 
                 Img_URL = [NSURL URLWithString:Url_Str];
+                if(Img_URL == nil){
+                    NSLog(@"\nImg_Url : nil\n");
+                    return;
+                }
+                
                 Img_Data = [NSData dataWithContentsOfURL:Img_URL];
+                if (Img_Data == nil) {
+                    NSLog(@"\nImg_Data : nil\n");
+                    return;
+                }
+                
                 Recipe_Img = [UIImage imageWithData:Img_Data];
+                if (Recipe_Img == nil) {
+                    NSLog(@"\nRecipe_Img : nil\n");
+                    return;
+                }
                 
                 [Select_URL addObject:Recipe_Img];
                 [Recipe_Title_Arr addObject:Name_Str];

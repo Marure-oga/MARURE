@@ -47,6 +47,12 @@ int Select_Flag = 0;
     self.Menu_Img03.image = [Select_URL objectAtIndex:2+i];
     self.Menu_Img04.image = [Select_URL objectAtIndex:3+i];*/
     
+    for (int k = 0; k < 4; k++) {
+        if(nil == [Select_URL objectAtIndex:[[indexnumber objectAtIndex:k+i] intValue]]){
+            NSLog(@"\n[画面4]Select_URL[%d] = nil\n",k);
+            return;
+        }
+    }
     self.Menu_Img01.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:0+i] intValue]];
     self.Menu_Img02.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:1+i] intValue]];
     self.Menu_Img03.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:2+i] intValue]];
