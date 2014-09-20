@@ -31,8 +31,8 @@ int Select_Flag = 0;
     MenuViewController *mvc;
     mvc = [[MenuViewController alloc]init];
 
-    int i,
-    j = 0;
+    int i;
+    
     NSString *Title_Text;
     
     if(Send_Flag == 1){
@@ -40,36 +40,33 @@ int Select_Flag = 0;
     }
     else{
         i = 4;
-        j = 4;
     }
     /*self.Menu_Img01.image = [Select_URL objectAtIndex:0+i];
     self.Menu_Img02.image = [Select_URL objectAtIndex:1+i];
     self.Menu_Img03.image = [Select_URL objectAtIndex:2+i];
     self.Menu_Img04.image = [Select_URL objectAtIndex:3+i];*/
     
+    /*
     for (int k = 0; k < 4; k++) {
         if(nil == [Select_URL objectAtIndex:[[indexnumber objectAtIndex:k+i] intValue]]){
             NSLog(@"\n[画面4]Select_URL[%d] = nil\n",k);
             return;
         }
     }
-    self.Menu_Img01.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:0+i] intValue]];
-    self.Menu_Img02.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:1+i] intValue]];
-    self.Menu_Img03.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:2+i] intValue]];
-    self.Menu_Img04.image = [Select_URL objectAtIndex:[[indexnumber objectAtIndex:3+i] intValue]];
-
-    if ([Recipe_Title_Arr count] == 0) {
-        NSLog(@"\n【Fig4】Recipe_Title_Arr_COUNT = %d\n",[Recipe_Title_Arr count]);
-    }
-    else{
-        for (i = 0; i < 4; i++) {
-            //Title_Text = [Recipe_Title_Arr objectAtIndex:i+j];
-            Title_Text = [Recipe_Title_Arr objectAtIndex:[[indexnumber objectAtIndex:i+j] intValue]];
-            [self Title_Set:i :Title_Text];
-            //NSLog(@"\n【Fig4】i = %d j= %d\n",i,j);
-        }
-        //NSLog(@"\n【Fig4】Recipe_Title_Arr_COUNT = %d\n",[Recipe_Title_Arr count]);
-    }
+    */
+    self.Menu_Img01.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:0+i] intValue]];
+    self.Menu_Img02.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:1+i] intValue]];
+    self.Menu_Img03.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:2+i] intValue]];
+    self.Menu_Img04.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:3+i] intValue]];
+    
+    Title_Text = [Recipe_Title_Arr_1 objectAtIndex:[[indexnumber objectAtIndex:0+i] intValue]];
+    [self Title_Set:0 :Title_Text];
+    Title_Text = [Recipe_Title_Arr_2 objectAtIndex:[[indexnumber objectAtIndex:1+i] intValue]];
+    [self Title_Set:1 :Title_Text];
+    Title_Text = [Recipe_Title_Arr_3 objectAtIndex:[[indexnumber objectAtIndex:2+i] intValue]];
+    [self Title_Set:2 :Title_Text];
+    Title_Text = [Recipe_Title_Arr_4 objectAtIndex:[[indexnumber objectAtIndex:3+i] intValue]];
+    [self Title_Set:3 :Title_Text];
 }
 
 - (void)Title_Set:(NSInteger)Label_Id :(NSString*)Recipe_Title
@@ -132,11 +129,28 @@ int Select_Flag = 0;
     push.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:push];
     [self presentViewController:navigation animated:YES completion:nil];
+    
+    [Select_URL_1 removeAllObjects];
+    [Select_URL_2 removeAllObjects];
+    [Select_URL_3 removeAllObjects];
+    [Select_URL_4 removeAllObjects];
+    
+    [Recipe_Title_Arr_1 removeAllObjects];
+    [Recipe_Title_Arr_2 removeAllObjects];
+    [Recipe_Title_Arr_3 removeAllObjects];
+    [Recipe_Title_Arr_4 removeAllObjects];
+    
+    [Recipe_URL_1 removeAllObjects];
+    [Recipe_URL_2 removeAllObjects];
+    [Recipe_URL_3 removeAllObjects];
+    [Recipe_URL_4 removeAllObjects];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     int i = 0;
+    
+    //画面3で2つ目の献立を選択された場合
     if(Send_Flag == 2){
         i =4;
     }
@@ -144,23 +158,22 @@ int Select_Flag = 0;
     if ([[segue identifier] isEqualToString:@"Select_Recipe_01"]) {
         WebViewController *vcntl = [segue destinationViewController];
         if(Send_Flag == 2) i = 4;
-        //vcntl.getUrl = [Recipe_URL objectAtIndex:0+i];
-        vcntl.getUrl = [Recipe_URL objectAtIndex:[[indexnumber objectAtIndex:i+0] intValue]];
+        vcntl.getUrl = [Recipe_URL_1 objectAtIndex:[[indexnumber objectAtIndex:i+0] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_02"]){
         WebViewController *vcntl = [segue destinationViewController];
         //vcntl.getUrl = [Recipe_URL objectAtIndex:1+i];
-        vcntl.getUrl = [Recipe_URL objectAtIndex:[[indexnumber objectAtIndex:i+1] intValue]];
+        vcntl.getUrl = [Recipe_URL_2 objectAtIndex:[[indexnumber objectAtIndex:i+1] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_03"]){
         WebViewController *vcntl = [segue destinationViewController];
         //vcntl.getUrl = [Recipe_URL objectAtIndex:2+i];
-        vcntl.getUrl = [Recipe_URL objectAtIndex:[[indexnumber objectAtIndex:i+2] intValue]];
+        vcntl.getUrl = [Recipe_URL_3 objectAtIndex:[[indexnumber objectAtIndex:i+2] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_04"]){
         WebViewController *vcntl = [segue destinationViewController];
         //vcntl.getUrl = [Recipe_URL objectAtIndex:3+i];
-        vcntl.getUrl = [Recipe_URL objectAtIndex:[[indexnumber objectAtIndex:i+3] intValue]];
+        vcntl.getUrl = [Recipe_URL_4 objectAtIndex:[[indexnumber objectAtIndex:i+3] intValue]];
     }
 }
 

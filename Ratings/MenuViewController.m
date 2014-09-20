@@ -19,13 +19,40 @@ int Send_Flag;
 NSString *Url_Str;
 NSString *Name_Str;
 NSString *R_Url_Str;
+
 NSURL *Img_URL;
 NSData *Img_Data;
 UIImage *Recipe_Img;
 
-NSMutableArray *Select_URL;
-NSMutableArray *Recipe_URL;
-NSMutableArray *Recipe_Title_Arr;
+//料理の画像URL格納用配列
+//主菜
+NSMutableArray *Select_URL_1;
+//副菜
+NSMutableArray *Select_URL_2;
+//デザート
+NSMutableArray *Select_URL_3;
+//ドリンク
+NSMutableArray *Select_URL_4;
+
+//ウェブサイトのURL格納配列
+//主菜
+NSMutableArray *Recipe_URL_1;
+//副菜
+NSMutableArray *Recipe_URL_2;
+//デザート
+NSMutableArray *Recipe_URL_3;
+//ドリンク
+NSMutableArray *Recipe_URL_4;
+
+//レシピタイトルの格納配列
+//主菜
+NSMutableArray *Recipe_Title_Arr_1;
+//副菜
+NSMutableArray *Recipe_Title_Arr_2;
+//デザート
+NSMutableArray *Recipe_Title_Arr_3;
+//ドリンク
+NSMutableArray *Recipe_Title_Arr_4;
 
 //Menu_Image_01〜Menu_Image_08に対応するレシピ番号
 NSMutableArray *indexnumber;
@@ -40,213 +67,178 @@ NSMutableArray *indexnumber;
     return self;
 }
 
-- (void)Menu_Img_SET
+//献立の情報取得
+- (void)Menu_Img_GET
 {
     
     MarureKeyS *mrks;
+    
     mrks = [[MarureKeyS alloc]init];
     
+    //nilチェック用の変数
     Boolean nil_Flag = false;
     
-    if([Select_URL count] == 0){
-        Select_URL = [NSMutableArray array];
-        Recipe_URL = [NSMutableArray array];
-        Recipe_Title_Arr = [NSMutableArray array];
-        
-        indexnumber = [NSMutableArray array];
-    }
+    Select_URL_1 = [NSMutableArray array];
+    Select_URL_2 = [NSMutableArray array];
+    Select_URL_3 = [NSMutableArray array];
+    Select_URL_4 = [NSMutableArray array];
+    
+    
+    Recipe_URL_1 = [NSMutableArray array];
+    Recipe_URL_2 = [NSMutableArray array];
+    Recipe_URL_3 = [NSMutableArray array];
+    Recipe_URL_4 = [NSMutableArray array];
+    
+    Recipe_Title_Arr_1 = [NSMutableArray array];
+    Recipe_Title_Arr_2 = [NSMutableArray array];
+    Recipe_Title_Arr_3 = [NSMutableArray array];
+    Recipe_Title_Arr_4 = [NSMutableArray array];
+    
+    int i;
+    
+    //ユーザーが選択した検索条件をAPIに投げる
+    //テスト用：
+    [mrks SetEventAndMoody:0 moody:0];
+    //本番用：
+    //[mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
 
-    if(Send_Flag != -1){
-        Send_Flag = 0;
-    }
-    
-    int Img_Count = 0,
-    Name_Count = 0;
-    
-    if(Send_Flag == 0){
-        [mrks SetEventAndMoody:0 moody:0];
-    }
-    
-    //NSLog(@"recipeNameArr_COUNT：%d\n",[mrks.recipeNameArr count]);
-    
-    Img_Count = [mrks.recipeImgArr count];
-    //Name_Count = [mrks.recipeNameArr count];
-    
-    if(Img_Count > 0 || Send_Flag == -1){
-        int i;
-        
-        //nilチェック
-        if(Send_Flag == 0){
-            for (i = 0; i < 8; i++) {
-                if (nil == [mrks.recipeImgArr objectAtIndex:i]) {
-                    NSLog(@"\nrecipeImgArr[%d] : nil\n",i);
-                    nil_Flag = true;
-                    return;
-                }
-                if (nil == [mrks.recipeNameArr objectAtIndex:i]) {
-                    NSLog(@"\nrecipeNameArr[%d] : nil\n",i);
-                    nil_Flag = true;
-                    return;
-                }
-                if (nil == [mrks.recipUrlArr objectAtIndex:i]) {
-                    NSLog(@"\nrecipeNameArr[%d] : nil\n",i);
-                    nil_Flag = true;
-                    return;
-                }
-            }
-        }
-        //
-        
-        for(i = 0;i < 8;i++){
-            if(Send_Flag == 0 && !nil_Flag){
-                Url_Str = [mrks.recipeImgArr objectAtIndex:i];
-                if(Url_Str == nil){
-                    NSLog(@"\nUrl_Str : nil\n");
-                    return;
-                }
+    //APIからの返却数までループ
+    for(i = 0;i < [mrks.key1ImgArr count];i++){
+        //画面2から遷移　かつ　格納値がnilでない時
+        if(!nil_Flag){
+
+            //主菜の画像URLの文字列格納
+            Url_Str = [mrks.key1ImgArr objectAtIndex:i];
+            //主菜のレシピタイトルの文字列格納
+            Name_Str = [mrks.key1NameArr objectAtIndex:i];
+            //主菜のレシピURLの文字列格納
+            R_Url_Str = [mrks.key1UrlArr objectAtIndex:i];
+
+            [self Menu_Img_UrlSet:0];
                 
-                Name_Str = [mrks.recipeNameArr objectAtIndex:i];
-                if(Name_Str == nil){
-                    NSLog(@"\nName_Str : nil\n");
-                    return;
-                }
+            //副菜の画像URLの文字列格納
+            Url_Str = [mrks.key2ImgArr objectAtIndex:i];
+            //副菜のレシピタイトルの文字列格納
+            Name_Str = [mrks.key2NameArr objectAtIndex:i];
+            //副菜のレシピURLの文字列格納
+            R_Url_Str = [mrks.key2UrlArr objectAtIndex:i];
                 
-                R_Url_Str = [mrks.recipUrlArr objectAtIndex:i];
-                if(R_Url_Str == nil){
-                    NSLog(@"\nR_Url_Str : nil\n");
-                    return;
-                }
+            [self Menu_Img_UrlSet:1];
                 
-                Img_URL = [NSURL URLWithString:Url_Str];
-                if(Img_URL == nil){
-                    NSLog(@"\nImg_Url : nil\n");
-                    return;
-                }
+            //デザートの画像URLの文字列格納
+            Url_Str = [mrks.key3ImgArr objectAtIndex:i];
+            //デザートのレシピタイトルの文字列格納
+            Name_Str = [mrks.key3NameArr objectAtIndex:i];
+            //デザートのレシピURLの文字列格納
+            R_Url_Str = [mrks.key3UrlArr objectAtIndex:i];
                 
-                Img_Data = [NSData dataWithContentsOfURL:Img_URL];
-                if (Img_Data == nil) {
-                    NSLog(@"\nImg_Data : nil\n");
-                    return;
-                }
+            [self Menu_Img_UrlSet:2];
                 
-                Recipe_Img = [UIImage imageWithData:Img_Data];
-                if (Recipe_Img == nil) {
-                    NSLog(@"\nRecipe_Img : nil\n");
-                    return;
-                }
+            //ドリンクの画像URLの文字列格納
+            Url_Str = [mrks.key4ImgArr objectAtIndex:i];
+            //ドリンクのレシピタイトルの文字列格納
+            Name_Str = [mrks.key4NameArr objectAtIndex:i];
+            //ドリンクのレシピURLの文字列格納
+            R_Url_Str = [mrks.key4UrlArr objectAtIndex:i];
                 
-                [Select_URL addObject:Recipe_Img];
-                [Recipe_Title_Arr addObject:Name_Str];
-                [Recipe_URL addObject:R_Url_Str];
-                
-                [indexnumber addObject:[NSNumber numberWithInteger:i]];
-            }
-            
-            NSLog(@"Recipe_Title_Arr_COUNT：%d\n",[Recipe_Title_Arr count]);
-            
-            switch (i) {
-                case 0:
-                    //self.Menu_Image_01.contentMode = UIViewContentModeScaleAspectFit;
-                    //戻るボタンでselfに遷移していない場合
-                    if (Send_Flag == 0) {
-                        self.Menu_Image_01.image = Recipe_Img;
-                    }
-                    //戻るボタンでselfに遷移した場合
-                    else{
-                        //self.Menu_Image_01.image = [Select_URL objectAtIndex:0];
-                        self.Menu_Image_01.image =
-                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:0] intValue]];
-                        
-                    }
-                    break;
-                case 1:
-                    //self.Menu_Image_02.contentMode = UIViewContentModeScaleAspectFit;
-                    if (Send_Flag == 0) {
-                        self.Menu_Image_02.image = Recipe_Img;
-                    }
-                    else{
-                        //self.Menu_Image_02.image = [Select_URL objectAtIndex:1];
-                        self.Menu_Image_02.image =
-                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:1] intValue]];
-                    }
-                case 2:
-                    //self.Menu_Image_03.contentMode = UIViewContentModeScaleAspectFit;
-                    if (Send_Flag == 0) {
-                        self.Menu_Image_03.image = Recipe_Img;
-                    }
-                    else{
-                        //self.Menu_Image_03.image = [Select_URL objectAtIndex:2];
-                        self.Menu_Image_03.image =
-                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:2] intValue]];
-                    }
-                case 3:
-                    //self.Menu_Image_04.contentMode = UIViewContentModeScaleAspectFit;
-                    if (Send_Flag == 0) {
-                        self.Menu_Image_04.image = Recipe_Img;
-                    }
-                    else{
-                        //self.Menu_Image_04.image = [Select_URL objectAtIndex:3];
-                        self.Menu_Image_04.image =
-                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:3] intValue]];
-                    }
-                case 4:
-                    //self.Menu_Image_05.contentMode = UIViewContentModeScaleAspectFit;
-                    if (Send_Flag == 0) {
-                        self.Menu_Image_05.image = Recipe_Img;
-                    }
-                    else{
-                        //self.Menu_Image_05.image = [Select_URL objectAtIndex:4];
-                        self.Menu_Image_05.image =
-                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:4] intValue]];
-                    }
-                case 5:
-                    //self.Menu_Image_06.contentMode = UIViewContentModeScaleAspectFit;
-                    if (Send_Flag == 0) {
-                        self.Menu_Image_06.image = Recipe_Img;
-                    }
-                    else{
-                        //self.Menu_Image_06.image = [Select_URL objectAtIndex:5];
-                        self.Menu_Image_06.image =
-                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:5] intValue]];
-                    }
-                case 6:
-                    //self.Menu_Image_07.contentMode = UIViewContentModeScaleAspectFit;
-                    if (Send_Flag == 0) {
-                        self.Menu_Image_07.image = Recipe_Img;
-                    }
-                    else{
-                        //self.Menu_Image_07.image = [Select_URL objectAtIndex:6];
-                        self.Menu_Image_07.image =
-                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:6] intValue]];
-                    }
-                case 7:
-                    //self.Menu_Image_08.contentMode = UIViewContentModeScaleAspectFit;
-                    if (Send_Flag == 0) {
-                        self.Menu_Image_08.image = Recipe_Img;
-                    }
-                    else{
-                        //self.Menu_Image_08.image = [Select_URL objectAtIndex:7];
-                        self.Menu_Image_08.image =
-                            [Select_URL objectAtIndex:[[indexnumber objectAtIndex:7] intValue]];
-                    }
-                default:
-                    break;
-            }
+            [self Menu_Img_UrlSet:3];
         }
     }
-    else{
-        NSLog(@"\n画像が取得出来ません！\n");
-        NSLog(@"\nrecipeImgArr_Count = %d\n",Img_Count);
-        NSLog(@"\nrecipeNameArr_Count = %d\n",Name_Count);
-        
-        UIAlertView *alert;
-        
-        alert = [[UIAlertView alloc] initWithTitle:@"エラー"
-                                           message:@"画像が取得出来ません！"
-                                          delegate:self cancelButtonTitle:@"確認" otherButtonTitles:nil];
-        [alert show];
-        Send_Flag = 0;
+}
+
+//文字列を表示可能な型に変換・格納処理
+- (void)Menu_Img_UrlSet:(NSInteger)Category_Num
+{
+    /*
+     Category_Num
+     
+     0:主菜
+     1:副菜
+     2:デザート
+     3:ドリンク
+     */
+    
+    //レシピ画像URLの文字列をNSURL型に変換し格納
+    Img_URL = [NSURL URLWithString:Url_Str];
+    
+    //レシピ画像URLのNSURL型をNSData型に変換し格納
+    Img_Data = [NSData dataWithContentsOfURL:Img_URL];
+    
+    //レシピ画像URLのNSData型をUIImage型に変換し格納
+    Recipe_Img = [UIImage imageWithData:Img_Data];
+    
+    switch (Category_Num) {
+        case 0:
+            //主菜の料理画像URL情報を格納
+            [Select_URL_1 addObject:Recipe_Img];
+            [Recipe_Title_Arr_1 addObject:Name_Str];
+            [Recipe_URL_1 addObject:R_Url_Str];
+            break;
+        case 1:
+            //副菜の料理画像URL情報を格納
+            [Select_URL_2 addObject:Recipe_Img];
+            [Recipe_Title_Arr_2 addObject:Name_Str];
+            [Recipe_URL_2 addObject:R_Url_Str];
+            break;
+        case 2:
+            //デザートの料理画像URL情報を格納
+            [Select_URL_3 addObject:Recipe_Img];
+            [Recipe_Title_Arr_3 addObject:Name_Str];
+            [Recipe_URL_3 addObject:R_Url_Str];
+            break;
+        case 3:
+            //ドリンクの料理画像URL情報を格納
+            [Select_URL_4 addObject:Recipe_Img];
+            [Recipe_Title_Arr_4 addObject:Name_Str];
+            [Recipe_URL_4 addObject:R_Url_Str];
+            break;
+        default:
+            NSLog(@"不正な引数が入力されました。\n");
+            return;
+            break;
     }
+}
+
+//料理画像の表示処理
+- (void)Menu_Img_Show
+{
+    if (Send_Flag != -1) {
+        [self Menu_Img_Change];
+    }
+    
+    //====================献立.1====================
+    //主菜
+    //self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:Select_Index];
+    self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:0] intValue]];
+    
+    //副菜
+    //self.Menu_Image_02.image = [Select_URL_2 objectAtIndex:Select_Index];
+    self.Menu_Image_02.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:1] intValue]];
+    
+    //デザート
+    //self.Menu_Image_03.image = [Select_URL_3 objectAtIndex:Select_Index];
+    self.Menu_Image_03.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:2] intValue]];
+
+    //ドリンク
+    //self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:Select_Index];
+    self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:3] intValue]];
+    
+    //====================献立.2====================
+    //主菜
+    //self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:Select_Index];
+    self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:4] intValue]];
+
+    //副菜
+    //self.Menu_Image_06.image = [Select_URL_2 objectAtIndex:Select_Index];
+    self.Menu_Image_06.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:5] intValue]];
+    
+    //デザート
+    //self.Menu_Image_07.image = [Select_URL_3 objectAtIndex:Select_Index];
+    self.Menu_Image_07.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:6] intValue]];
+
+    //ドリンク
+    //self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:Select_Index];
+    self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:7] intValue]];
 }
 
 - (void)viewDidLoad
@@ -257,8 +249,15 @@ NSMutableArray *indexnumber;
     //ナビゲーションバーの非表示
     [self.navigationController setNavigationBarHidden:YES];
     
+    //
+    if(Send_Flag != -1)
+    {
+        //取得した文字列から画像表示するための前処理
+        [self Menu_Img_GET];
+    }
     
-    [self Menu_Img_SET];
+    //画像の表示処理
+    [self Menu_Img_Show];
     
     //右へスワイプしたときの処理
     UISwipeGestureRecognizer *swiperight = [[UISwipeGestureRecognizer alloc]
@@ -276,7 +275,6 @@ NSMutableArray *indexnumber;
     swipeleft.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:swipeleft];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -299,11 +297,22 @@ NSMutableArray *indexnumber;
     [self.navigationController pushViewController:push animated:NO];
     
     Send_Flag = 0;
-    [Select_URL removeAllObjects];
-    [Recipe_Title_Arr removeAllObjects];
+    
+    [Select_URL_1 removeAllObjects];
+    [Select_URL_2 removeAllObjects];
+    [Select_URL_3 removeAllObjects];
+    [Select_URL_4 removeAllObjects];
+    
+    [Recipe_Title_Arr_1 removeAllObjects];
+    [Recipe_Title_Arr_2 removeAllObjects];
+    [Recipe_Title_Arr_3 removeAllObjects];
+    [Recipe_Title_Arr_4 removeAllObjects];
+    
+    [Recipe_URL_1 removeAllObjects];
+    [Recipe_URL_2 removeAllObjects];
+    [Recipe_URL_3 removeAllObjects];
+    [Recipe_URL_4 removeAllObjects];
 }
-
-
 - (IBAction)Menu_01:(id)sender {
     Send_Flag = 1;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
@@ -336,41 +345,39 @@ NSMutableArray *indexnumber;
                 }
             }
         }while(hantei);
+        
         [indexnumber addObject:[NSNumber numberWithInteger:random]];
         
         switch (i) {
             case 0:
-                self.Menu_Image_01.image = [Select_URL objectAtIndex:random];
+                self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:random];
                 break;
             case 1:
-                self.Menu_Image_02.image = [Select_URL objectAtIndex:random];
+                self.Menu_Image_02.image = [Select_URL_2 objectAtIndex:random];
                 break;
             case 2:
-                self.Menu_Image_03.image = [Select_URL objectAtIndex:random];
+                self.Menu_Image_03.image = [Select_URL_3 objectAtIndex:random];
                 break;
             case 3:
-                self.Menu_Image_04.image = [Select_URL objectAtIndex:random];
+                self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:random];
                 break;
             case 4:
-                self.Menu_Image_05.image = [Select_URL objectAtIndex:random];
+                self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:random];
                 break;
             case 5:
-                self.Menu_Image_06.image = [Select_URL objectAtIndex:random];
+                self.Menu_Image_06.image = [Select_URL_2 objectAtIndex:random];
                 break;
             case 6:
-                self.Menu_Image_07.image = [Select_URL objectAtIndex:random];
+                self.Menu_Image_07.image = [Select_URL_3 objectAtIndex:random];
                 break;
             case 7:
-                self.Menu_Image_08.image = [Select_URL objectAtIndex:random];
+                self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:random];
                 break;
             default:
                 break;
         }
     }
 }
-
-
-
 
 /*
 #pragma mark - Navigation
@@ -382,8 +389,5 @@ NSMutableArray *indexnumber;
     // Pass the selected object to the new view controller.
 }
 */
-
-
-
 
 @end
