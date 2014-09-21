@@ -24,6 +24,9 @@ NSURL *Img_URL;
 NSData *Img_Data;
 UIImage *Recipe_Img;
 
+MarureKeyS *mrks;
+
+
 //料理の画像URL格納用配列
 //主菜
 NSMutableArray *Select_URL_1;
@@ -70,13 +73,7 @@ NSMutableArray *indexnumber;
 //献立の情報取得
 - (void)Menu_Img_GET
 {
-    
-    MarureKeyS *mrks;
-    
     mrks = [[MarureKeyS alloc]init];
-    
-    //nilチェック用の変数
-    Boolean nil_Flag = false;
     
     Select_URL_1 = [NSMutableArray array];
     Select_URL_2 = [NSMutableArray array];
@@ -101,48 +98,146 @@ NSMutableArray *indexnumber;
     [mrks SetEventAndMoody:0 moody:0];
     //本番用：
     //[mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
+    
+    //=========================nilチェック=========================
+    if ([mrks.key1ImgArr count] > 0) {
+        NSLog(@"Key1ImgArr COUNT = %d\n",[mrks.key1ImgArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey1ImgArr COUNT = %d\n",[mrks.key1ImgArr count]);
+        return;
+    }
+    
+    if ([mrks.key2ImgArr count] > 0) {
+        NSLog(@"Key2ImgArr COUNT = %d\n",[mrks.key2ImgArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey2ImgArr COUNT = %d\n",[mrks.key2ImgArr count]);
+        return;
+    }
+    
+    if ([mrks.key3ImgArr count] > 0) {
+        NSLog(@"Key3ImgArr COUNT = %d\n",[mrks.key3ImgArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey3ImgArr COUNT = %d\n",[mrks.key3ImgArr count]);
+        return;
+    }
+    
+    if ([mrks.key4ImgArr count] > 0) {
+        NSLog(@"Key4ImgArr COUNT = %d\n",[mrks.key4ImgArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey4ImgArr COUNT = %d\n",[mrks.key4ImgArr count]);
+        return;
+    }
+    
+    if ([mrks.key1NameArr count] > 0) {
+        NSLog(@"Key1NameArr COUNT = %d\n",[mrks.key1NameArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey1NameArr COUNT = %d\n",[mrks.key1NameArr count]);
+        return;
+    }
+    
+    if ([mrks.key2NameArr count] > 0) {
+        NSLog(@"Key2NameArr COUNT = %d\n",[mrks.key2NameArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey2NameArr COUNT = %d\n",[mrks.key2NameArr count]);
+        return;
+    }
+    
+    if ([mrks.key3NameArr count] > 0) {
+        NSLog(@"Key3NameArr COUNT = %d\n",[mrks.key3NameArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey3NameArr COUNT = %d\n",[mrks.key3NameArr count]);
+        return;
+    }
+    
+    if ([mrks.key4NameArr count] > 0) {
+        NSLog(@"Key4NameArr COUNT = %d\n",[mrks.key4NameArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey4NameArr COUNT = %d\n",[mrks.key4NameArr count]);
+        return;
+    }
+    
+    if ([mrks.key1UrlArr count] > 0) {
+        NSLog(@"Key1UrlArr COUNT = %d\n",[mrks.key1UrlArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey1UrlArr COUNT = %d\n",[mrks.key1NameArr count]);
+        return;
+    }
+    
+    if ([mrks.key2UrlArr count] > 0) {
+        NSLog(@"Key2UrlArr COUNT = %d\n",[mrks.key2UrlArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey2UrlArr COUNT = %d\n",[mrks.key2UrlArr count]);
+        return;
+    }
+    
+    if ([mrks.key3UrlArr count] > 0) {
+        NSLog(@"Key3UrlArr COUNT = %d\n",[mrks.key3UrlArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey3UrlArr COUNT = %d\n",[mrks.key3UrlArr count]);
+        return;
+    }
+    
+    if ([mrks.key4UrlArr count] > 0) {
+        NSLog(@"Key4UrlArr COUNT = %d\n",[mrks.key4UrlArr count]);
+    }
+    else{
+        NSLog(@"ERROR!!\nKey4UrlArr COUNT = %d\n",[mrks.key4UrlArr count]);
+        return;
+    }
+    
+    
+    //==================================================
+    
 
     //APIからの返却数までループ
     for(i = 0;i < [mrks.key1ImgArr count];i++){
-        //画面2から遷移　かつ　格納値がnilでない時
-        if(!nil_Flag){
+        
+        //主菜の画像URLの文字列格納
+        Url_Str = [mrks.key1ImgArr objectAtIndex:i];
+        //主菜のレシピタイトルの文字列格納
+        Name_Str = [mrks.key1NameArr objectAtIndex:i];
+        //主菜のレシピURLの文字列格納
+        R_Url_Str = [mrks.key1UrlArr objectAtIndex:i];
 
-            //主菜の画像URLの文字列格納
-            Url_Str = [mrks.key1ImgArr objectAtIndex:i];
-            //主菜のレシピタイトルの文字列格納
-            Name_Str = [mrks.key1NameArr objectAtIndex:i];
-            //主菜のレシピURLの文字列格納
-            R_Url_Str = [mrks.key1UrlArr objectAtIndex:i];
-
-            [self Menu_Img_UrlSet:0];
+        [self Menu_Img_UrlSet:0];
+            
+        //副菜の画像URLの文字列格納
+        Url_Str = [mrks.key2ImgArr objectAtIndex:i];
+        //副菜のレシピタイトルの文字列格納
+        Name_Str = [mrks.key2NameArr objectAtIndex:i];
+        //副菜のレシピURLの文字列格納
+        R_Url_Str = [mrks.key2UrlArr objectAtIndex:i];
                 
-            //副菜の画像URLの文字列格納
-            Url_Str = [mrks.key2ImgArr objectAtIndex:i];
-            //副菜のレシピタイトルの文字列格納
-            Name_Str = [mrks.key2NameArr objectAtIndex:i];
-            //副菜のレシピURLの文字列格納
-            R_Url_Str = [mrks.key2UrlArr objectAtIndex:i];
+        [self Menu_Img_UrlSet:1];
                 
-            [self Menu_Img_UrlSet:1];
+        //デザートの画像URLの文字列格納
+        Url_Str = [mrks.key3ImgArr objectAtIndex:i];
+        //デザートのレシピタイトルの文字列格納
+        Name_Str = [mrks.key3NameArr objectAtIndex:i];
+        //デザートのレシピURLの文字列格納
+        R_Url_Str = [mrks.key3UrlArr objectAtIndex:i];
                 
-            //デザートの画像URLの文字列格納
-            Url_Str = [mrks.key3ImgArr objectAtIndex:i];
-            //デザートのレシピタイトルの文字列格納
-            Name_Str = [mrks.key3NameArr objectAtIndex:i];
-            //デザートのレシピURLの文字列格納
-            R_Url_Str = [mrks.key3UrlArr objectAtIndex:i];
+        [self Menu_Img_UrlSet:2];
                 
-            [self Menu_Img_UrlSet:2];
+        //ドリンクの画像URLの文字列格納
+        Url_Str = [mrks.key4ImgArr objectAtIndex:i];
+        //ドリンクのレシピタイトルの文字列格納
+        Name_Str = [mrks.key4NameArr objectAtIndex:i];
+        //ドリンクのレシピURLの文字列格納
+        R_Url_Str = [mrks.key4UrlArr objectAtIndex:i];
                 
-            //ドリンクの画像URLの文字列格納
-            Url_Str = [mrks.key4ImgArr objectAtIndex:i];
-            //ドリンクのレシピタイトルの文字列格納
-            Name_Str = [mrks.key4NameArr objectAtIndex:i];
-            //ドリンクのレシピURLの文字列格納
-            R_Url_Str = [mrks.key4UrlArr objectAtIndex:i];
-                
-            [self Menu_Img_UrlSet:3];
-        }
+        [self Menu_Img_UrlSet:3];
     }
 }
 
@@ -159,13 +254,31 @@ NSMutableArray *indexnumber;
      */
     
     //レシピ画像URLの文字列をNSURL型に変換し格納
-    Img_URL = [NSURL URLWithString:Url_Str];
+    if(Url_Str.length > 0){
+        Img_URL = [NSURL URLWithString:Url_Str];
+    }
+    else{
+        NSLog(@"ERROR!! Url_Str.LENGTH = %d",Url_Str.length);
+        return;
+    }
     
     //レシピ画像URLのNSURL型をNSData型に変換し格納
-    Img_Data = [NSData dataWithContentsOfURL:Img_URL];
+    if (Img_URL != nil) {
+        Img_Data = [NSData dataWithContentsOfURL:Img_URL];
+    }
+    else{
+        NSLog(@"ERROR!! Img_Data = nil");
+        return;
+    }
     
     //レシピ画像URLのNSData型をUIImage型に変換し格納
-    Recipe_Img = [UIImage imageWithData:Img_Data];
+    if (Img_Data != nil) {
+        Recipe_Img = [UIImage imageWithData:Img_Data];
+    }
+    else{
+        NSLog(@"ERROR!! Recipe_Img = nil");
+        return;
+    }
     
     switch (Category_Num) {
         case 0:
@@ -249,7 +362,7 @@ NSMutableArray *indexnumber;
     //ナビゲーションバーの非表示
     [self.navigationController setNavigationBarHidden:YES];
     
-    //
+    //画面2から遷移した場合
     if(Send_Flag != -1)
     {
         //取得した文字列から画像表示するための前処理
