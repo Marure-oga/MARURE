@@ -7,9 +7,20 @@
 
 extern int Send_Flag;
 
-extern NSMutableArray *Select_URL;
-extern NSMutableArray *Recipe_URL;
-extern NSMutableArray *Recipe_Title_Arr;
+extern NSMutableArray *Select_URL_1;
+extern NSMutableArray *Select_URL_2;
+extern NSMutableArray *Select_URL_3;
+extern NSMutableArray *Select_URL_4;
+
+extern NSMutableArray *Recipe_URL_1;
+extern NSMutableArray *Recipe_URL_2;
+extern NSMutableArray *Recipe_URL_3;
+extern NSMutableArray *Recipe_URL_4;
+
+extern NSMutableArray *Recipe_Title_Arr_1;
+extern NSMutableArray *Recipe_Title_Arr_2;
+extern NSMutableArray *Recipe_Title_Arr_3;
+extern NSMutableArray *Recipe_Title_Arr_4;
 
 extern NSMutableArray *indexnumber;
 
@@ -25,6 +36,9 @@ extern NSMutableArray *indexnumber;
 
 @property (weak, nonatomic) IBOutlet UIButton *Menu_01;
 @property (weak, nonatomic) IBOutlet UIButton *Menu_02;
--(void) Menu_Img_SET;
+
+-(void) Menu_Img_GET;
+-(void) Menu_Img_UrlSet:(NSInteger)Category_Num;
+-(void) Menu_Img_Show;
 
 @end

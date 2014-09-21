@@ -60,59 +60,74 @@
     if (data) {
         NSError * jsonErr = nil;
         NSDictionary * dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonErr];
-        //イベントのセット
-        NSArray* arrayEvent =[dic objectForKey:@"event"];
-        NSDictionary * eventDic = [arrayEvent objectAtIndex:eventindex];
-        //キーワードを検索
-        NSString* _eventName = [eventDic objectForKey:@"name"];
-        NSString* _ekey1 = [eventDic objectForKey:@"key1"];
-        NSString* _ekey2 = [eventDic objectForKey:@"key2"];
-        NSString* _ekey3 = [eventDic objectForKey:@"key3"];
-        NSString* _ekey4 = [eventDic objectForKey:@"key4"];
-        
-        //キーワードセット
-        eventName = _eventName;
-        self->eventName = _eventName;
-        self->ekey1 = _ekey1;
-        self->ekey2 = _ekey2;
-        self->ekey3 = _ekey3;
-        self->ekey4 = _ekey4;
-        
-        //キーワードが空白出はない時セットする
-        if (_ekey1.length > 0){[keyword1 addObject:_ekey1];}
-        if (_ekey2.length > 0){[keyword2 addObject:_ekey2];}
-        if (_ekey3.length > 0){[keyword3 addObject:_ekey3];}
-        if (_ekey4.length > 0){[keyword4 addObject:_ekey4];}
-        
+        if (eventindex >= 0)
+        {
+            //イベントのセット
+            NSLog(@"eventindex >= 0");
+            NSArray* arrayEvent =[dic objectForKey:@"event"];
+            NSDictionary * eventDic = [arrayEvent objectAtIndex:eventindex];
+            //キーワードを検索
+            NSString* _eventName = [eventDic objectForKey:@"name"];
+            NSString* _ekey1 = [eventDic objectForKey:@"key1"];
+            NSString* _ekey2 = [eventDic objectForKey:@"key2"];
+            NSString* _ekey3 = [eventDic objectForKey:@"key3"];
+            NSString* _ekey4 = [eventDic objectForKey:@"key4"];
+            
+            //キーワードセット
+            eventName = _eventName;
+            self->eventName = _eventName;
+            self->ekey1 = _ekey1;
+            self->ekey2 = _ekey2;
+            self->ekey3 = _ekey3;
+            self->ekey4 = _ekey4;
+            
+            //キーワードが空白出はない時セットする
+            if (_ekey1.length > 0){[keyword1 addObject:_ekey1];}
+            if (_ekey2.length > 0){[keyword2 addObject:_ekey2];}
+            if (_ekey3.length > 0){[keyword3 addObject:_ekey3];}
+            if (_ekey4.length > 0){[keyword4 addObject:_ekey4];}
+        }
+        else
+        {
+            NSLog(@"eventindex < 0");
+        }
         //雰囲気のセット　上と同じような処理
-        NSArray* arrayMoody = [dic objectForKey:@"moody"];
-        
-        NSDictionary * moodyDic = [arrayMoody objectAtIndex:moodyindex];
-        
-        NSString* _moodyName = [moodyDic objectForKey:@"name"];
-        NSString* _mkey1 = [moodyDic objectForKey:@"key1"];
-        NSString* _mkey2 = [moodyDic objectForKey:@"key2"];
-        NSString* _mkey3 = [moodyDic objectForKey:@"key3"];
-        NSString* _mkey4 = [moodyDic objectForKey:@"key4"];
-        
-        self->moodyName = _moodyName;
-        self->mkey1 = _mkey1;
-        self->mkey2 = _mkey2;
-        self->mkey3 = _mkey3;
-        self->mkey4 = _mkey4;
-        
-        if (_mkey1.length > 0){[keyword1 addObject:_mkey1];}
-        if (_mkey2.length > 0){[keyword2 addObject:_mkey2];}
-        if (_mkey3.length > 0){[keyword3 addObject:_mkey3];}
-        if (_mkey4.length > 0){[keyword4 addObject:_mkey4];}
+        if (moodyindex >= 0)
+        {
+            NSLog(@"modeyindex >= 0");
+            NSArray* arrayMoody = [dic objectForKey:@"moody"];
+            
+            NSDictionary * moodyDic = [arrayMoody objectAtIndex:moodyindex];
+            
+            NSString* _moodyName = [moodyDic objectForKey:@"name"];
+            NSString* _mkey1 = [moodyDic objectForKey:@"key1"];
+            NSString* _mkey2 = [moodyDic objectForKey:@"key2"];
+            NSString* _mkey3 = [moodyDic objectForKey:@"key3"];
+            NSString* _mkey4 = [moodyDic objectForKey:@"key4"];
+            
+            self->moodyName = _moodyName;
+            self->mkey1 = _mkey1;
+            self->mkey2 = _mkey2;
+            self->mkey3 = _mkey3;
+            self->mkey4 = _mkey4;
+            
+            if (_mkey1.length > 0){[keyword1 addObject:_mkey1];}
+            if (_mkey2.length > 0){[keyword2 addObject:_mkey2];}
+            if (_mkey3.length > 0){[keyword3 addObject:_mkey3];}
+            if (_mkey4.length > 0){[keyword4 addObject:_mkey4];}
+        }
+        else
+        {
+            NSLog(@"modeyindex < 0");
+        }
         
     }
     else
     {
         NSLog(@"file is missing.");
     }
-    
-    const float intervalTime = 0.9;//   webapi検索のため最小間隔時間
+    NSLog(@"keyword set");
+    const float intervalTime = 1.0;//   webapi検索のため最小間隔時間
     //キーワードによる検索
     for (NSString *str in keyword1)
     {
