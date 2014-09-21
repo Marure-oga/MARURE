@@ -6,19 +6,15 @@
 @end
 
 @implementation ViewController
-//タイマー１
-NSTimer *ter;
-//タイマー２
-NSTimer *ter2;
-//イベント
-NSInteger event=0;
-//雰囲気
-NSInteger atomosphere = 0;
+//タイマー１　画面遷移の時間用の変数
+NSTimer *timer;
+//タイマー２　最初のアラート表示の時間用
+NSTimer *timer2;
 //プログレスバー進捗度（０〜１）
 double progresslevel = 0;
 //ネットワークに接続しているかを判断する時間（秒）
-double searchTime = 5;
-//最初のネットワーク接続確認か
+double searchTime;
+//最初のネットワーク接続確認を行っているかどうかの判定
 Boolean first = true;
 
 // 08/08 by yo
@@ -26,11 +22,16 @@ MarureKeyS *mrks;
 
 //以上 08/08 by yo
 
+//プログレスバー
 UIProgressView *progressView;
 
+//アラート
 UIAlertView *alert;
 
+//並列処理　メイン処理
 dispatch_queue_t mainQueue;
+
+//並列処理　サブ処理
 dispatch_queue_t subQueue;
 
 - (void)viewDidLoad
@@ -51,10 +52,13 @@ dispatch_queue_t subQueue;
     [self.view addSubview:progressView];
     
     
+    //メイン処理とサブ処理を設定
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);
     
+    //Threadメソッドの呼び出し
     [self Thread];
+    
     // 08/09 by yo
     //イベントと雰囲気　を記録するファイルを呼び出す
     //第一引数はイベントindex
@@ -73,7 +77,7 @@ dispatch_queue_t subQueue;
 
 }
 
-//メイン処理の実行
+//メイン処理としてmainQueueメソッドの実行
 -(void)Thread
 {
     dispatch_async(mainQueue,^{
@@ -81,7 +85,7 @@ dispatch_queue_t subQueue;
     });
 }
 
-//メイン処理
+//メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
 -(void)mainQueueMethod
 {
     
@@ -91,7 +95,7 @@ dispatch_queue_t subQueue;
     [self.view addSubview:progressView];
 }
 
-//サブ処理
+//サブ処理　ネットワーク接続確認（２回目以降）を実行
 -(void)subQueueMethod
 {
     [self network];
@@ -104,13 +108,12 @@ dispatch_queue_t subQueue;
 }
 
 
-//変数初期化
+//変数初期化 プログレスバーを0.5進行
 -(void)syokika
 {
-    event = 0;
-    atomosphere = 0;
     progresslevel = 0;
     first = true;
+    searchTime = 5;
     
     progresslevel = progresslevel + 0.5;
 }
@@ -120,8 +123,9 @@ dispatch_queue_t subQueue;
 {
     Boolean accessstate = false;
     
+    //networksearchメソッドの呼び出し
     accessstate = [self networksearch];
-    
+    //networkaccessHanteiメソッドの呼び出し
     [self networkaccessHantei:accessstate];
     
 }
@@ -130,34 +134,43 @@ dispatch_queue_t subQueue;
 -(void)network
 {
     first = false;
+    
+    //ネットワーク接続が確認できたかどうか
     Boolean accessstate = false;
     
+    //このメソッドが呼び出された時間の変数
     NSDate *startDate;
+    //startDateからどれほど時間がたったかをはかるための変数
     NSDate *endDate;
+    //startDateからendDateまでにかかっった時間
     NSTimeInterval interval;
     
     startDate = [NSDate date];
     
+    //ネットワーク接続確認がとれるかserrchTimeで設定した時間がたつまで　networksearchメソッドを呼び出すことを繰り返す
     do{
         accessstate = [self networksearch];
         endDate = [NSDate date];
         interval = [endDate timeIntervalSinceDate:startDate];
     }while(accessstate == false && interval <= searchTime);
     
+    //networkaccsessHanteiメソッドの呼び出し
     [self networkaccessHantei:accessstate];
 }
 
 
-//ネットワーク検索用
+//ネットワーク接続判定を行うメソッド
 -(Boolean)networksearch
 {
+    //ネットワーク接続ができているかどうかの変数
     Boolean networkaccess = false;
     
+    //ネットワーク接続確認
     Reachability *curReach = [Reachability reachabilityForInternetConnection];
     NetworkStatus netStatus =[curReach currentReachabilityStatus];
     
     if(netStatus == NotReachable){
-        
+        //ネットワーク説毒ができていないとき
         networkaccess = false;
     }else{
         //ネットワーク接続ができているとき
@@ -168,7 +181,7 @@ dispatch_queue_t subQueue;
             [progressView setProgress:progresslevel animated:YES];
             [self.view addSubview:progressView];
         }else{
-            //２回目以降のときメイン処理でプログレスバーの進行
+            //２回目以降のときメイン処理でプログレスバーの進行　メイン処理側で実行
             dispatch_async(mainQueue,^{
                 progresslevel = progresslevel + 0.5;
                 [progressView setProgress:progresslevel animated:YES];
@@ -220,16 +233,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 {
     if(accessstate){
         if(first){
-            //最初の時点でネットワーク接続ができているとき1.2秒後画面遷移
-            ter = [NSTimer scheduledTimerWithTimeInterval:1.2
+            //最初の確認でネットワーク接続ができているとき1.2秒後画面遷移
+            timer = [NSTimer scheduledTimerWithTimeInterval:1.2
                                                target:self
                                              selector:@selector(nextPage:)
                                              userInfo:nil
                                               repeats:NO];
         }else{
-            //２回目以降でネットワーク接続ができたときメイン処理で0.7秒後画面遷移
+            //２回目以降の確認でネットワーク接続ができたときメイン処理で0.7秒後画面遷移
             dispatch_async(mainQueue,^{
-                ter = [NSTimer scheduledTimerWithTimeInterval:0.7
+                timer = [NSTimer scheduledTimerWithTimeInterval:0.7
                                                        target:self
                                                      selector:@selector(nextPage:)
                                                      userInfo:nil
@@ -239,8 +252,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         }
     }else{
         if(first){
-            //最初の時点でネットワーク接続ができていないときアラート表示
-            ter2 = [NSTimer scheduledTimerWithTimeInterval:0.5
+            //最初の確認でネットワーク接続ができていないときアラート表示
+            timer2 = [NSTimer scheduledTimerWithTimeInterval:0.5
                                             target:self
                                              selector:@selector(showAlert)
                                             userInfo:nil
@@ -256,7 +269,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
 }
 
-//次の画面へ遷移
+//検索条件入力画面へ遷移
 -(void)nextPage:(NSTimer*)timer{
     ViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"search"];
     [self.navigationController setNavigationBarHidden:YES];

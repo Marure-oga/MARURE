@@ -1,5 +1,7 @@
 
 #import "RecipeViewController.h"
+
+//左から表示させるアニメーションのために必要
 #import <QuartzCore/QuartzCore.h>
 
 @interface RecipeViewController ()

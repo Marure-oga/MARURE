@@ -1,5 +1,7 @@
 
 #import "WebViewController.h"
+
+//左から表示させるアニメーションのために必要
 #import <QuartzCore/QuartzCore.h>
 
 @interface WebViewController ()
@@ -38,7 +40,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-//右スワイプを行ったとき画面４に遷移
+//右スワイプを行ったとき献立詳細画面に遷移
 -(void)swipe:(UISwipeGestureRecognizer *)gesture
 {
     CATransition *transition = [CATransition animation];

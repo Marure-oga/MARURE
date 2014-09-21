@@ -7,6 +7,8 @@
 //
 
 #import "MenuViewController.h"
+
+//左から表示させるアニメーションのために必要
 #import <QuartzCore/QuartzCore.h>
 
 @interface MenuViewController ()
@@ -53,6 +55,7 @@ NSMutableArray *indexnumber;
         Recipe_URL = [NSMutableArray array];
         Recipe_Title_Arr = [NSMutableArray array];
         
+        //indexnumberの初期化
         indexnumber = [NSMutableArray array];
     }
 
@@ -139,6 +142,7 @@ NSMutableArray *indexnumber;
                 [Recipe_Title_Arr addObject:Name_Str];
                 [Recipe_URL addObject:R_Url_Str];
                 
+                //indexnumberにiをセット
                 [indexnumber addObject:[NSNumber numberWithInteger:i]];
             }
             
@@ -325,10 +329,14 @@ NSMutableArray *indexnumber;
     int random = 0;
     bool hantei = true;
     indexnumber = [NSMutableArray array];
+    
+    //処理を8回繰り返す
     for(i = 0;i < 8;i++){
+        //まだ選ばれていないレシピ番号が出るまで乱数を発生させる
         do{
             random = (int)(arc4random() %8);
             hantei = false;
+            //発生した値がすでにあるかどうかの判定
             for(int j =0;j<i;j++){
                 if([[indexnumber objectAtIndex:j] intValue] == random){
                     hantei = true;
@@ -338,6 +346,7 @@ NSMutableArray *indexnumber;
         }while(hantei);
         [indexnumber addObject:[NSNumber numberWithInteger:random]];
         
+        //画像をセット
         switch (i) {
             case 0:
                 self.Menu_Image_01.image = [Select_URL objectAtIndex:random];
