@@ -3,6 +3,10 @@
 #import "JsonSerchClass.h"
 #import "SearchViewController.h"
 
+//ネットワーク接続確認のために必要
+#import "Reachability.h"
+@class Reachability;
+
 @interface MenuViewController : UIViewController
 
 extern int Send_Flag;

@@ -15,7 +15,7 @@ double progresslevel = 0;
 //ネットワークに接続しているかを判断する時間（秒）
 double searchTime;
 //最初のネットワーク接続確認を行っているかどうかの判定
-Boolean first = true;
+Boolean firstcheck = true;
 
 // 08/08 by yo
 MarureKeyS *mrks;
@@ -74,6 +74,9 @@ dispatch_queue_t subQueue;
     //配列は[mrks SetEventAndMoody:0 moody:0];を呼び出す後からデータが入るのでその前にnilになっている
     //
     //以上 08/09 by yo
+    
+    //ナビゲーションバーの非表示
+    [self.navigationController setNavigationBarHidden:YES];
 
 }
 
@@ -112,8 +115,8 @@ dispatch_queue_t subQueue;
 -(void)syokika
 {
     progresslevel = 0;
-    first = true;
-    searchTime = 5;
+    firstcheck = true;
+    searchTime = 5.0;
     
     progresslevel = progresslevel + 0.5;
 }
@@ -121,6 +124,7 @@ dispatch_queue_t subQueue;
 //ネットワーク接続判定１回目
 -(void)network_first
 {
+    //ネットワーク接続確認できたかどうか
     Boolean accessstate = false;
     
     //networksearchメソッドの呼び出し
@@ -133,7 +137,7 @@ dispatch_queue_t subQueue;
 //ネットワーク接続判定２回目以降
 -(void)network
 {
-    first = false;
+    firstcheck = false;
     
     //ネットワーク接続が確認できたかどうか
     Boolean accessstate = false;
@@ -175,7 +179,7 @@ dispatch_queue_t subQueue;
     }else{
         //ネットワーク接続ができているとき
         networkaccess = true;
-        if(first){
+        if(firstcheck){
             //最初のときプログレスバーの進行
             progresslevel = progresslevel + 0.5;
             [progressView setProgress:progresslevel animated:YES];
@@ -228,11 +232,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 }
 
 
-//ネットワーク接続ができているかどうか
+//ネットワーク接続ができているかどうかとそれに対応する処理
 -(void)networkaccessHantei:(Boolean)accessstate
 {
     if(accessstate){
-        if(first){
+        if(firstcheck){
             //最初の確認でネットワーク接続ができているとき1.2秒後画面遷移
             timer = [NSTimer scheduledTimerWithTimeInterval:1.2
                                                target:self
@@ -251,7 +255,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
         }
     }else{
-        if(first){
+        if(firstcheck){
             //最初の確認でネットワーク接続ができていないときアラート表示
             timer2 = [NSTimer scheduledTimerWithTimeInterval:0.5
                                             target:self

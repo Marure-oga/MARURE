@@ -2,6 +2,10 @@
 #import "MenuViewController.h"
 #import "WebViewController.h"
 
+//ネットワーク接続確認のために必要
+#import "Reachability.h"
+@class Reachability;
+
 @interface RecipeViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *Menu_Img01;

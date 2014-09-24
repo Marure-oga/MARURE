@@ -11,6 +11,7 @@
 		6358762719A23DED0007EE28 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762619A23DED0007EE28 /* MenuViewController.m */; };
 		6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762919A23E410007EE28 /* RecipeViewController.m */; };
 		AB3993621984F80C00D0F1FF /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3993611984F80C00D0F1FF /* Back.png */; };
+		AB53718519CF160600B5BCEC /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = AB53718419CF160600B5BCEC /* title.png */; };
 		AB71FC16197FFAFD00F2A5BD /* Menu1.1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */; };
 		AB71FC17197FFAFD00F2A5BD /* Menu1.2.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */; };
 		AB71FC18197FFAFD00F2A5BD /* Menu1.3.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC10197FFAFD00F2A5BD /* Menu1.3.png */; };
@@ -61,6 +62,7 @@
 		6358762819A23E410007EE28 /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
 		6358762919A23E410007EE28 /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
 		AB3993611984F80C00D0F1FF /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
+		AB53718419CF160600B5BCEC /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.1.png; sourceTree = "<group>"; };
 		AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.2.png; sourceTree = "<group>"; };
 		AB71FC10197FFAFD00F2A5BD /* Menu1.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.3.png; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				AB71FC13197FFAFD00F2A5BD /* Menu2.2.png */,
 				AB71FC14197FFAFD00F2A5BD /* Menu2.3.png */,
 				AB71FC15197FFAFD00F2A5BD /* Menu2.4.png */,
+				AB53718419CF160600B5BCEC /* title.png */,
 			);
 			name = picture;
 			path = ../../picture;
@@ -389,6 +392,7 @@
 				AB71FC1C197FFAFD00F2A5BD /* Menu2.3.png in Resources */,
 				ABB8390A197CFF9000878CB0 /* InfoPlist.strings in Resources */,
 				ABB83913197CFF9000878CB0 /* Main.storyboard in Resources */,
+				AB53718519CF160600B5BCEC /* title.png in Resources */,
 				AB71FC16197FFAFD00F2A5BD /* Menu1.1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

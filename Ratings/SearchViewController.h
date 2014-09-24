@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "MenuViewController.h"
 
+//ネットワーク接続確認のために必要
+#import "Reachability.h"
+@class Reachability;
+
 @interface SearchViewController : UIViewController
 
 extern int Event_NO;

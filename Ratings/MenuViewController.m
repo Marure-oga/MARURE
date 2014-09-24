@@ -62,6 +62,15 @@ NSMutableArray *Recipe_Title_Arr_4;
 //Menu_Image_01〜Menu_Image_08に対応するレシピ番号
 NSMutableArray *indexnumber;
 
+//ネットワークに接続しているかを判断する時間（秒）
+double searchTime;
+//並列処理　メイン処理
+dispatch_queue_t mainQueue;
+//並列処理　サブ処理
+dispatch_queue_t subQueue;
+//どのボタンが押されたかを数字で保存
+int buttontapped = -1;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -389,6 +398,13 @@ NSMutableArray *indexnumber;
     swipeleft.direction = UISwipeGestureRecognizerDirectionLeft;
     swipeleft.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:swipeleft];
+    
+    searchTime = 5.0;
+    buttontapped = -1;
+    
+    //メイン処理とサブ処理を設定
+    mainQueue = dispatch_get_main_queue();
+    subQueue = dispatch_queue_create("sub1",0);
 }
 
 - (void)didReceiveMemoryWarning
@@ -399,7 +415,11 @@ NSMutableArray *indexnumber;
 
 //戻るボタンを押したとき左から前の画面を出す
 - (IBAction)BackButton:(id)sender {
-    CATransition * transition = [CATransition animation];
+    buttontapped = 0;
+    dispatch_async(mainQueue,^{
+        [self mainQueueMethod];
+    });
+    /*CATransition * transition = [CATransition animation];
     
     transition.duration = 0.4;
     
@@ -426,14 +446,22 @@ NSMutableArray *indexnumber;
     [Recipe_URL_1 removeAllObjects];
     [Recipe_URL_2 removeAllObjects];
     [Recipe_URL_3 removeAllObjects];
-    [Recipe_URL_4 removeAllObjects];
+    [Recipe_URL_4 removeAllObjects];*/
 }
 - (IBAction)Menu_01:(id)sender {
-    Send_Flag = 1;
+    buttontapped = 1;
+    dispatch_async(mainQueue,^{
+        [self mainQueueMethod];
+    });
+    //Send_Flag = 1;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
 - (IBAction)Menu_02:(id)sender {
-    Send_Flag = 2;
+    buttontapped = 2;
+    dispatch_async(mainQueue,^{
+        [self mainQueueMethod];
+    });
+    //Send_Flag = 2;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
 
@@ -498,6 +526,191 @@ NSMutableArray *indexnumber;
         }
     }
 }
+
+//メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
+-(void)mainQueueMethod
+{
+    [self network_first];
+}
+
+//サブ処理　ネットワーク接続確認（２回目以降）を実行
+-(void)subQueueMethod
+{
+    [self network];
+}
+
+
+//ネットワーク接続判定１回目
+-(void)network_first
+{
+    Boolean accessstate = false;
+    
+    //networksearchメソッドの呼び出し
+    accessstate = [self networksearch];
+    //networkaccessHanteiメソッドの呼び出し
+    [self networkaccessHantei:accessstate];
+    
+}
+
+//ネットワーク接続判定２回目以降
+-(void)network
+{
+    //ネットワーク接続が確認できたかどうか
+    Boolean accessstate = false;
+    
+    //このメソッドが呼び出された時間の変数
+    NSDate *startDate;
+    //startDateからどれほど時間がたったかをはかるための変数
+    NSDate *endDate;
+    //startDateからendDateまでにかかっった時間
+    NSTimeInterval interval;
+    
+    startDate = [NSDate date];
+    
+    //ネットワーク接続確認がとれるかserrchTimeで設定した時間がたつまで　networksearchメソッドを呼び出すことを繰り返す
+    do{
+        accessstate = [self networksearch];
+        endDate = [NSDate date];
+        interval = [endDate timeIntervalSinceDate:startDate];
+    }while(accessstate == false && interval <= searchTime);
+    NSLog(@"ループを抜けた");
+    
+    //networkaccsessHanteiメソッドの呼び出し
+    [self networkaccessHantei:accessstate];
+}
+
+//ネットワーク接続判定を行うメソッド
+-(Boolean)networksearch
+{
+    //ネットワーク接続ができているかどうかの変数
+    Boolean networkaccess = false;
+    
+    //ネットワーク接続確認
+    Reachability *curReach = [Reachability reachabilityForInternetConnection];
+    NetworkStatus netStatus =[curReach currentReachabilityStatus];
+    
+    if(netStatus == NotReachable){
+        //ネットワーク説毒ができていないとき
+        networkaccess = false;
+    }else{
+        //ネットワーク接続ができているとき
+        networkaccess = true;
+    }
+    
+    return networkaccess;
+}
+
+//ネットワーク接続エラーのアラート表示
+-(void)showAlert
+{
+    //アラート
+    UIAlertView *alert;
+    
+    alert =[[UIAlertView alloc]
+            initWithTitle:@"エラー"
+            message:@"ネットワークに接続していません\n再試行しますか？"
+            delegate:self
+            cancelButtonTitle:@"後で"
+            otherButtonTitles:@"はい",
+            nil];
+    alert.alertViewStyle = UIAlertViewStyleDefault;
+    
+    [alert show];
+    
+}
+
+//アラートのボタンが押されたときの処理（イベント未選択のアラートとネットワーク接続確認のアラートの両方が実行する）
+-(void)alertView:(UIAlertView*)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch(buttonIndex){
+        case 0:
+            break;
+        case 1:
+            //はいが押されたらサブ処理でネットワーク接続確認を再試行
+            dispatch_async(subQueue,^{
+                [self subQueueMethod];
+                
+            });
+            break;
+    }
+}
+
+//ネットワーク接続ができているかどうか
+-(void)networkaccessHantei:(Boolean)accessstate
+{
+    if(accessstate){
+        NSLog(@"ネットワーク接続確認OK");
+        dispatch_async(mainQueue,^{
+            if(buttontapped == 0){
+                [self previousPage];
+            }else if(buttontapped == 1){
+                [self nextPage1];
+            }else if(buttontapped == 2){
+                [self nextPage2];
+            }else{
+                NSLog(@"buttontappedが不正です");
+            }
+            
+        });
+    }else{
+        dispatch_async(mainQueue,^{
+            [self showAlert];
+        });
+    }
+    
+}
+
+//前のページに遷移
+-(void)previousPage
+{
+    CATransition * transition = [CATransition animation];
+    
+    transition.duration = 0.4;
+    
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    transition.type = kCATransitionMoveIn;
+    transition.subtype = kCATransitionFromLeft;
+    
+    MenuViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"search"];
+    [self.navigationController.view.layer addAnimation:transition forKey:nil];
+    [self.navigationController pushViewController:push animated:NO];
+    
+    Send_Flag = 0;
+    
+    [Select_URL_1 removeAllObjects];
+    [Select_URL_2 removeAllObjects];
+    [Select_URL_3 removeAllObjects];
+    [Select_URL_4 removeAllObjects];
+    
+    [Recipe_Title_Arr_1 removeAllObjects];
+    [Recipe_Title_Arr_2 removeAllObjects];
+    [Recipe_Title_Arr_3 removeAllObjects];
+    [Recipe_Title_Arr_4 removeAllObjects];
+    
+    [Recipe_URL_1 removeAllObjects];
+    [Recipe_URL_2 removeAllObjects];
+    [Recipe_URL_3 removeAllObjects];
+    [Recipe_URL_4 removeAllObjects];
+}
+
+//上の献立に遷移
+-(void)nextPage1
+{
+    Send_Flag = 1;
+    MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
+    [self.navigationController pushViewController:viewCont animated:YES];
+}
+
+//下の献立に遷移
+-(void)nextPage2
+{
+    Send_Flag = 2;
+    MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
+    [self.navigationController pushViewController:viewCont animated:YES];
+}
+
+
+
 
 /*
 #pragma mark - Navigation

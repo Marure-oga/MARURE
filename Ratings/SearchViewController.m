@@ -28,6 +28,13 @@ UITableViewCell *bak_cell;
 NSIndexPath *bak_indexPath_2;
 UITableViewCell *bak_cell_2;
 
+//ネットワークに接続しているかを判断する時間（秒）
+double searchTime;
+//並列処理　メイン処理
+dispatch_queue_t mainQueue;
+//並列処理　サブ処理
+dispatch_queue_t subQueue;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,6 +61,12 @@ UITableViewCell *bak_cell_2;
     
     //ナビゲーションバーの非表示
     [self.navigationController setNavigationBarHidden:YES];
+    
+    searchTime = 5.0;
+    
+    //メイン処理とサブ処理を設定
+    mainQueue = dispatch_get_main_queue();
+    subQueue = dispatch_queue_create("sub1",0);
     
 }
 
@@ -217,6 +230,9 @@ UITableViewCell *bak_cell_2;
     
     
     if (Selected_flag){
+        dispatch_async(mainQueue,^{
+            [self mainQueueMethod];
+        });
         
     }
     else {
@@ -230,6 +246,136 @@ UITableViewCell *bak_cell_2;
     }
     Selected_flag = false;
 }
+
+//メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
+-(void)mainQueueMethod
+{
+    [self network_first];
+}
+
+//サブ処理　ネットワーク接続確認（２回目以降）を実行
+-(void)subQueueMethod
+{
+    [self network];
+}
+
+
+//ネットワーク接続判定１回目
+-(void)network_first
+{
+    Boolean accessstate = false;
+    
+    //networksearchメソッドの呼び出し
+    accessstate = [self networksearch];
+    //networkaccessHanteiメソッドの呼び出し
+    [self networkaccessHantei:accessstate];
+    
+}
+
+//ネットワーク接続判定２回目以降
+-(void)network
+{
+    //ネットワーク接続が確認できたかどうか
+    Boolean accessstate = false;
+    
+    //このメソッドが呼び出された時間の変数
+    NSDate *startDate;
+    //startDateからどれほど時間がたったかをはかるための変数
+    NSDate *endDate;
+    //startDateからendDateまでにかかっった時間
+    NSTimeInterval interval;
+    
+    startDate = [NSDate date];
+    
+    //ネットワーク接続確認がとれるかserrchTimeで設定した時間がたつまで　networksearchメソッドを呼び出すことを繰り返す
+    do{
+        accessstate = [self networksearch];
+        endDate = [NSDate date];
+        interval = [endDate timeIntervalSinceDate:startDate];
+    }while(accessstate == false && interval <= searchTime);
+    NSLog(@"ループを抜けた");
+    
+    //networkaccsessHanteiメソッドの呼び出し
+    [self networkaccessHantei:accessstate];
+}
+
+//ネットワーク接続判定を行うメソッド
+-(Boolean)networksearch
+{
+    //ネットワーク接続ができているかどうかの変数
+    Boolean networkaccess = false;
+    
+    //ネットワーク接続確認
+    Reachability *curReach = [Reachability reachabilityForInternetConnection];
+    NetworkStatus netStatus =[curReach currentReachabilityStatus];
+    
+    if(netStatus == NotReachable){
+        //ネットワーク説毒ができていないとき
+        networkaccess = false;
+    }else{
+        //ネットワーク接続ができているとき
+        networkaccess = true;
+    }
+    
+    return networkaccess;
+}
+
+//ネットワーク接続エラーのアラート表示
+-(void)showAlert
+{
+    //アラート
+    UIAlertView *alert;
+    
+    alert =[[UIAlertView alloc]
+            initWithTitle:@"エラー"
+            message:@"ネットワークに接続していません\n再試行しますか？"
+            delegate:self
+            cancelButtonTitle:@"後で"
+            otherButtonTitles:@"はい",
+            nil];
+    alert.alertViewStyle = UIAlertViewStyleDefault;
+    
+    [alert show];
+    
+}
+
+//アラートのボタンが押されたときの処理（イベント未選択のアラートとネットワーク接続確認のアラートの両方が実行する）
+-(void)alertView:(UIAlertView*)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex{
+    switch(buttonIndex){
+        case 0:
+            break;
+        case 1:
+            //はいが押されたらサブ処理でネットワーク接続確認を再試行
+            dispatch_async(subQueue,^{
+                [self subQueueMethod];
+                
+            });
+            break;
+    }
+}
+
+//ネットワーク接続ができているかどうか
+-(void)networkaccessHantei:(Boolean)accessstate
+{
+    if(accessstate){
+        NSLog(@"ネットワーク接続確認OK");dispatch_async(mainQueue,^{
+            [self nextPage];
+        });
+    }else{
+        dispatch_async(mainQueue,^{
+            [self showAlert];
+        });
+    }
+    
+}
+
+-(void)nextPage
+{
+    SearchViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
+    [self.navigationController pushViewController:viewCont animated:YES];
+}
+
 
 /*
 #pragma mark - Navigation
