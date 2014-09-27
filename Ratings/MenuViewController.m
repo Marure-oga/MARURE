@@ -61,6 +61,8 @@ NSMutableArray *Recipe_Title_Arr_4;
 
 //Menu_Image_01〜Menu_Image_08に対応するレシピ番号
 NSMutableArray *indexnumber;
+//今表示されている料理の画像
+NSMutableArray *nownumber;
 
 //ネットワークに接続しているかを判断する時間（秒）
 double searchTime;
@@ -370,6 +372,7 @@ int buttontapped = -1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
     //ナビゲーションバーの非表示
     [self.navigationController setNavigationBarHidden:YES];
     
@@ -465,65 +468,70 @@ int buttontapped = -1;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
 
-//スワイプしたときMenu_Img_Changeを呼び出す
+//スワイプしたときMenu_Img_Changeを呼び出し、その後Menu_Img_Showを呼び出す
 -(void)swipe:(UISwipeGestureRecognizer *)gesture
 {
     [self Menu_Img_Change];
+    
+    [self Menu_Img_Show];
 }
+
+//nownumberに-1をセット
+/*
+-(void)nownumberReset
+{
+    for(int i = 0;i < 8; i++){
+        [nownumber addObject:-1];
+    }
+    for(int i = 0;i < 8; i++){
+        NSLog(@"1回目：%d",[[nownumber objectAtIndex:i] intValue]);
+    }
+}
+ */
 
 //表示されているメニューの画像をランダムに更新する
 -(void)Menu_Img_Change{
     int i;
     int random = 0;
-    bool hantei = true;
+    bool hantei = false;
     indexnumber = [NSMutableArray array];
+    
+    //[self nownumberReset];
+    
+    for(i = 0;i < 8; i++){
+        NSLog(@"2回目：%d",[[nownumber objectAtIndex:i] intValue]);
+    }
     
     //処理を8回繰り返す
     for(i = 0;i < 8;i++){
         //まだ選ばれていないレシピ番号が出るまで乱数を発生させる
         do{
-            random = (int)(arc4random() %8);
+            random = (int)(arc4random() % 8);
             hantei = false;
-            //発生した値がすでにあるかどうかの判定
-            for(int j =0;j<i;j++){
-                if([[indexnumber objectAtIndex:j] intValue] == random){
+            //発生した値が今表示されている料理の番号か判定（表示されているならもう一度ループ）
+            /*for(int j = 0;j < 8;j++){
+                if([[nownumber objectAtIndex:j] intValue] == random){
                     hantei = true;
                     break;
+                }
+            }*/
+            //発生した値が今表示されている料理の番号でないなら発生した値がすでにあるかどうかの判定（すでにあるならもう一度ループ）
+            if(!(hantei)){
+                for(int j =0;j<i;j++){
+                    if([[indexnumber objectAtIndex:j] intValue] == random){
+                        hantei = true;
+                        break;
+                    }
                 }
             }
         }while(hantei);
         
         [indexnumber addObject:[NSNumber numberWithInteger:random]];
-        
-        //画像をセット
-        switch (i) {
-            case 0:
-                self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:random];
-                break;
-            case 1:
-                self.Menu_Image_02.image = [Select_URL_2 objectAtIndex:random];
-                break;
-            case 2:
-                self.Menu_Image_03.image = [Select_URL_3 objectAtIndex:random];
-                break;
-            case 3:
-                self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:random];
-                break;
-            case 4:
-                self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:random];
-                break;
-            case 5:
-                self.Menu_Image_06.image = [Select_URL_2 objectAtIndex:random];
-                break;
-            case 6:
-                self.Menu_Image_07.image = [Select_URL_3 objectAtIndex:random];
-                break;
-            case 7:
-                self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:random];
-                break;
-            default:
-                break;
-        }
+    }
+    
+    nownumber = [NSMutableArray array];
+    for(i = 0;i < 8; i++){
+         [nownumber addObject:[indexnumber objectAtIndex:i]];
     }
 }
 
