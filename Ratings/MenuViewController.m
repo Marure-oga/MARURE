@@ -73,6 +73,12 @@ dispatch_queue_t subQueue;
 //どのボタンが押されたかを数字で保存
 int buttontapped = -1;
 
+//最初にMenu_Img_Changeを呼び出したときnownumberResetを呼び出す
+bool hantei0 = true;
+
+//表示する料理の最大数
+int maxNumber = 4;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -331,6 +337,7 @@ int buttontapped = -1;
     if (Send_Flag != -1) {
         [self Menu_Img_Change];
     }
+    Send_Flag = 0;
     
     //====================献立.1====================
     //主菜
@@ -349,6 +356,7 @@ int buttontapped = -1;
     //self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:Select_Index];
     self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:3] intValue]];
     
+    if(maxNumber > 4){
     //====================献立.2====================
     //主菜
     //self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:Select_Index];
@@ -365,6 +373,8 @@ int buttontapped = -1;
     //ドリンク
     //self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:Select_Index];
     self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:7] intValue]];
+    
+    }
 }
 
 - (void)viewDidLoad
@@ -408,6 +418,7 @@ int buttontapped = -1;
     //メイン処理とサブ処理を設定
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -460,10 +471,12 @@ int buttontapped = -1;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
 - (IBAction)Menu_02:(id)sender {
-    buttontapped = 2;
-    dispatch_async(mainQueue,^{
-        [self mainQueueMethod];
-    });
+    if(maxNumber > 4){
+        buttontapped = 2;
+        dispatch_async(mainQueue,^{
+            [self mainQueueMethod];
+        });
+    }
     //Send_Flag = 2;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
@@ -471,50 +484,47 @@ int buttontapped = -1;
 //スワイプしたときMenu_Img_Changeを呼び出し、その後Menu_Img_Showを呼び出す
 -(void)swipe:(UISwipeGestureRecognizer *)gesture
 {
-    [self Menu_Img_Change];
-    
     [self Menu_Img_Show];
 }
 
 //nownumberに-1をセット
-/*
 -(void)nownumberReset
 {
-    for(int i = 0;i < 8; i++){
-        [nownumber addObject:-1];
+    if(maxNumber <= 4){
+        hantei0 = false;
     }
-    for(int i = 0;i < 8; i++){
-        NSLog(@"1回目：%d",[[nownumber objectAtIndex:i] intValue]);
+    nownumber = [NSMutableArray array];
+    for(int i = 0;i < maxNumber; i++){
+        [nownumber addObject:@"-1"];
     }
 }
- */
+
 
 //表示されているメニューの画像をランダムに更新する
--(void)Menu_Img_Change{
+-(void)Menu_Img_Change
+{
     int i;
     int random = 0;
     bool hantei = false;
     indexnumber = [NSMutableArray array];
     
-    //[self nownumberReset];
-    
-    for(i = 0;i < 8; i++){
-        NSLog(@"2回目：%d",[[nownumber objectAtIndex:i] intValue]);
+    if(hantei0){
+        [self nownumberReset];
     }
     
-    //処理を8回繰り返す
-    for(i = 0;i < 8;i++){
+    //処理をmaxNumber回繰り返す
+    for(i = 0;i < maxNumber;i++){
         //まだ選ばれていないレシピ番号が出るまで乱数を発生させる
         do{
-            random = (int)(arc4random() % 8);
+            random = (int)(arc4random() % 8 /*maxNumber*/);
             hantei = false;
             //発生した値が今表示されている料理の番号か判定（表示されているならもう一度ループ）
-            /*for(int j = 0;j < 8;j++){
+            for(int j = 0;j < maxNumber;j++){
                 if([[nownumber objectAtIndex:j] intValue] == random){
                     hantei = true;
                     break;
                 }
-            }*/
+            }
             //発生した値が今表示されている料理の番号でないなら発生した値がすでにあるかどうかの判定（すでにあるならもう一度ループ）
             if(!(hantei)){
                 for(int j =0;j<i;j++){
@@ -530,9 +540,26 @@ int buttontapped = -1;
     }
     
     nownumber = [NSMutableArray array];
-    for(i = 0;i < 8; i++){
-         [nownumber addObject:[indexnumber objectAtIndex:i]];
+    for(i = 0;i < maxNumber; i++){
+        [nownumber addObject:[indexnumber objectAtIndex:i]];
     }
+    
+    for(int i = 0;i < 8 - maxNumber; i++){
+        [indexnumber addObject:@"0"];
+    }
+    NSLog(@"--------------------------------");
+    NSLog(@"Send?flg%d",Send_Flag);
+    for(i = 0;i < maxNumber; i++){
+        NSLog(@"now：%d",[[nownumber objectAtIndex:i] intValue]);
+    }
+    
+    for(i = 0;i < maxNumber; i++){
+        NSLog(@"index：%d",[[indexnumber objectAtIndex:i] intValue]);
+    }
+    NSLog(@"--------------------------------");
+    
+    
+    
 }
 
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
