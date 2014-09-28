@@ -60,8 +60,10 @@ NSMutableArray *Recipe_Title_Arr_3;
 NSMutableArray *Recipe_Title_Arr_4;
 
 //Menu_Image_01〜Menu_Image_08に対応するレシピ番号
+//(0:1つ目の献立の主菜　1:1つ目の献立の副菜　2:1つ目の献立のデザート　3:1つ目の献立のドリンク)
+//(4:2つ目の献立の主菜　1:2つ目の献立の副菜　2:2つ目の献立のデザート　3:一2目の献立のドリンク)
 NSMutableArray *indexnumber;
-//今表示されている料理の画像
+//今表示されている料理の画像の番号
 NSMutableArray *nownumber;
 
 //ネットワークに接続しているかを判断する時間（秒）
@@ -75,9 +77,6 @@ int buttontapped = -1;
 
 //最初にMenu_Img_Changeを呼び出したときnownumberResetを呼び出す
 bool hantei0 = true;
-
-//表示する料理の最大数
-int maxNumber = 4;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -335,7 +334,43 @@ int maxNumber = 4;
 - (void)Menu_Img_Show
 {
     if (Send_Flag != -1) {
-        [self Menu_Img_Change];
+        if(hantei0){
+            [self nownumberReset];
+        }
+        indexnumber = [NSMutableArray array];
+        //Menu_Img_Changeを８回呼び出す　引数１：ImgNumber(0〜7) 引数２：maxNumber（APIからの戻り値により変動）
+        for(int i = 0;i<2;i++){
+            [self Menu_Img_Change:0 + 4 * i maxNumber:8];
+            [self Menu_Img_Change:1 + 4 * i maxNumber:8];
+            [self Menu_Img_Change:2 + 4 * i maxNumber:4];
+            [self Menu_Img_Change:3 + 4 * i maxNumber:4];
+        }
+        
+        
+        
+        NSLog(@"--------------------------------");
+        NSLog(@"Send?flg%d",Send_Flag);
+        NSLog(@"now");
+        for(int i = 0;i < 2; i++){
+            NSLog(@"(%d)%d (%d)%d",0 + 4 * i,[[nownumber objectAtIndex:0 + 4 * i] intValue],
+                  1 + 4 * i,[[nownumber objectAtIndex:1 + 4 * i] intValue]);
+            NSLog(@"(%d)%d (%d)%d",2 + 4 * i,[[nownumber objectAtIndex:2 + 4 * i] intValue],
+                  3 + 4 * i,[[nownumber objectAtIndex:3 + 4 * i] intValue]);
+        }
+        NSLog(@"index");
+        for(int i = 0;i < 2; i++){
+            NSLog(@"(%d)%d (%d)%d",0 + 4 * i,[[indexnumber objectAtIndex:0 + 4 * i] intValue],
+                  1 + 4 * i,[[indexnumber objectAtIndex:1 + 4 * i] intValue]);
+            NSLog(@"(%d)%d (%d)%d",2 + 4 * i,[[indexnumber objectAtIndex:2 + 4 * i] intValue],
+                  3 + 4 * i,[[indexnumber objectAtIndex:3 + 4 * i] intValue]);
+        }
+        NSLog(@"--------------------------------");
+        
+        //今回の処理でindexnumberにセットされた値をnownumberにセット
+        nownumber = [NSMutableArray array];
+        for(int i = 0;i < 8; i++){
+            [nownumber addObject:[indexnumber objectAtIndex:i]];
+        }
     }
     Send_Flag = 0;
     
@@ -356,7 +391,6 @@ int maxNumber = 4;
     //self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:Select_Index];
     self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:3] intValue]];
     
-    if(maxNumber > 4){
     //====================献立.2====================
     //主菜
     //self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:Select_Index];
@@ -374,7 +408,6 @@ int maxNumber = 4;
     //self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:Select_Index];
     self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:7] intValue]];
     
-    }
 }
 
 - (void)viewDidLoad
@@ -433,34 +466,6 @@ int maxNumber = 4;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
-    /*CATransition * transition = [CATransition animation];
-    
-    transition.duration = 0.4;
-    
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    transition.type = kCATransitionMoveIn;
-    transition.subtype = kCATransitionFromLeft;
-    
-    MenuViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"search"];
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController pushViewController:push animated:NO];
-    
-    Send_Flag = 0;
-    
-    [Select_URL_1 removeAllObjects];
-    [Select_URL_2 removeAllObjects];
-    [Select_URL_3 removeAllObjects];
-    [Select_URL_4 removeAllObjects];
-    
-    [Recipe_Title_Arr_1 removeAllObjects];
-    [Recipe_Title_Arr_2 removeAllObjects];
-    [Recipe_Title_Arr_3 removeAllObjects];
-    [Recipe_Title_Arr_4 removeAllObjects];
-    
-    [Recipe_URL_1 removeAllObjects];
-    [Recipe_URL_2 removeAllObjects];
-    [Recipe_URL_3 removeAllObjects];
-    [Recipe_URL_4 removeAllObjects];*/
 }
 - (IBAction)Menu_01:(id)sender {
     buttontapped = 1;
@@ -471,12 +476,10 @@ int maxNumber = 4;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
 - (IBAction)Menu_02:(id)sender {
-    if(maxNumber > 4){
-        buttontapped = 2;
-        dispatch_async(mainQueue,^{
-            [self mainQueueMethod];
-        });
-    }
+    buttontapped = 2;
+    dispatch_async(mainQueue,^{
+        [self mainQueueMethod];
+    });
     //Send_Flag = 2;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
@@ -490,76 +493,51 @@ int maxNumber = 4;
 //nownumberに-1をセット
 -(void)nownumberReset
 {
-    if(maxNumber <= 4){
-        hantei0 = false;
-    }
+    hantei0 = false;
     nownumber = [NSMutableArray array];
-    for(int i = 0;i < maxNumber; i++){
+    for(int i = 0;i < 8; i++){
         [nownumber addObject:@"-1"];
     }
 }
 
 
-//表示されているメニューの画像をランダムに更新する
--(void)Menu_Img_Change
+//表示されているメニューの画像をランダムに更新する　引数１：ImgNumber(0〜7) 引数２：maxNumber（APIからの戻り値により変動）
+-(void)Menu_Img_Change:(int)ImgNumber maxNumber:(int)maxNumber
 {
-    int i;
     int random = 0;
     bool hantei = false;
-    indexnumber = [NSMutableArray array];
     
-    if(hantei0){
-        [self nownumberReset];
-    }
-    
-    //処理をmaxNumber回繰り返す
-    for(i = 0;i < maxNumber;i++){
-        //まだ選ばれていないレシピ番号が出るまで乱数を発生させる
-        do{
-            random = (int)(arc4random() % 8 /*maxNumber*/);
-            hantei = false;
-            //発生した値が今表示されている料理の番号か判定（表示されているならもう一度ループ）
-            for(int j = 0;j < maxNumber;j++){
-                if([[nownumber objectAtIndex:j] intValue] == random){
+    //まだ選ばれていないレシピ番号が出るまで乱数を発生させる
+    do{
+        random = (int)(arc4random() % maxNumber);
+        hantei = false;
+        //ImgNumberが4未満のとき、直前の献立ての同じカテゴリで選ばれていない番号がでるまでループ
+        if(ImgNumber < 4){
+            if([[nownumber objectAtIndex:ImgNumber] intValue] == random
+                ||[[nownumber objectAtIndex:(ImgNumber+4)] intValue] == random){
+                hantei = true;
+            }
+        //ImgNumberが4以上のとき、直前の献立ての同じカテゴリと今回の処理の一つ目の献立で選ばれていない番号がでるまでループ
+        }else{
+            if([[nownumber objectAtIndex:ImgNumber] intValue] == random
+                ||[[nownumber objectAtIndex:(ImgNumber-4)] intValue] == random
+                ||[[indexnumber objectAtIndex:(ImgNumber-4)] intValue] == random){
+                hantei = true;
+            }
+        }
+        
+        //発生した値が今表示されている料理の番号でないなら発生した値がすでにあるかどうかの判定（すでにあるならもう一度ループ）
+        /*if(!(hantei)){
+            for(int j =0;j<i;j++){
+                if([[indexnumber objectAtIndex:j] intValue] == random){
                     hantei = true;
                     break;
                 }
             }
-            //発生した値が今表示されている料理の番号でないなら発生した値がすでにあるかどうかの判定（すでにあるならもう一度ループ）
-            if(!(hantei)){
-                for(int j =0;j<i;j++){
-                    if([[indexnumber objectAtIndex:j] intValue] == random){
-                        hantei = true;
-                        break;
-                    }
-                }
-            }
-        }while(hantei);
+        }*/
+    }while(hantei);
         
-        [indexnumber addObject:[NSNumber numberWithInteger:random]];
-    }
-    
-    nownumber = [NSMutableArray array];
-    for(i = 0;i < maxNumber; i++){
-        [nownumber addObject:[indexnumber objectAtIndex:i]];
-    }
-    
-    for(int i = 0;i < 8 - maxNumber; i++){
-        [indexnumber addObject:@"0"];
-    }
-    NSLog(@"--------------------------------");
-    NSLog(@"Send?flg%d",Send_Flag);
-    for(i = 0;i < maxNumber; i++){
-        NSLog(@"now：%d",[[nownumber objectAtIndex:i] intValue]);
-    }
-    
-    for(i = 0;i < maxNumber; i++){
-        NSLog(@"index：%d",[[indexnumber objectAtIndex:i] intValue]);
-    }
-    NSLog(@"--------------------------------");
-    
-    
-    
+    [indexnumber addObject:[NSNumber numberWithInteger:random]];
 }
 
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
@@ -732,6 +710,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 -(void)nextPage1
 {
     Send_Flag = 1;
+    NSLog(@"\nSend_Flag = %d\n",Send_Flag);
     MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
     [self.navigationController pushViewController:viewCont animated:YES];
 }
@@ -740,6 +719,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 -(void)nextPage2
 {
     Send_Flag = 2;
+    NSLog(@"\nSend_Flag = %d\n",Send_Flag);
     MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
     [self.navigationController pushViewController:viewCont animated:YES];
 }

@@ -128,20 +128,6 @@ int recipebuttontapped = -1;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
-    
-    /*Send_Flag = -1;
-    
-    CATransition * transition = [CATransition animation];
-    
-    transition.duration = 0.4;
-    
-    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    transition.type = kCATransitionMoveIn;
-    transition.subtype = kCATransitionFromLeft;
-    
-    RecipeViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController pushViewController:push animated:NO];*/
 }
 
 

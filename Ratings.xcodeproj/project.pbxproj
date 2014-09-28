@@ -10,6 +10,7 @@
 		6338D64A1999048300C486A7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338D6491999048300C486A7 /* SearchViewController.m */; };
 		6358762719A23DED0007EE28 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762619A23DED0007EE28 /* MenuViewController.m */; };
 		6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762919A23E410007EE28 /* RecipeViewController.m */; };
+		AB36D23F19D8459F0000825A /* marure_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB36D23E19D8459F0000825A /* marure_1.jpg */; };
 		AB3993621984F80C00D0F1FF /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3993611984F80C00D0F1FF /* Back.png */; };
 		AB53718519CF160600B5BCEC /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = AB53718419CF160600B5BCEC /* title.png */; };
 		AB71FC16197FFAFD00F2A5BD /* Menu1.1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */; };
@@ -61,6 +62,7 @@
 		6358762619A23DED0007EE28 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		6358762819A23E410007EE28 /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
 		6358762919A23E410007EE28 /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
+		AB36D23E19D8459F0000825A /* marure_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marure_1.jpg; sourceTree = "<group>"; };
 		AB3993611984F80C00D0F1FF /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		AB53718419CF160600B5BCEC /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
 		AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.1.png; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				AB71FC14197FFAFD00F2A5BD /* Menu2.3.png */,
 				AB71FC15197FFAFD00F2A5BD /* Menu2.4.png */,
 				AB53718419CF160600B5BCEC /* title.png */,
+				AB36D23E19D8459F0000825A /* marure_1.jpg */,
 			);
 			name = picture;
 			path = ../../picture;
@@ -385,6 +388,7 @@
 				ABB83918197CFF9000878CB0 /* Images.xcassets in Resources */,
 				AB71FC1B197FFAFD00F2A5BD /* Menu2.2.png in Resources */,
 				AB71FC18197FFAFD00F2A5BD /* Menu1.3.png in Resources */,
+				AB36D23F19D8459F0000825A /* marure_1.jpg in Resources */,
 				F22144DB199D0D490075D67B /* webapi.json in Resources */,
 				AB71FC19197FFAFD00F2A5BD /* Menu1.4.png in Resources */,
 				AB71FC17197FFAFD00F2A5BD /* Menu1.2.png in Resources */,
