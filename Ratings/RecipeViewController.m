@@ -155,6 +155,7 @@ int recipebuttontapped = -1;
     [Recipe_URL_4 removeAllObjects];
 }
 
+//画面4から別画面へ遷移前の処理
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     int i = 0;
@@ -166,49 +167,48 @@ int recipebuttontapped = -1;
     
     if ([[segue identifier] isEqualToString:@"Select_Recipe_01"]) {
         WebViewController *vcntl = [segue destinationViewController];
+        
+        //画面3で選択された献立が下だった場合、インデックスを4に設定
         if(Send_Flag == 2) i = 4;
         vcntl.getUrl = [Recipe_URL_1 objectAtIndex:[[indexnumber objectAtIndex:i+0] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_02"]){
         WebViewController *vcntl = [segue destinationViewController];
-        //vcntl.getUrl = [Recipe_URL objectAtIndex:1+i];
         vcntl.getUrl = [Recipe_URL_2 objectAtIndex:[[indexnumber objectAtIndex:i+1] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_03"]){
         WebViewController *vcntl = [segue destinationViewController];
-        //vcntl.getUrl = [Recipe_URL objectAtIndex:2+i];
         vcntl.getUrl = [Recipe_URL_3 objectAtIndex:[[indexnumber objectAtIndex:i+2] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_04"]){
         WebViewController *vcntl = [segue destinationViewController];
-        //vcntl.getUrl = [Recipe_URL objectAtIndex:3+i];
         vcntl.getUrl = [Recipe_URL_4 objectAtIndex:[[indexnumber objectAtIndex:i+3] intValue]];
     }
 }
 
+//料理1のボタンを選択
 - (IBAction)Recipe_Button_01:(id)sender {
-    //Select_Flag = 1;
     recipebuttontapped = 1;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
 }
+//料理2のボタンを選択
 - (IBAction)Recipe_Button_02:(id)sender {
-    //Select_Flag = 2;
     recipebuttontapped = 2;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
 }
+//料理3のボタンを選択
 - (IBAction)Recipe_Button_03:(id)sender {
-    //Select_Flag = 3;
     recipebuttontapped = 3;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
 }
+//料理4のボタンを選択
 - (IBAction)Recipe_Button_04:(id)sender {
-    //Select_Flag = 4;
     recipebuttontapped = 4;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
@@ -329,14 +329,20 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(accessstate){
         NSLog(@"ネットワーク接続確認OK");
         dispatch_async(mainQueue,^{
+            //戻るボタン押下時
             if(recipebuttontapped == 0){
+                //画面3へ遷移
                 [self previousPage];
+            //料理1を選択時
             }else if(recipebuttontapped == 1){
                 [self nextPage1];
+            //料理2を選択時
             }else if(recipebuttontapped == 2){
                 [self nextPage2];
+            //料理3を選択時
             }else if(recipebuttontapped == 3){
                 [self nextPage3];
+            //料理4を選択時
             }else if(recipebuttontapped == 4){
                 [self nextPage4];
             }else{
@@ -354,6 +360,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
 -(void)previousPage
 {
+    //戻るボタン押下時のフラグ立て
     Send_Flag = -1;
     
     CATransition * transition = [CATransition animation];
@@ -372,42 +379,28 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 -(void)nextPage1
 {
     Select_Flag = 1;
-    RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
-    [self.navigationController pushViewController:viewCont animated:YES];
+    //RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
+    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 -(void)nextPage2
 {
     Select_Flag = 2;
-    RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
-    [self.navigationController pushViewController:viewCont animated:YES];
+    //RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
+    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 -(void)nextPage3
 {
     Select_Flag = 3;
-    RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
-    [self.navigationController pushViewController:viewCont animated:YES];
+    //RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
+    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 -(void)nextPage4
 {
     Select_Flag = 4;
-    RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
-    [self.navigationController pushViewController:viewCont animated:YES];
+    //RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
+    //[self.navigationController pushViewController:viewCont animated:YES];
 }
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
-
 @end

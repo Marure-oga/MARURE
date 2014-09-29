@@ -36,7 +36,7 @@ dispatch_queue_t mainQueue;
 dispatch_queue_t subQueue;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -45,9 +45,7 @@ dispatch_queue_t subQueue;
     return self;
 }
 
-
-
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
 
@@ -70,15 +68,13 @@ dispatch_queue_t subQueue;
     
 }
 
-- (void)didReceiveMemoryWarning
+-(void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger dataCount;
 
@@ -95,9 +91,7 @@ dispatch_queue_t subQueue;
     return dataCount;
 }
 
-
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
 
@@ -122,21 +116,14 @@ dispatch_queue_t subQueue;
     return cell;
 }
 
-
-
-
-
 //セクション件数を指定
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
 }
 
-
-
-
 //セクション名を指定
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {
+-(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {
 	switch(section) {
 		case 0:
 			return @"イベント";
@@ -146,7 +133,6 @@ dispatch_queue_t subQueue;
 			return @"その他";
 	}
 }
-
 
 //セクションの高さ調整
 -(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -160,9 +146,8 @@ dispatch_queue_t subQueue;
 	}
 }
 
-
 //セル選択時の処理
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     // 選択されたセルを取得
@@ -210,9 +195,8 @@ dispatch_queue_t subQueue;
     }
 }
 
-
 // セルの選択がはずれた時に呼び出される
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     // 選択がはずれたセルを取得
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
@@ -224,9 +208,8 @@ dispatch_queue_t subQueue;
     }
 }
 
-
 //ボタンがタップされたとき
-- (IBAction)Button_Tapped:(id)sender {
+-(IBAction)Button_Tapped:(id)sender {
     
     
     if (Selected_flag){
@@ -258,7 +241,6 @@ dispatch_queue_t subQueue;
 {
     [self network];
 }
-
 
 //ネットワーク接続判定１回目
 -(void)network_first
@@ -321,6 +303,8 @@ dispatch_queue_t subQueue;
 }
 
 //ネットワーク接続エラーのアラート表示
+//アラート表示の共通化に伴って削除希望（Kasiwabara）
+/*
 -(void)showAlert
 {
     //アラート
@@ -338,6 +322,7 @@ dispatch_queue_t subQueue;
     [alert show];
     
 }
+*/
 
 //アラートのボタンが押されたときの処理（イベント未選択のアラートとネットワーク接続確認のアラートの両方が実行する）
 -(void)alertView:(UIAlertView*)alertView
@@ -359,17 +344,20 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 -(void)networkaccessHantei:(Boolean)accessstate
 {
     if(accessstate){
-        NSLog(@"ネットワーク接続確認OK");dispatch_async(mainQueue,^{
+        NSLog(@"画面2:ネットワーク接続確認OK");dispatch_async(mainQueue,^{
             [self nextPage];
         });
     }else{
         dispatch_async(mainQueue,^{
-            [self showAlert];
+            MenuViewController *MVC_Ctl = [[MenuViewController alloc]init];
+            
+            [MVC_Ctl showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
         });
     }
     
 }
 
+//画面3へ遷移
 -(void)nextPage
 {
     SearchViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"menu"];

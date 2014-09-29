@@ -16,6 +16,12 @@
 
 @implementation MenuViewController
 
+
+//Send_Flag : 画面3で選択したボタン
+// -1: 画面4の戻るボタン
+// 0 : 戻るボタン
+// 1 : 献立（上）
+// 2 : 献立（下）
 int Send_Flag;
 
 NSString *Url_Str;
@@ -89,7 +95,7 @@ bool hantei0 = true;
 }
 
 //献立の情報取得
-- (void)Menu_Img_GET
+- (Boolean)Menu_Img_GET
 {
     mrks = [[MarureKeyS alloc]init];
     
@@ -113,9 +119,9 @@ bool hantei0 = true;
     
     //ユーザーが選択した検索条件をAPIに投げる
     //テスト用：
-    [mrks SetEventAndMoody:0 moody:0];
+    //[mrks SetEventAndMoody:0 moody:0];
     //本番用：
-    //[mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
+    [mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
     
     //=========================nilチェック=========================
     if ([mrks.key1ImgArr count] > 0) {
@@ -123,7 +129,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey1ImgArr COUNT = %d\n",[mrks.key1ImgArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key2ImgArr count] > 0) {
@@ -131,7 +137,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey2ImgArr COUNT = %d\n",[mrks.key2ImgArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key3ImgArr count] > 0) {
@@ -139,7 +145,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey3ImgArr COUNT = %d\n",[mrks.key3ImgArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key4ImgArr count] > 0) {
@@ -147,7 +153,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey4ImgArr COUNT = %d\n",[mrks.key4ImgArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key1NameArr count] > 0) {
@@ -155,7 +161,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey1NameArr COUNT = %d\n",[mrks.key1NameArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key2NameArr count] > 0) {
@@ -163,7 +169,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey2NameArr COUNT = %d\n",[mrks.key2NameArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key3NameArr count] > 0) {
@@ -171,7 +177,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey3NameArr COUNT = %d\n",[mrks.key3NameArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key4NameArr count] > 0) {
@@ -179,7 +185,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey4NameArr COUNT = %d\n",[mrks.key4NameArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key1UrlArr count] > 0) {
@@ -187,7 +193,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey1UrlArr COUNT = %d\n",[mrks.key1NameArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key2UrlArr count] > 0) {
@@ -195,7 +201,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey2UrlArr COUNT = %d\n",[mrks.key2UrlArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key3UrlArr count] > 0) {
@@ -203,7 +209,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey3UrlArr COUNT = %d\n",[mrks.key3UrlArr count]);
-        return;
+        return false;
     }
     
     if ([mrks.key4UrlArr count] > 0) {
@@ -211,7 +217,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!!\nKey4UrlArr COUNT = %d\n",[mrks.key4UrlArr count]);
-        return;
+        return false;
     }
     
     
@@ -229,7 +235,8 @@ bool hantei0 = true;
         R_Url_Str = [mrks.key1UrlArr objectAtIndex:i];
 
         [self Menu_Img_UrlSet:0];
-            
+    }
+    for(i = 0;i < [mrks.key2ImgArr count];i++){
         //副菜の画像URLの文字列格納
         Url_Str = [mrks.key2ImgArr objectAtIndex:i];
         //副菜のレシピタイトルの文字列格納
@@ -238,7 +245,8 @@ bool hantei0 = true;
         R_Url_Str = [mrks.key2UrlArr objectAtIndex:i];
                 
         [self Menu_Img_UrlSet:1];
-                
+    }
+    for (i = 0; i < [mrks.key3ImgArr count]; i++) {
         //デザートの画像URLの文字列格納
         Url_Str = [mrks.key3ImgArr objectAtIndex:i];
         //デザートのレシピタイトルの文字列格納
@@ -247,7 +255,8 @@ bool hantei0 = true;
         R_Url_Str = [mrks.key3UrlArr objectAtIndex:i];
                 
         [self Menu_Img_UrlSet:2];
-                
+    }
+    for (i = 0; i < [mrks.key4ImgArr count]; i++) {
         //ドリンクの画像URLの文字列格納
         Url_Str = [mrks.key4ImgArr objectAtIndex:i];
         //ドリンクのレシピタイトルの文字列格納
@@ -257,10 +266,11 @@ bool hantei0 = true;
         
         [self Menu_Img_UrlSet:3];
     }
+    return true;
 }
 
 //文字列を表示可能な型に変換・格納処理
-- (void)Menu_Img_UrlSet:(NSInteger)Category_Num
+- (Boolean)Menu_Img_UrlSet:(NSInteger)Category_Num
 {
     /*
      Category_Num
@@ -277,7 +287,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!! Url_Str.LENGTH = %d",Url_Str.length);
-        return;
+        return false;
     }
     
     //レシピ画像URLのNSURL型をNSData型に変換し格納
@@ -286,7 +296,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!! Img_Data = nil");
-        return;
+        return false;
     }
     
     //レシピ画像URLのNSData型をUIImage型に変換し格納
@@ -295,7 +305,7 @@ bool hantei0 = true;
     }
     else{
         NSLog(@"ERROR!! Recipe_Img = nil");
-        return;
+        return false;
     }
     
     switch (Category_Num) {
@@ -325,25 +335,33 @@ bool hantei0 = true;
             break;
         default:
             NSLog(@"不正な引数が入力されました。\n");
-            return;
+            return false;
             break;
     }
+    
+    return true;
 }
 
 //料理画像の表示処理
 - (void)Menu_Img_Show
 {
-    if (Send_Flag != -1) {
-        if(hantei0){
+    //画面4から遷移していない場合
+    if (Send_Flag != -1)
+    {
+        if(hantei0)
+        {
             [self nownumberReset];
         }
+        
         indexnumber = [NSMutableArray array];
+        
         //Menu_Img_Changeを８回呼び出す　引数１：ImgNumber(0〜7) 引数２：maxNumber（APIからの戻り値により変動）
-        for(int i = 0;i<2;i++){
-            [self Menu_Img_Change:0 + 4 * i maxNumber:8];
-            [self Menu_Img_Change:1 + 4 * i maxNumber:8];
-            [self Menu_Img_Change:2 + 4 * i maxNumber:4];
-            [self Menu_Img_Change:3 + 4 * i maxNumber:4];
+        for(int i = 0; i < 2; i++)
+        {
+            [self Menu_Img_Change:0 + 4 * i maxNumber:[Select_URL_1 count]];
+            [self Menu_Img_Change:1 + 4 * i maxNumber:[Select_URL_2 count]];
+            [self Menu_Img_Change:2 + 4 * i maxNumber:[Select_URL_3 count]];
+            [self Menu_Img_Change:3 + 4 * i maxNumber:[Select_URL_4 count]];
         }
         
         
@@ -372,7 +390,8 @@ bool hantei0 = true;
             [nownumber addObject:[indexnumber objectAtIndex:i]];
         }
     }
-    Send_Flag = 0;
+    NSLog(@"画面3:Send_Flag = %d\n",Send_Flag);
+    //Send_Flag = 0;
     
     //====================献立.1====================
     //主菜
@@ -423,11 +442,21 @@ bool hantei0 = true;
     if(Send_Flag != -1)
     {
         //取得した文字列から画像表示するための前処理
-        [self Menu_Img_GET];
+        if([self Menu_Img_GET]){
+            //APIからの返却数が正常だった場合
+            //画像の表示処理
+            [self Menu_Img_Show];
+        }
+        else{
+            NSLog(@"API取得値が不正\n");
+            [self showAlert:@"エラー" MESSAGE_Str:@"献立の取得に失敗しました。" CANCEL_Str:nil OTHER_Str:@"はい"];
+            [self previousPage];
+        }
     }
-    
-    //画像の表示処理
-    [self Menu_Img_Show];
+    else if(Send_Flag == -1){
+        [self Menu_Img_Show];
+        Send_Flag = 0;
+    }
     
     //右へスワイプしたときの処理
     UISwipeGestureRecognizer *swiperight = [[UISwipeGestureRecognizer alloc]
@@ -460,6 +489,10 @@ bool hantei0 = true;
     // Dispose of any resources that can be recreated.
 }
 
+
+//=======================各ボタン押下時の処理===========================
+
+
 //戻るボタンを押したとき左から前の画面を出す
 - (IBAction)BackButton:(id)sender {
     buttontapped = 0;
@@ -484,6 +517,9 @@ bool hantei0 = true;
     //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
 
+
+//=======================献立切り替え時の処理===========================
+
 //スワイプしたときMenu_Img_Changeを呼び出し、その後Menu_Img_Showを呼び出す
 -(void)swipe:(UISwipeGestureRecognizer *)gesture
 {
@@ -499,7 +535,6 @@ bool hantei0 = true;
         [nownumber addObject:@"-1"];
     }
 }
-
 
 //表示されているメニューの画像をランダムに更新する　引数１：ImgNumber(0〜7) 引数２：maxNumber（APIからの戻り値により変動）
 -(void)Menu_Img_Change:(int)ImgNumber maxNumber:(int)maxNumber
@@ -540,6 +575,8 @@ bool hantei0 = true;
     [indexnumber addObject:[NSNumber numberWithInteger:random]];
 }
 
+//=======================ネットワーク接続確認===========================
+
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
 -(void)mainQueueMethod
 {
@@ -551,7 +588,6 @@ bool hantei0 = true;
 {
     [self network];
 }
-
 
 //ネットワーク接続判定１回目
 -(void)network_first
@@ -613,12 +649,38 @@ bool hantei0 = true;
     return networkaccess;
 }
 
-//ネットワーク接続エラーのアラート表示
--(void)showAlert
+//ネットワーク接続ができているかどうか
+-(void)networkaccessHantei:(Boolean)accessstate
+{
+    if(accessstate){
+        NSLog(@"画面3:ネットワーク接続確認OK");
+        dispatch_async(mainQueue,^{
+            if(buttontapped == 0){
+                [self previousPage];
+            }else if(buttontapped == 1){
+                [self nextPage1];
+            }else if(buttontapped == 2){
+                [self nextPage2];
+            }else{
+                NSLog(@"buttontappedが不正です");
+            }
+        });
+    }else{
+        dispatch_async(mainQueue,^{
+            [self showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
+        });
+    }
+    
+}
+
+//=======================アラーム表示処理==============================
+
+//アラート表示
+-(void)showAlert:(NSString*)TITLE_Str MESSAGE_Str:(NSString*)MESSAGE_Str CANCEL_Str:(NSString*)CANCEL_Str OTHER_Str:(NSString*)OTHER_Str
 {
     //アラート
     UIAlertView *alert;
-    
+    /*
     alert =[[UIAlertView alloc]
             initWithTitle:@"エラー"
             message:@"ネットワークに接続していません\n再試行しますか？"
@@ -626,7 +688,19 @@ bool hantei0 = true;
             cancelButtonTitle:@"後で"
             otherButtonTitles:@"はい",
             nil];
+     */
+    
+    alert =[[UIAlertView alloc]
+            initWithTitle:TITLE_Str
+            message:MESSAGE_Str
+            delegate:self
+            cancelButtonTitle:CANCEL_Str
+            otherButtonTitles:OTHER_Str,
+            nil];
+    
     alert.alertViewStyle = UIAlertViewStyleDefault;
+    
+    
     
     [alert show];
     
@@ -648,30 +722,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     }
 }
 
-//ネットワーク接続ができているかどうか
--(void)networkaccessHantei:(Boolean)accessstate
-{
-    if(accessstate){
-        NSLog(@"ネットワーク接続確認OK");
-        dispatch_async(mainQueue,^{
-            if(buttontapped == 0){
-                [self previousPage];
-            }else if(buttontapped == 1){
-                [self nextPage1];
-            }else if(buttontapped == 2){
-                [self nextPage2];
-            }else{
-                NSLog(@"buttontappedが不正です");
-            }
-            
-        });
-    }else{
-        dispatch_async(mainQueue,^{
-            [self showAlert];
-        });
-    }
-    
-}
+
+//=======================画面遷移==============================
+
 
 //前のページに遷移
 -(void)previousPage
@@ -710,8 +763,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 -(void)nextPage1
 {
     Send_Flag = 1;
+    
     NSLog(@"\nSend_Flag = %d\n",Send_Flag);
+    
     MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
+    
     [self.navigationController pushViewController:viewCont animated:YES];
 }
 
@@ -723,19 +779,5 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
     [self.navigationController pushViewController:viewCont animated:YES];
 }
-
-
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

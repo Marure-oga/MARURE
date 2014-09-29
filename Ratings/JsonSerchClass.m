@@ -156,19 +156,19 @@
 -(void)WebSerchApi:(NSString *)keyword nameArr:(NSMutableArray *)nameArr imgArr:(NSMutableArray *)imgArr urlArr:(NSMutableArray *)urlArr
 {
     //~~~~~~~~~~テスト　ローカルファイルを使う~~~~~~~~~~~~~~~
-    
+    /*
     NSBundle *bundle = [NSBundle mainBundle];
     NSString *path = [bundle pathForResource:@"webapi" ofType:@"json"];
     NSFileHandle *filehandle = [NSFileHandle fileHandleForReadingAtPath:path];
     NSData *data = [filehandle readDataToEndOfFile];
-    
+    */
     
     //=================本番webapi使う=================
-    /*
+    
      NSString *str = [NSString stringWithFormat:@"https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20121121?format=json&categoryId=%@&applicationId=1055797974705259361",keyword];
      NSURL *jsonUrl = [NSURL URLWithString:str];
      NSData *data = [NSData dataWithContentsOfURL:jsonUrl options:kNilOptions error:nil];
-     */
+
     //検索結果をセット
     if(data)
     {

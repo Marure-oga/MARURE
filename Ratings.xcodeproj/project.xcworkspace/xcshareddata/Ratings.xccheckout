@@ -10,33 +10,45 @@
 	<string>Ratings</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4FBEF78C-2EF5-4CF7-93E3-923F4AAC63D3</key>
+		<key>6C42C761C9118C89D96FDD45F0F2E81909971CA5</key>
+		<string>https://github.com/Marure-oga/MARURE.git</string>
+		<key>8374F603B428C3A3AAEF4DD63046FB6BEDE5B963</key>
 		<string>https://github.com/Marure-oga/picture.git</string>
 		<key>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</key>
 		<string>https://github.com/Marure-oga/MARURE.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Ratings.xcodeproj/project.xcworkspace</string>
+	<string>Ratings.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4FBEF78C-2EF5-4CF7-93E3-923F4AAC63D3</key>
+		<key>6C42C761C9118C89D96FDD45F0F2E81909971CA5</key>
+		<string>../..</string>
+		<key>8374F603B428C3A3AAEF4DD63046FB6BEDE5B963</key>
 		<string>../../../picture</string>
 		<key>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</key>
-		<string>../..</string>
+		<string>../../../Ratings</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Marure-oga/MARURE.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</string>
+	<string>6C42C761C9118C89D96FDD45F0F2E81909971CA5</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4FBEF78C-2EF5-4CF7-93E3-923F4AAC63D3</string>
+			<string>6C42C761C9118C89D96FDD45F0F2E81909971CA5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MARURE</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8374F603B428C3A3AAEF4DD63046FB6BEDE5B963</string>
 			<key>IDESourceControlWCCName</key>
 			<string>picture</string>
 		</dict>
