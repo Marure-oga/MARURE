@@ -75,8 +75,6 @@ dispatch_queue_t subQueue;
     //
     //以上 08/09 by yo
     
-    //ナビゲーションバーの非表示
-    [self.navigationController setNavigationBarHidden:YES];
 
 }
 
@@ -276,7 +274,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 //検索条件入力画面へ遷移
 -(void)nextPage:(NSTimer*)timer{
     ViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"search"];
-    [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController pushViewController:viewCont animated:YES];
 }
 

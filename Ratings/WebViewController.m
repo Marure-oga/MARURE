@@ -42,6 +42,9 @@ int webbuttontapped = -1;
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);
     
+    //デフォルトのBACKボタンの非表示
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    
     
 }
 

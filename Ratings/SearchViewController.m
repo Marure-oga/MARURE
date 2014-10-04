@@ -57,14 +57,15 @@ dispatch_queue_t subQueue;
     
     self.Event_Table.bounces = NO;
     
-    //ナビゲーションバーの非表示
-    [self.navigationController setNavigationBarHidden:YES];
     
     searchTime = 5.0;
     
     //メイン処理とサブ処理を設定
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);
+    
+    //デフォルトのBACKボタンの非表示
+    [self.navigationItem setHidesBackButton:YES animated:NO];
     
 }
 
@@ -329,6 +330,7 @@ dispatch_queue_t subQueue;
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     switch(buttonIndex){
         case 0:
+            NSLog(@"??????");
             break;
         case 1:
             //はいが押されたらサブ処理でネットワーク接続確認を再試行

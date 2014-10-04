@@ -434,10 +434,6 @@ bool hantei0 = true;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-    //ナビゲーションバーの非表示
-    [self.navigationController setNavigationBarHidden:YES];
-    
     //画面2から遷移した場合
     if(Send_Flag != -1)
     {
@@ -481,6 +477,16 @@ bool hantei0 = true;
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);
     
+    //デフォルトのBACKボタンの非表示
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    //戻るボタンの追加
+    UIBarButtonItem* backButton =[[UIBarButtonItem alloc]
+                                  initWithTitle:@"戻る"
+                                  style:UIBarButtonItemStyleBordered
+                                  target:self
+                                  action:@selector(BackBtn)];
+    self.navigationItem.leftBarButtonItems = @[backButton];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -494,12 +500,11 @@ bool hantei0 = true;
 
 
 //戻るボタンを押したとき左から前の画面を出す
-- (IBAction)BackButton:(id)sender {
-    buttontapped = 0;
-    dispatch_async(mainQueue,^{
-        [self mainQueueMethod];
-    });
+-(void)BackBtn
+{
+    [self previousPage];
 }
+
 - (IBAction)Menu_01:(id)sender {
     buttontapped = 1;
     dispatch_async(mainQueue,^{
@@ -655,9 +660,7 @@ bool hantei0 = true;
     if(accessstate){
         NSLog(@"画面3:ネットワーク接続確認OK");
         dispatch_async(mainQueue,^{
-            if(buttontapped == 0){
-                [self previousPage];
-            }else if(buttontapped == 1){
+           if(buttontapped == 1){
                 [self nextPage1];
             }else if(buttontapped == 2){
                 [self nextPage2];

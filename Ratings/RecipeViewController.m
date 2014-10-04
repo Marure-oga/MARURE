@@ -34,8 +34,15 @@ int recipebuttontapped = -1;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //ナビゲーションバーの非表示
-    [self.navigationController setNavigationBarHidden:YES];
+    //デフォルトのBACKボタンの非表示
+    [self.navigationItem setHidesBackButton:YES animated:NO];
+    //戻るボタンの追加
+    UIBarButtonItem* backButton =[[UIBarButtonItem alloc]
+                                  initWithTitle:@"戻る"
+                                  style:UIBarButtonItemStyleBordered
+                                  target:self
+                                  action:@selector(BackBtn)];
+    self.navigationItem.leftBarButtonItems = @[backButton];
     
     searchTime = 5.0;
     recipebuttontapped = -1;
@@ -124,6 +131,14 @@ int recipebuttontapped = -1;
 //戻るボタンを押したとき左から前の画面を出す
 - (IBAction)BackButton:(id)sender {
     
+    recipebuttontapped = 0;
+    dispatch_async(mainQueue,^{
+        [self mainQueueMethod];
+    });
+}
+
+-(void)BackBtn
+{
     recipebuttontapped = 0;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
