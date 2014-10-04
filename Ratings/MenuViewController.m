@@ -665,7 +665,7 @@ bool hantei0 = true;
             }else if(buttontapped == 2){
                 [self nextPage2];
             }else{
-                NSLog(@"buttontappedが不正です");
+                NSLog(@"buttontappedが不正です buttontapped = %d",buttontapped);
             }
         });
     }else{

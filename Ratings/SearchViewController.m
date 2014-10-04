@@ -35,6 +35,9 @@ dispatch_queue_t mainQueue;
 //並列処理　サブ処理
 dispatch_queue_t subQueue;
 
+//355行目からのアラート表示に使用
+MenuViewController *MVC_Ctl;
+
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -330,7 +333,6 @@ dispatch_queue_t subQueue;
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     switch(buttonIndex){
         case 0:
-            NSLog(@"??????");
             break;
         case 1:
             //はいが押されたらサブ処理でネットワーク接続確認を再試行
@@ -351,10 +353,15 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         });
     }else{
         dispatch_async(mainQueue,^{
-            MenuViewController *MVC_Ctl = [[MenuViewController alloc]init];
+            
+            //MenuViewController *MVC_Ctl = [[MenuViewController alloc]init];
+            MVC_Ctl = [[MenuViewController alloc]init]; //MenuViewController *MVC_Ctl;の宣言を３８行目に移動しました
             
             [MVC_Ctl showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
+            
+            //[self showAlert];
         });
+        
     }
     
 }
