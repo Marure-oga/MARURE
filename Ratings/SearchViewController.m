@@ -67,6 +67,9 @@ MenuViewController *MVC_Ctl;
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);
     
+    //ナビゲーションバーの表示
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
     //デフォルトのBACKボタンの非表示
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
@@ -231,7 +234,7 @@ MenuViewController *MVC_Ctl;
                                          delegate:self cancelButtonTitle:@"確認" otherButtonTitles:nil];
         [alert show];
     }
-    Selected_flag = false;
+    //Selected_flag = false;
 }
 
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示

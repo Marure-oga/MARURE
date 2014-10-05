@@ -75,6 +75,9 @@ dispatch_queue_t subQueue;
     //
     //以上 08/09 by yo
     
+    //ナビゲーションバーの非表示
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    
 
 }
 
