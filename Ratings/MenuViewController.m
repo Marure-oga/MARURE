@@ -83,6 +83,10 @@ int buttontapped = -1;
 //最初にMenu_Img_Changeを呼び出したときnownumberResetを呼び出す
 bool hantei0 = true;
 
+//タッチした時の座標
+CGPoint pickPos;
+//初回表示かどうか
+bool syokai = true;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -363,6 +367,9 @@ bool hantei0 = true;
             [self Menu_Img_Change:3 + 4 * i maxNumber:[Select_URL_4 count]];
         }
         
+        //ランダム切り替えの処理を行えるようにする
+        syokai = false;
+        
         
         
         NSLog(@"--------------------------------");
@@ -540,6 +547,14 @@ bool hantei0 = true;
 
 
 //=======================献立切り替え時の処理===========================
+//画面をタッチした位置を取得
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    pickPos = [touch locationInView:self.view];
+    NSLog(@"x=%f",pickPos.x);
+    NSLog(@"y = %f",pickPos.y);
+}
 
 //スワイプしたときMenu_Img_Changeを呼び出し、その後Menu_Img_Showを呼び出す
 -(void)swipe:(UISwipeGestureRecognizer *)gesture
@@ -563,37 +578,43 @@ bool hantei0 = true;
     int random = 0;
     bool hantei = false;
     
-    //まだ選ばれていないレシピ番号が出るまで乱数を発生させる
-    do{
-        random = (int)(arc4random() % maxNumber);
-        hantei = false;
-        //ImgNumberが4未満のとき、直前の献立ての同じカテゴリで選ばれていない番号がでるまでループ
-        if(ImgNumber < 4){
-            if([[nownumber objectAtIndex:ImgNumber] intValue] == random
-                ||[[nownumber objectAtIndex:(ImgNumber+4)] intValue] == random){
-                hantei = true;
-            }
-        //ImgNumberが4以上のとき、直前の献立ての同じカテゴリと今回の処理の一つ目の献立で選ばれていない番号がでるまでループ
-        }else{
-            if([[nownumber objectAtIndex:ImgNumber] intValue] == random
-                ||[[nownumber objectAtIndex:(ImgNumber-4)] intValue] == random
-                ||[[indexnumber objectAtIndex:(ImgNumber-4)] intValue] == random){
-                hantei = true;
-            }
-        }
-        
-        //発生した値が今表示されている料理の番号でないなら発生した値がすでにあるかどうかの判定（すでにあるならもう一度ループ）
-        /*if(!(hantei)){
-            for(int j =0;j<i;j++){
-                if([[indexnumber objectAtIndex:j] intValue] == random){
+    //初回表示もしくはスワイプされた側の献立をランダムに設定　スワイプされなかった側の献立は今の値を取得
+    if(syokai || (pickPos.y < 320 && ImgNumber < 4) || (pickPos.y >= 320 && ImgNumber >= 4)){
+    
+        //まだ選ばれていないレシピ番号が出るまで乱数を発生させる
+        do{
+            random = (int)(arc4random() % maxNumber);
+            hantei = false;
+            //ImgNumberが4未満のとき、直前の献立ての同じカテゴリで選ばれていない番号がでるまでループ
+            if(ImgNumber < 4){
+                if([[nownumber objectAtIndex:ImgNumber] intValue] == random
+                   ||[[nownumber objectAtIndex:(ImgNumber+4)] intValue] == random){
                     hantei = true;
-                    break;
+                }
+                //ImgNumberが4以上のとき、直前の献立ての同じカテゴリと今回の処理の一つ目の献立で選ばれていない番号がでるまでループ
+            }else{
+                if([[nownumber objectAtIndex:ImgNumber] intValue] == random
+                   ||[[nownumber objectAtIndex:(ImgNumber-4)] intValue] == random
+                   ||[[indexnumber objectAtIndex:(ImgNumber-4)] intValue] == random){
+                    hantei = true;
                 }
             }
-        }*/
-    }while(hantei);
         
-    [indexnumber addObject:[NSNumber numberWithInteger:random]];
+            //発生した値が今表示されている料理の番号でないなら発生した値がすでにあるかどうかの判定（すでにあるならもう一度ループ）
+            /*if(!(hantei)){
+                for(int j =0;j<i;j++){
+                    if([[indexnumber objectAtIndex:j] intValue] == random){
+                        hantei = true;
+                        break;
+                    }
+             }
+             }*/
+        }while(hantei);
+        
+        [indexnumber addObject:[NSNumber numberWithInteger:random]];
+    }else{
+        [indexnumber addObject:[nownumber objectAtIndex:ImgNumber]];
+    }
 }
 
 //=======================ネットワーク接続確認===========================
