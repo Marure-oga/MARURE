@@ -7,7 +7,6 @@
 //
 
 #import "MenuViewController.h"
-
 //左から表示させるアニメーションのために必要
 #import <QuartzCore/QuartzCore.h>
 
@@ -120,7 +119,7 @@ bool hantei0 = true;
     //ユーザーが選択した検索条件をAPIに投げる
     //テスト用：
     //[mrks SetEventAndMoody:0 moody:0];
-    //本番用：
+    //本番用
     [mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
     
     //=========================nilチェック=========================
@@ -393,6 +392,7 @@ bool hantei0 = true;
     NSLog(@"画面3:Send_Flag = %d\n",Send_Flag);
     //Send_Flag = 0;
     
+    
     //====================献立.1====================
     //主菜
     //self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:Select_Index];
@@ -432,7 +432,23 @@ bool hantei0 = true;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    NSString *Merge_Text;
+    
+    if (Ambience_NO == -1) {
+        Merge_Text = Event_Str;
+    }
+    else{
+        Merge_Text = [Event_Str stringByAppendingFormat:@" × %@",Ambience_Str];
+    }
     // Do any additional setup after loading the view.
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
+    title.font = [UIFont boldSystemFontOfSize:16.0];
+    title.textColor = [UIColor whiteColor];
+    title.text = Merge_Text;
+    [title sizeToFit];
+    
+    self.navigationItem.titleView = title;
     
     //画面2から遷移した場合
     if(Send_Flag != -1)

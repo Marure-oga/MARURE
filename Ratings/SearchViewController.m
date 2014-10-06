@@ -7,7 +7,9 @@
 //
 
 #import "SearchViewController.h"
+#import "MenuViewController.h"
 #import "JsonSerchClass.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface SearchViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -19,14 +21,15 @@
 int Event_NO = -1,
     Ambience_NO = -1;
 
+NSString *Event_Str,*Ambience_Str;
+
+//検索条件判定フラグ
+//true : 遷移可能
+//false: 検索条件が不正
 BOOL Selected_flag = false;
 
-
-NSIndexPath *bak_indexPath;
-UITableViewCell *bak_cell;
-
-NSIndexPath *bak_indexPath_2;
-UITableViewCell *bak_cell_2;
+//選択されたセルのバックアップ変数
+UITableViewCell *bak_cell = nil;
 
 //ネットワークに接続しているかを判断する時間（秒）
 double searchTime;
@@ -51,15 +54,15 @@ MenuViewController *MVC_Ctl;
 -(void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.Event_Table.delegate = self;
     self.Event_Table.dataSource = self;
+    
+    self.Ambience_Table.delegate = self;
+    self.Ambience_Table.dataSource = self;
 
     self.dataSourceEvent = @[@"女子会", @"誕生日", @"クリスマス"];
     self.dataSourceAmbience = @[@"わいわい", @"和やか", @"ロマンチック"];
-    
-    self.Event_Table.bounces = NO;
-    
     
     searchTime = 5.0;
     
@@ -69,10 +72,27 @@ MenuViewController *MVC_Ctl;
     
     //ナビゲーションバーの表示
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+    //ナビゲーションバーの色選択
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:243/255.0 green:126/255.0 blue:74/255.0 alpha:1.000];
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
+    title.font = [UIFont boldSystemFontOfSize:16.0];
+    title.textColor = [UIColor whiteColor];
+    title.text = @"マルレ";
+    [title sizeToFit];
+    
+    self.navigationItem.titleView = title;
     
     //デフォルトのBACKボタンの非表示
     [self.navigationItem setHidesBackButton:YES animated:NO];
-    
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    if(Send_Flag == 0){
+        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
+        [self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    }
 }
 
 -(void)didReceiveMemoryWarning
@@ -81,21 +101,17 @@ MenuViewController *MVC_Ctl;
     // Dispose of any resources that can be recreated.
 }
 
+//テーブルのセル数を指定
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger dataCount;
-
-    switch (section) {
-        case 0:
-            dataCount = self.dataSourceEvent.count;
-            break;
-        case 1:
-            dataCount = self.dataSourceAmbience.count;
-            break;
-        default:
-            break;
+    //イベントのセル数：イベントのデータソースカウント分
+    if(tableView.tag == 0){
+        return self.dataSourceEvent.count;
     }
-    return dataCount;
+    //雰囲気のセル数：雰囲気のデータソースカウント分
+    else{
+        return self.dataSourceAmbience.count;
+    }
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -109,12 +125,22 @@ MenuViewController *MVC_Ctl;
                                       reuseIdentifier:CellIdentifier];
     }
     
-    switch (indexPath.section) {
+    switch (tableView.tag) {
         case 0:
             cell.textLabel.text = self.dataSourceEvent[indexPath.row];
+            cell.textLabel.font = [UIFont systemFontOfSize:13];
+            if(Send_Flag == 0){
+                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
+                [self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            }
             break;
         case 1:
             cell.textLabel.text = self.dataSourceAmbience[indexPath.row];
+            cell.textLabel.font = [UIFont systemFontOfSize:13];
+            if(Send_Flag == 0){
+                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Ambience_NO inSection:0];
+                [self.Ambience_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+            }
             break;
         default:
             break;
@@ -123,118 +149,83 @@ MenuViewController *MVC_Ctl;
     return cell;
 }
 
-//セクション件数を指定
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 2;
-}
-
-//セクション名を指定
--(NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger) section {
-	switch(section) {
-		case 0:
-			return @"イベント";
-		case 1:
-			return @"雰囲気";
-		default:
-			return @"その他";
-	}
-}
-
-//セクションの高さ調整
--(CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-	switch (section) {
-		case 0:
-            return 30;
-		case 1:
-			return 25;
-		default:
-			return 0;
-	}
-}
-
 //セル選択時の処理
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    // 選択されたセルを取得
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    // セルのアクセサリにチェックマークを指定
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    
-    
-    /*
-    NSString *Choose_1 = cell.textLabel.text;
-    
-    NSLog(@"選択：%@",Choose_1);
-    NSLog(@"セクション：%ld",(long)indexPath.section);
-    NSLog(@"Index：%ld",(long)indexPath.row);
-    */
-    
-    
-    //選択されたセクションがイベントの場合
-    if((int)indexPath.section == 0)
+    //選択されたテーブルがイベントの場合
+    if(tableView.tag == 0)
     {
-        if((int)indexPath.row != (int)bak_indexPath.row){
-            [tableView deselectRowAtIndexPath:bak_indexPath animated:YES];
-            bak_cell.accessoryType = UITableViewCellAccessoryNone;
+        //すでに選択しているイベントである場合
+        if((int)indexPath.row == Event_NO){
+            //選択状態を解除
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            
+            //イベントの選択インデックス初期化
+            Event_NO = -1;
+            Event_Str = nil;
+            NSLog(@"Event_NO : %d\n",Event_NO);
+            
+            //選択条件：不正
+            Selected_flag = false;
         }
-        
-        //選択された最新indexを格納
-        Event_NO = (int)indexPath.row;
-        bak_indexPath = indexPath;
-        bak_cell = cell;
-        Selected_flag = true;
+        else{
+            //選択された最新indexを格納
+            Event_NO = (int)indexPath.row;
+            Event_Str = nil;
+            Event_Str = self.dataSourceEvent[indexPath.row];
+            NSLog(@"Event_NO : %d\n",Event_NO);
+            NSLog(@"Event_Str : %@\n",Event_Str);
+            
+            //選択条件：正
+            Selected_flag = true;
+        }
     }
-    //選択されたセクションが雰囲気の場合
-    else if ((int)indexPath.section == 1)
-    {
-        if((int)indexPath.row != (int)bak_indexPath_2.row){
-            [tableView deselectRowAtIndexPath:bak_indexPath_2 animated:YES];
-            bak_cell_2.accessoryType = UITableViewCellAccessoryNone;
+    //選択されたテーブルが雰囲気の場合
+    else{
+        //すでに選択している雰囲気である場合
+        if((int)indexPath.row == Ambience_NO){
+            //選択状態を解除
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            //雰囲気の選択インデックス初期化
+            Ambience_NO = -1;
+            Ambience_Str = nil;
+            NSLog(@"Ambience_NO : %d\n",Ambience_NO);
         }
-        
-        //選択された最新indexを格納
-        Ambience_NO = (int)indexPath.row;
-        bak_indexPath_2 = indexPath;
-        bak_cell_2 = cell;
+        else{
+            //選択された最新indexを格納
+            Ambience_NO = (int)indexPath.row;
+            Ambience_Str = self.dataSourceAmbience[indexPath.row];
+            NSLog(@"Ambience_NO : %d\n",Ambience_NO);
+            NSLog(@"Ambience_Str : %@\n",Ambience_Str);
+        }
     }
 }
 
-// セルの選択がはずれた時に呼び出される
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // 選択がはずれたセルを取得
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    
-    // セルのアクセサリを解除する（チェックマークを外す）
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    
-    if ((int)indexPath.section == 0) {
-        Selected_flag = false;
-    }
-}
-
-//ボタンがタップされたとき
+//次へボタンがタップされたとき
 -(IBAction)Button_Tapped:(id)sender {
-    
-    
-    if (Selected_flag){
+
+    //検索条件が正しい場合
+    if(Selected_flag){
+        
+        UIActivityIndicatorView *Ac = [[UIActivityIndicatorView alloc] init];
+        Ac.frame = CGRectMake(0, 0, 50, 50);
+        Ac.center = self.view.center;
+        Ac.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+        Ac.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.6f];
+        [self.view addSubview:Ac];
+        
+        [Ac startAnimating];
+        
+        NSLog(@"イベント：%d / 雰囲気 %d",Event_NO,Ambience_NO);
         dispatch_async(mainQueue,^{
             [self mainQueueMethod];
         });
-        
     }
-    else {
-        
-        UIAlertView *alert;
-        
-        alert = [[UIAlertView alloc] initWithTitle:@"エラー"
-                                           message:@"イベントを選択してください。"
-                                         delegate:self cancelButtonTitle:@"確認" otherButtonTitles:nil];
-        [alert show];
+    //検索条件不正
+    else{
+        MVC_Ctl = [[MenuViewController alloc]init];
+        [MVC_Ctl showAlert:@"エラー" MESSAGE_Str:@"イベントを選択してください。" CANCEL_Str:@"確認" OTHER_Str:nil];
     }
-    //Selected_flag = false;
 }
 
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
@@ -309,28 +300,6 @@ MenuViewController *MVC_Ctl;
     return networkaccess;
 }
 
-//ネットワーク接続エラーのアラート表示
-//アラート表示の共通化に伴って削除希望（Kasiwabara）
-/*
--(void)showAlert
-{
-    //アラート
-    UIAlertView *alert;
-    
-    alert =[[UIAlertView alloc]
-            initWithTitle:@"エラー"
-            message:@"ネットワークに接続していません\n再試行しますか？"
-            delegate:self
-            cancelButtonTitle:@"後で"
-            otherButtonTitles:@"はい",
-            nil];
-    alert.alertViewStyle = UIAlertViewStyleDefault;
-    
-    [alert show];
-    
-}
-*/
-
 //アラートのボタンが押されたときの処理（イベント未選択のアラートとネットワーク接続確認のアラートの両方が実行する）
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -356,13 +325,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         });
     }else{
         dispatch_async(mainQueue,^{
-            
-            //MenuViewController *MVC_Ctl = [[MenuViewController alloc]init];
-            MVC_Ctl = [[MenuViewController alloc]init]; //MenuViewController *MVC_Ctl;の宣言を３８行目に移動しました
-            
+            MVC_Ctl = [[MenuViewController alloc]init];
             [MVC_Ctl showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
-            
-            //[self showAlert];
         });
         
     }
@@ -375,17 +339,5 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     SearchViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
     [self.navigationController pushViewController:viewCont animated:YES];
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

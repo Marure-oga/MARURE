@@ -8,20 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		6338D64A1999048300C486A7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338D6491999048300C486A7 /* SearchViewController.m */; };
+		6352251019E1821900CF39D9 /* marure_bak.png in Resources */ = {isa = PBXBuildFile; fileRef = 6352250D19E1821900CF39D9 /* marure_bak.png */; };
+		6352251119E1821900CF39D9 /* marure_event.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6352250E19E1821900CF39D9 /* marure_event.jpg */; };
+		6352251219E1821900CF39D9 /* marure_mood.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6352250F19E1821900CF39D9 /* marure_mood.jpg */; };
+		6352251419E18A1200CF39D9 /* marure_next.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6352251319E18A1200CF39D9 /* marure_next.jpg */; };
 		6358762719A23DED0007EE28 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762619A23DED0007EE28 /* MenuViewController.m */; };
 		6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762919A23E410007EE28 /* RecipeViewController.m */; };
 		AB36D23F19D8459F0000825A /* marure_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB36D23E19D8459F0000825A /* marure_1.jpg */; };
 		AB3993621984F80C00D0F1FF /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = AB3993611984F80C00D0F1FF /* Back.png */; };
 		AB53718519CF160600B5BCEC /* title.png in Resources */ = {isa = PBXBuildFile; fileRef = AB53718419CF160600B5BCEC /* title.png */; };
-		AB71FC16197FFAFD00F2A5BD /* Menu1.1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */; };
-		AB71FC17197FFAFD00F2A5BD /* Menu1.2.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */; };
-		AB71FC18197FFAFD00F2A5BD /* Menu1.3.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC10197FFAFD00F2A5BD /* Menu1.3.png */; };
-		AB71FC19197FFAFD00F2A5BD /* Menu1.4.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC11197FFAFD00F2A5BD /* Menu1.4.png */; };
-		AB71FC1A197FFAFD00F2A5BD /* Menu2.1.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC12197FFAFD00F2A5BD /* Menu2.1.png */; };
-		AB71FC1B197FFAFD00F2A5BD /* Menu2.2.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC13197FFAFD00F2A5BD /* Menu2.2.png */; };
-		AB71FC1C197FFAFD00F2A5BD /* Menu2.3.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC14197FFAFD00F2A5BD /* Menu2.3.png */; };
-		AB71FC1D197FFAFD00F2A5BD /* Menu2.4.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC15197FFAFD00F2A5BD /* Menu2.4.png */; };
-		AB71FC1F197FFB7D00F2A5BD /* marure.png in Resources */ = {isa = PBXBuildFile; fileRef = AB71FC1E197FFB7D00F2A5BD /* marure.png */; };
 		AB818C15198E79930077E016 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AB818C14198E79930077E016 /* Reachability.m */; };
 		AB818C17198E7B650077E016 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB818C16198E7B650077E016 /* SystemConfiguration.framework */; };
 		ABA2A71619AF7DA0005018F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA2A71519AF7DA0005018F7 /* QuartzCore.framework */; };
@@ -58,6 +53,10 @@
 /* Begin PBXFileReference section */
 		6338D6481999048300C486A7 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		6338D6491999048300C486A7 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		6352250D19E1821900CF39D9 /* marure_bak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marure_bak.png; sourceTree = "<group>"; };
+		6352250E19E1821900CF39D9 /* marure_event.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marure_event.jpg; sourceTree = "<group>"; };
+		6352250F19E1821900CF39D9 /* marure_mood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marure_mood.jpg; sourceTree = "<group>"; };
+		6352251319E18A1200CF39D9 /* marure_next.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marure_next.jpg; sourceTree = "<group>"; };
 		6358762519A23DED0007EE28 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		6358762619A23DED0007EE28 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		6358762819A23E410007EE28 /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
@@ -65,15 +64,6 @@
 		AB36D23E19D8459F0000825A /* marure_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marure_1.jpg; sourceTree = "<group>"; };
 		AB3993611984F80C00D0F1FF /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		AB53718419CF160600B5BCEC /* title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title.png; sourceTree = "<group>"; };
-		AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.1.png; sourceTree = "<group>"; };
-		AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.2.png; sourceTree = "<group>"; };
-		AB71FC10197FFAFD00F2A5BD /* Menu1.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.3.png; sourceTree = "<group>"; };
-		AB71FC11197FFAFD00F2A5BD /* Menu1.4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu1.4.png; sourceTree = "<group>"; };
-		AB71FC12197FFAFD00F2A5BD /* Menu2.1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu2.1.png; sourceTree = "<group>"; };
-		AB71FC13197FFAFD00F2A5BD /* Menu2.2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu2.2.png; sourceTree = "<group>"; };
-		AB71FC14197FFAFD00F2A5BD /* Menu2.3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu2.3.png; sourceTree = "<group>"; };
-		AB71FC15197FFAFD00F2A5BD /* Menu2.4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu2.4.png; sourceTree = "<group>"; };
-		AB71FC1E197FFB7D00F2A5BD /* marure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marure.png; sourceTree = "<group>"; };
 		AB818C13198E798C0077E016 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AB818C14198E79930077E016 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AB818C16198E7B650077E016 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -188,16 +178,11 @@
 		AB2B79D9197EB69400590026 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				6352251319E18A1200CF39D9 /* marure_next.jpg */,
+				6352250D19E1821900CF39D9 /* marure_bak.png */,
+				6352250E19E1821900CF39D9 /* marure_event.jpg */,
+				6352250F19E1821900CF39D9 /* marure_mood.jpg */,
 				AB3993611984F80C00D0F1FF /* Back.png */,
-				AB71FC1E197FFB7D00F2A5BD /* marure.png */,
-				AB71FC0E197FFAFD00F2A5BD /* Menu1.1.png */,
-				AB71FC0F197FFAFD00F2A5BD /* Menu1.2.png */,
-				AB71FC10197FFAFD00F2A5BD /* Menu1.3.png */,
-				AB71FC11197FFAFD00F2A5BD /* Menu1.4.png */,
-				AB71FC12197FFAFD00F2A5BD /* Menu2.1.png */,
-				AB71FC13197FFAFD00F2A5BD /* Menu2.2.png */,
-				AB71FC14197FFAFD00F2A5BD /* Menu2.3.png */,
-				AB71FC15197FFAFD00F2A5BD /* Menu2.4.png */,
 				AB53718419CF160600B5BCEC /* title.png */,
 				AB36D23E19D8459F0000825A /* marure_1.jpg */,
 			);
@@ -383,21 +368,16 @@
 			files = (
 				AB3993621984F80C00D0F1FF /* Back.png in Resources */,
 				F2494D881994EB4900DD568A /* MARUREJson.json in Resources */,
-				AB71FC1D197FFAFD00F2A5BD /* Menu2.4.png in Resources */,
-				AB71FC1F197FFB7D00F2A5BD /* marure.png in Resources */,
 				ABB83918197CFF9000878CB0 /* Images.xcassets in Resources */,
-				AB71FC1B197FFAFD00F2A5BD /* Menu2.2.png in Resources */,
-				AB71FC18197FFAFD00F2A5BD /* Menu1.3.png in Resources */,
 				AB36D23F19D8459F0000825A /* marure_1.jpg in Resources */,
+				6352251119E1821900CF39D9 /* marure_event.jpg in Resources */,
 				F22144DB199D0D490075D67B /* webapi.json in Resources */,
-				AB71FC19197FFAFD00F2A5BD /* Menu1.4.png in Resources */,
-				AB71FC17197FFAFD00F2A5BD /* Menu1.2.png in Resources */,
-				AB71FC1A197FFAFD00F2A5BD /* Menu2.1.png in Resources */,
-				AB71FC1C197FFAFD00F2A5BD /* Menu2.3.png in Resources */,
+				6352251019E1821900CF39D9 /* marure_bak.png in Resources */,
+				6352251219E1821900CF39D9 /* marure_mood.jpg in Resources */,
 				ABB8390A197CFF9000878CB0 /* InfoPlist.strings in Resources */,
+				6352251419E18A1200CF39D9 /* marure_next.jpg in Resources */,
 				ABB83913197CFF9000878CB0 /* Main.storyboard in Resources */,
 				AB53718519CF160600B5BCEC /* title.png in Resources */,
-				AB71FC16197FFAFD00F2A5BD /* Menu1.1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +529,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ratings/Ratings-Prefix.pch";
 				INFOPLIST_FILE = "Ratings/Ratings-Info.plist";
@@ -562,6 +546,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Ratings/Ratings-Prefix.pch";
 				INFOPLIST_FILE = "Ratings/Ratings-Info.plist";

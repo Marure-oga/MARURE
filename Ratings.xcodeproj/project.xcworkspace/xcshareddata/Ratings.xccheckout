@@ -14,6 +14,8 @@
 		<string>https://github.com/Marure-oga/MARURE.git</string>
 		<key>8374F603B428C3A3AAEF4DD63046FB6BEDE5B963</key>
 		<string>https://github.com/Marure-oga/picture.git</string>
+		<key>9E1ECC80773D1F4F22D03CB4DEA298B3CB57FAF5</key>
+		<string>https://github.com/TransitApp/SVProgressHUD.git</string>
 		<key>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</key>
 		<string>https://github.com/Marure-oga/MARURE.git</string>
 	</dict>
@@ -25,6 +27,8 @@
 		<string>../..</string>
 		<key>8374F603B428C3A3AAEF4DD63046FB6BEDE5B963</key>
 		<string>../../../picture</string>
+		<key>9E1ECC80773D1F4F22D03CB4DEA298B3CB57FAF5</key>
+		<string>../../SVProgressHUD</string>
 		<key>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</key>
 		<string>../../../Ratings</string>
 	</dict>
@@ -59,6 +63,14 @@
 			<string>B73439A0-0A6C-4CFE-8FF3-23F2255FAD33</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Ratings</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9E1ECC80773D1F4F22D03CB4DEA298B3CB57FAF5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SVProgressHUD</string>
 		</dict>
 	</array>
 </dict>
