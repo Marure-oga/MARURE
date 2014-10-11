@@ -15,17 +15,17 @@
 
 @implementation MenuViewController
 
-
-//Send_Flag : 画面3で選択したボタン
-// -1: 画面4の戻るボタン
-// 0 : 戻るボタン
+//Select_ID : ユーザーが選択したボタン
+// 0 : 初期値
 // 1 : 献立（上）
 // 2 : 献立（下）
-int Send_Flag;
+int Select_ID = 0;
 
 NSString *Url_Str;
 NSString *Name_Str;
 NSString *R_Url_Str;
+
+NSString *Merge_Text;
 
 NSURL *Img_URL;
 NSData *Img_Data;
@@ -348,90 +348,70 @@ bool syokai = true;
 //料理画像の表示処理
 - (void)Menu_Img_Show
 {
-    //画面4から遷移していない場合
-    if (Send_Flag != -1)
-    {
-        if(hantei0)
-        {
-            [self nownumberReset];
-        }
-        
-        indexnumber = [NSMutableArray array];
-        
-        //Menu_Img_Changeを８回呼び出す　引数１：ImgNumber(0〜7) 引数２：maxNumber（APIからの戻り値により変動）
-        for(int i = 0; i < 2; i++)
-        {
-            [self Menu_Img_Change:0 + 4 * i maxNumber:[Select_URL_1 count]];
-            [self Menu_Img_Change:1 + 4 * i maxNumber:[Select_URL_2 count]];
-            [self Menu_Img_Change:2 + 4 * i maxNumber:[Select_URL_3 count]];
-            [self Menu_Img_Change:3 + 4 * i maxNumber:[Select_URL_4 count]];
-        }
-        
-        //ランダム切り替えの処理を行えるようにする
-        syokai = false;
-        
-        
-        
-        NSLog(@"--------------------------------");
-        NSLog(@"Send?flg%d",Send_Flag);
-        NSLog(@"now");
-        for(int i = 0;i < 2; i++){
-            NSLog(@"(%d)%d (%d)%d",0 + 4 * i,[[nownumber objectAtIndex:0 + 4 * i] intValue],
-                  1 + 4 * i,[[nownumber objectAtIndex:1 + 4 * i] intValue]);
-            NSLog(@"(%d)%d (%d)%d",2 + 4 * i,[[nownumber objectAtIndex:2 + 4 * i] intValue],
-                  3 + 4 * i,[[nownumber objectAtIndex:3 + 4 * i] intValue]);
-        }
-        NSLog(@"index");
-        for(int i = 0;i < 2; i++){
-            NSLog(@"(%d)%d (%d)%d",0 + 4 * i,[[indexnumber objectAtIndex:0 + 4 * i] intValue],
-                  1 + 4 * i,[[indexnumber objectAtIndex:1 + 4 * i] intValue]);
-            NSLog(@"(%d)%d (%d)%d",2 + 4 * i,[[indexnumber objectAtIndex:2 + 4 * i] intValue],
-                  3 + 4 * i,[[indexnumber objectAtIndex:3 + 4 * i] intValue]);
-        }
-        NSLog(@"--------------------------------");
-        
-        //今回の処理でindexnumberにセットされた値をnownumberにセット
-        nownumber = [NSMutableArray array];
-        for(int i = 0;i < 8; i++){
-            [nownumber addObject:[indexnumber objectAtIndex:i]];
-        }
+    if(hantei0){
+        [self nownumberReset];
     }
-    NSLog(@"画面3:Send_Flag = %d\n",Send_Flag);
-    //Send_Flag = 0;
+    indexnumber = [NSMutableArray array];
     
+    //Menu_Img_Changeを８回呼び出す　引数１：ImgNumber(0〜7) 引数２：maxNumber（APIからの戻り値により変動）
+    for(int i = 0; i < 2; i++)
+    {
+        [self Menu_Img_Change:0 + 4 * i maxNumber:[Select_URL_1 count]];
+        [self Menu_Img_Change:1 + 4 * i maxNumber:[Select_URL_2 count]];
+        [self Menu_Img_Change:2 + 4 * i maxNumber:[Select_URL_3 count]];
+        [self Menu_Img_Change:3 + 4 * i maxNumber:[Select_URL_4 count]];
+    }
+    //ランダム切り替えの処理を行えるようにする
+    syokai = false;
+    
+    NSLog(@"--------------------------------");
+    //NSLog(@"Send?flg%d",Send_Flag);
+    NSLog(@"now");
+    for(int i = 0;i < 2; i++){
+        NSLog(@"(%d)%d (%d)%d",0 + 4 * i,[[nownumber objectAtIndex:0 + 4 * i] intValue],
+              1 + 4 * i,[[nownumber objectAtIndex:1 + 4 * i] intValue]);
+        NSLog(@"(%d)%d (%d)%d",2 + 4 * i,[[nownumber objectAtIndex:2 + 4 * i] intValue],
+              3 + 4 * i,[[nownumber objectAtIndex:3 + 4 * i] intValue]);
+    }
+    NSLog(@"index");
+    for(int i = 0;i < 2; i++){
+        NSLog(@"(%d)%d (%d)%d",0 + 4 * i,[[indexnumber objectAtIndex:0 + 4 * i] intValue],
+              1 + 4 * i,[[indexnumber objectAtIndex:1 + 4 * i] intValue]);
+        NSLog(@"(%d)%d (%d)%d",2 + 4 * i,[[indexnumber objectAtIndex:2 + 4 * i] intValue],
+              3 + 4 * i,[[indexnumber objectAtIndex:3 + 4 * i] intValue]);
+    }
+    NSLog(@"--------------------------------");
+    
+    //今回の処理でindexnumberにセットされた値をnownumberにセット
+    nownumber = [NSMutableArray array];
+    for(int i = 0;i < 8; i++){
+        [nownumber addObject:[indexnumber objectAtIndex:i]];
+    }
     
     //====================献立.1====================
     //主菜
-    //self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:Select_Index];
     self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:0] intValue]];
     
     //副菜
-    //self.Menu_Image_02.image = [Select_URL_2 objectAtIndex:Select_Index];
     self.Menu_Image_02.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:1] intValue]];
     
     //デザート
-    //self.Menu_Image_03.image = [Select_URL_3 objectAtIndex:Select_Index];
     self.Menu_Image_03.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:2] intValue]];
 
     //ドリンク
-    //self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:Select_Index];
     self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:3] intValue]];
     
     //====================献立.2====================
     //主菜
-    //self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:Select_Index];
     self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:4] intValue]];
 
     //副菜
-    //self.Menu_Image_06.image = [Select_URL_2 objectAtIndex:Select_Index];
     self.Menu_Image_06.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:5] intValue]];
     
     //デザート
-    //self.Menu_Image_07.image = [Select_URL_3 objectAtIndex:Select_Index];
     self.Menu_Image_07.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:6] intValue]];
 
     //ドリンク
-    //self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:Select_Index];
     self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:7] intValue]];
     
 }
@@ -439,8 +419,6 @@ bool syokai = true;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    NSString *Merge_Text;
     
     if (Ambience_NO == -1) {
         Merge_Text = Event_Str;
@@ -458,7 +436,7 @@ bool syokai = true;
     self.navigationItem.titleView = title;
     
     //画面2から遷移した場合
-    if(Send_Flag != -1)
+    if(Display_ID == 2)
     {
         //取得した文字列から画像表示するための前処理
         if([self Menu_Img_GET]){
@@ -472,9 +450,10 @@ bool syokai = true;
             [self previousPage];
         }
     }
-    else if(Send_Flag == -1){
+    //画面4から遷移した場合
+    else{
+        //以前の献立を表示
         [self Menu_Img_Show];
-        Send_Flag = 0;
     }
     
     //右へスワイプしたときの処理
@@ -533,16 +512,12 @@ bool syokai = true;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
-    //Send_Flag = 1;
-    //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
 - (IBAction)Menu_02:(id)sender {
     buttontapped = 2;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
-    //Send_Flag = 2;
-    //NSLog(@"\nSend_Flag = %d\n",Send_Flag);
 }
 
 
@@ -781,8 +756,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.navigationController.view.layer addAnimation:transition forKey:nil];
     [self.navigationController pushViewController:push animated:NO];
     
-    Send_Flag = 0;
-    
     [Select_URL_1 removeAllObjects];
     [Select_URL_2 removeAllObjects];
     [Select_URL_3 removeAllObjects];
@@ -797,25 +770,25 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     [Recipe_URL_2 removeAllObjects];
     [Recipe_URL_3 removeAllObjects];
     [Recipe_URL_4 removeAllObjects];
+    
+    //遷移元画面設定
+    Display_ID = 3;
 }
 
 //上の献立に遷移
 -(void)nextPage1
 {
-    Send_Flag = 1;
-    
-    NSLog(@"\nSend_Flag = %d\n",Send_Flag);
+    Select_ID = 1;
     
     MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
-    
     [self.navigationController pushViewController:viewCont animated:YES];
 }
 
 //下の献立に遷移
 -(void)nextPage2
 {
-    Send_Flag = 2;
-    NSLog(@"\nSend_Flag = %d\n",Send_Flag);
+    Select_ID = 2;
+    
     MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
     [self.navigationController pushViewController:viewCont animated:YES];
 }

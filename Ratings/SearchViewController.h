@@ -17,6 +17,7 @@
 
 extern int Event_NO;
 extern int Ambience_NO;
+extern int Display_ID;
 
 extern NSString *Event_Str;
 extern NSString *Ambience_Str;

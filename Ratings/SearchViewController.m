@@ -21,6 +21,13 @@
 int Event_NO = -1,
     Ambience_NO = -1;
 
+//画面ID：遷移元情報
+// 1 : 画面1
+// 2 : 画面2
+// 3 : 画面3
+// 4 : 画面4
+int Display_ID = 1;
+
 NSString *Event_Str,*Ambience_Str;
 
 //検索条件判定フラグ
@@ -89,7 +96,7 @@ MenuViewController *MVC_Ctl;
 
 - (void) viewDidAppear:(BOOL)animated
 {
-    if(Send_Flag == 0){
+    if(Display_ID == 3){
         NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
         [self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
     }
@@ -129,7 +136,7 @@ MenuViewController *MVC_Ctl;
         case 0:
             cell.textLabel.text = self.dataSourceEvent[indexPath.row];
             cell.textLabel.font = [UIFont systemFontOfSize:13];
-            if(Send_Flag == 0){
+            if(Display_ID == 3){
                 NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
                 [self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             }
@@ -137,7 +144,7 @@ MenuViewController *MVC_Ctl;
         case 1:
             cell.textLabel.text = self.dataSourceAmbience[indexPath.row];
             cell.textLabel.font = [UIFont systemFontOfSize:13];
-            if(Send_Flag == 0){
+            if(Display_ID == 3){
                 NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Ambience_NO inSection:0];
                 [self.Ambience_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             }
@@ -336,6 +343,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 //画面3へ遷移
 -(void)nextPage
 {
+    Display_ID = 2;
+    
     SearchViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
     [self.navigationController pushViewController:viewCont animated:YES];
 }

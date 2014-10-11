@@ -9,7 +9,8 @@
 
 @interface MenuViewController : UIViewController
 
-extern int Send_Flag;
+extern int Select_ID;
+extern NSString *Merge_Text;
 
 extern NSMutableArray *Select_URL_1;
 extern NSMutableArray *Select_URL_2;

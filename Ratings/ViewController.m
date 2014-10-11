@@ -239,7 +239,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(accessstate){
         if(firstcheck){
             //最初の確認でネットワーク接続ができているとき1.2秒後画面遷移
-            timer = [NSTimer scheduledTimerWithTimeInterval:1.2
+            timer = [NSTimer scheduledTimerWithTimeInterval:5.2
                                                target:self
                                              selector:@selector(nextPage:)
                                              userInfo:nil
@@ -247,7 +247,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         }else{
             //２回目以降の確認でネットワーク接続ができたときメイン処理で0.7秒後画面遷移
             dispatch_async(mainQueue,^{
-                timer = [NSTimer scheduledTimerWithTimeInterval:0.7
+                timer = [NSTimer scheduledTimerWithTimeInterval:5.7
                                                        target:self
                                                      selector:@selector(nextPage:)
                                                      userInfo:nil

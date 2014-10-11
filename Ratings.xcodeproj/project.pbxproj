@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6338D64A1999048300C486A7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338D6491999048300C486A7 /* SearchViewController.m */; };
+		6338E15A19E58095005D8E7F /* main_menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6338E15919E58095005D8E7F /* main_menu.jpg */; };
+		6338E15C19E580FB005D8E7F /* marure_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6338E15B19E580FB005D8E7F /* marure_4.png */; };
 		6352251019E1821900CF39D9 /* marure_bak.png in Resources */ = {isa = PBXBuildFile; fileRef = 6352250D19E1821900CF39D9 /* marure_bak.png */; };
 		6352251119E1821900CF39D9 /* marure_event.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6352250E19E1821900CF39D9 /* marure_event.jpg */; };
 		6352251219E1821900CF39D9 /* marure_mood.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6352250F19E1821900CF39D9 /* marure_mood.jpg */; };
@@ -53,6 +55,8 @@
 /* Begin PBXFileReference section */
 		6338D6481999048300C486A7 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		6338D6491999048300C486A7 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
+		6338E15919E58095005D8E7F /* main_menu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_menu.jpg; sourceTree = "<group>"; };
+		6338E15B19E580FB005D8E7F /* marure_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marure_4.png; sourceTree = "<group>"; };
 		6352250D19E1821900CF39D9 /* marure_bak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marure_bak.png; sourceTree = "<group>"; };
 		6352250E19E1821900CF39D9 /* marure_event.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marure_event.jpg; sourceTree = "<group>"; };
 		6352250F19E1821900CF39D9 /* marure_mood.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marure_mood.jpg; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 		AB2B79D9197EB69400590026 /* picture */ = {
 			isa = PBXGroup;
 			children = (
+				6338E15B19E580FB005D8E7F /* marure_4.png */,
+				6338E15919E58095005D8E7F /* main_menu.jpg */,
 				6352251319E18A1200CF39D9 /* marure_next.jpg */,
 				6352250D19E1821900CF39D9 /* marure_bak.png */,
 				6352250E19E1821900CF39D9 /* marure_event.jpg */,
@@ -372,9 +378,11 @@
 				AB36D23F19D8459F0000825A /* marure_1.jpg in Resources */,
 				6352251119E1821900CF39D9 /* marure_event.jpg in Resources */,
 				F22144DB199D0D490075D67B /* webapi.json in Resources */,
+				6338E15A19E58095005D8E7F /* main_menu.jpg in Resources */,
 				6352251019E1821900CF39D9 /* marure_bak.png in Resources */,
 				6352251219E1821900CF39D9 /* marure_mood.jpg in Resources */,
 				ABB8390A197CFF9000878CB0 /* InfoPlist.strings in Resources */,
+				6338E15C19E580FB005D8E7F /* marure_4.png in Resources */,
 				6352251419E18A1200CF39D9 /* marure_next.jpg in Resources */,
 				ABB83913197CFF9000878CB0 /* Main.storyboard in Resources */,
 				AB53718519CF160600B5BCEC /* title.png in Resources */,

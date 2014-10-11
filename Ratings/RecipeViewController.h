@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "MenuViewController.h"
+#import "SearchViewController.h"
 #import "WebViewController.h"
 
 //ネットワーク接続確認のために必要

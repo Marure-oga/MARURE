@@ -1,5 +1,6 @@
 
 #import "WebViewController.h"
+#import "MenuViewController.h"
 
 //左から表示させるアニメーションのために必要
 #import <QuartzCore/QuartzCore.h>
@@ -26,6 +27,15 @@ int webbuttontapped = -1;
     // Do any additional setup after loading the view.
     
     [self Display];
+    
+    // Do any additional setup after loading the view.
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
+    title.font = [UIFont boldSystemFontOfSize:16.0];
+    title.textColor = [UIColor whiteColor];
+    title.text = Merge_Text;
+    [title sizeToFit];
+    
+    self.navigationItem.titleView = title;
     
     //右へスワイプしたときの処理
     UISwipeGestureRecognizer *swiperight = [[UISwipeGestureRecognizer alloc]

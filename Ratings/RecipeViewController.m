@@ -9,6 +9,8 @@
 
 @implementation RecipeViewController
 
+//ユーザーが選択した単品
+// 0 : 初期値
 int Select_Flag = 0;
 
 //ネットワークに接続しているかを判断する時間（秒）
@@ -44,6 +46,15 @@ int recipebuttontapped = -1;
                                   action:@selector(BackBtn)];
     self.navigationItem.leftBarButtonItems = @[backButton];
     
+    // Do any additional setup after loading the view.
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
+    title.font = [UIFont boldSystemFontOfSize:16.0];
+    title.textColor = [UIColor whiteColor];
+    title.text = Merge_Text;
+    [title sizeToFit];
+    
+    self.navigationItem.titleView = title;
+    
     searchTime = 5.0;
     recipebuttontapped = -1;
     
@@ -60,25 +71,13 @@ int recipebuttontapped = -1;
     
     NSString *Title_Text;
     
-    if(Send_Flag == 1){
+    if(Select_ID == 1){
         i = 0;
     }
     else{
         i = 4;
     }
-    /*self.Menu_Img01.image = [Select_URL objectAtIndex:0+i];
-    self.Menu_Img02.image = [Select_URL objectAtIndex:1+i];
-    self.Menu_Img03.image = [Select_URL objectAtIndex:2+i];
-    self.Menu_Img04.image = [Select_URL objectAtIndex:3+i];*/
     
-    /*
-    for (int k = 0; k < 4; k++) {
-        if(nil == [Select_URL objectAtIndex:[[indexnumber objectAtIndex:k+i] intValue]]){
-            NSLog(@"\n[画面4]Select_URL[%d] = nil\n",k);
-            return;
-        }
-    }
-    */
     self.Menu_Img01.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:0+i] intValue]];
     self.Menu_Img02.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:1+i] intValue]];
     self.Menu_Img03.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:2+i] intValue]];
@@ -176,7 +175,7 @@ int recipebuttontapped = -1;
     int i = 0;
     
     //画面3で2つ目の献立を選択された場合
-    if(Send_Flag == 2){
+    if(Select_ID == 2){
         i =4;
     }
     
@@ -184,7 +183,7 @@ int recipebuttontapped = -1;
         WebViewController *vcntl = [segue destinationViewController];
         
         //画面3で選択された献立が下だった場合、インデックスを4に設定
-        if(Send_Flag == 2) i = 4;
+        if(Select_ID == 2) i = 4;
         vcntl.getUrl = [Recipe_URL_1 objectAtIndex:[[indexnumber objectAtIndex:i+0] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_02"]){
@@ -375,8 +374,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
 -(void)previousPage
 {
-    //戻るボタン押下時のフラグ立て
-    Send_Flag = -1;
+    //遷移元画面ID設定
+    Display_ID = 4;
     
     CATransition * transition = [CATransition animation];
     
@@ -393,29 +392,33 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
 -(void)nextPage1
 {
+    //遷移元画面ID設定
+    Display_ID = 4;
+    
     Select_Flag = 1;
-    //RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
-    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 -(void)nextPage2
 {
+    //遷移元画面ID設定
+    Display_ID = 4;
+    
     Select_Flag = 2;
-    //RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
-    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 -(void)nextPage3
 {
+    //遷移元画面ID設定
+    Display_ID = 4;
+    
     Select_Flag = 3;
-    //RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
-    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 -(void)nextPage4
 {
+    //遷移元画面ID設定
+    Display_ID = 4;
+    
     Select_Flag = 4;
-    //RecipeViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"web"];
-    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 @end
