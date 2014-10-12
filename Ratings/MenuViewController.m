@@ -534,7 +534,11 @@ bool syokai = true;
 //スワイプしたときMenu_Img_Changeを呼び出し、その後Menu_Img_Showを呼び出す
 -(void)swipe:(UISwipeGestureRecognizer *)gesture
 {
-    [self Menu_Img_Show];
+    //[self Menu_Img_Show];
+    buttontapped = 0;
+    dispatch_async(mainQueue,^{
+        [self mainQueueMethod];
+    });
 }
 
 //nownumberに-1をセット
@@ -672,7 +676,9 @@ bool syokai = true;
     if(accessstate){
         NSLog(@"画面3:ネットワーク接続確認OK");
         dispatch_async(mainQueue,^{
-           if(buttontapped == 1){
+            if(buttontapped == 0){
+                [self Menu_Img_Show];
+            }else if(buttontapped == 1){
                 [self nextPage1];
             }else if(buttontapped == 2){
                 [self nextPage2];

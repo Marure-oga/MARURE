@@ -21,6 +21,8 @@ dispatch_queue_t subQueue;
 //どのボタンが押されたかを数字で保存
 int webbuttontapped = -1;
 
+UIWebView *webView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,6 +56,13 @@ int webbuttontapped = -1;
     
     //デフォルトのBACKボタンの非表示
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    //戻るボタンの追加
+    UIBarButtonItem* backButton =[[UIBarButtonItem alloc]
+                                  initWithTitle:@"戻る"
+                                  style:UIBarButtonItemStyleBordered
+                                  target:self
+                                  action:@selector(BackBtn)];
+    self.navigationItem.leftBarButtonItems = @[backButton];
     
     
 }
@@ -77,8 +86,20 @@ int webbuttontapped = -1;
     [self.webView loadRequest:request];
 }
 
-//献立詳細画面に戻る
--(void)Back
+//ウェブサイトの戻る
+-(void)webBack
+{
+    [self.webView goBack];
+}
+
+//ウェブサイトの更新
+-(void)Update
+{
+    [self.webView reload];
+}
+
+//アプリに戻る
+-(void)AppBack
 {
     CATransition *transition = [CATransition animation];
     
@@ -93,11 +114,20 @@ int webbuttontapped = -1;
     [self.navigationController pushViewController:push animated:NO];
 }
 
+//ナビゲーションバーの戻るボタンを押したときの処理　前の画面に戻る
+-(void)BackBtn
+{
+    webbuttontapped = 2;
+    dispatch_async(mainQueue,^{
+        [self mainQueueMethod];
+    });
+}
+
 //右スワイプを行ったとき献立詳細画面に遷移
 -(void)swipe:(UISwipeGestureRecognizer *)gesture
 {
     //[self Back];
-    webbuttontapped = 0;
+    webbuttontapped = 2;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
@@ -114,7 +144,7 @@ int webbuttontapped = -1;
 
 //更新ボタンを押したときDisplayメソッドを呼び出す
 - (IBAction)UpdateButton:(id)sender {
-    [self Display];
+    //[self Display];
     webbuttontapped = 1;
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
@@ -236,9 +266,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         NSLog(@"ネットワーク接続確認OK");
         dispatch_async(mainQueue,^{
             if(webbuttontapped == 0){
-                [self Back];
+                [self webBack];
             }else if(webbuttontapped == 1){
-                [self Display];
+                [self Update];
+            }else if(webbuttontapped == 2){
+                [self AppBack];
             }else{
                 NSLog(@"buttontappedが不正です");
             }
