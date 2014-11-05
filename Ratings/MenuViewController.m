@@ -32,6 +32,7 @@ NSData *Img_Data;
 UIImage *Recipe_Img;
 
 MarureKeyS *mrks;
+ShowAppAlert *saa;
 
 
 //料理の画像URL格納用配列
@@ -121,9 +122,6 @@ bool syokai = true;
     int i;
     
     //ユーザーが選択した検索条件をAPIに投げる
-    //テスト用：
-    //[mrks SetEventAndMoody:0 moody:0];
-    //本番用
     [mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
     
     //=========================nilチェック=========================
@@ -438,6 +436,7 @@ bool syokai = true;
     //画面2から遷移した場合
     if(Display_ID == 2)
     {
+        saa = [[ShowAppAlert alloc]init];
         //取得した文字列から画像表示するための前処理
         if([self Menu_Img_GET]){
             //APIからの返却数が正常だった場合
@@ -446,7 +445,7 @@ bool syokai = true;
         }
         else{
             NSLog(@"API取得値が不正\n");
-            [self showAlert:@"エラー" MESSAGE_Str:@"献立の取得に失敗しました。" CANCEL_Str:nil OTHER_Str:@"はい"];
+            [saa showAlert:@"エラー" MESSAGE_Str:@"献立の取得に失敗しました。" CANCEL_Str:nil OTHER_Str:@"はい"];
             [self previousPage];
         }
     }
@@ -673,6 +672,8 @@ bool syokai = true;
 //ネットワーク接続ができているかどうか
 -(void)networkaccessHantei:(Boolean)accessstate
 {
+    saa = [[ShowAppAlert alloc]init];
+    
     if(accessstate){
         NSLog(@"画面3:ネットワーク接続確認OK");
         dispatch_async(mainQueue,^{
@@ -688,44 +689,13 @@ bool syokai = true;
         });
     }else{
         dispatch_async(mainQueue,^{
-            [self showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
+            [saa showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
         });
     }
     
 }
 
 //=======================アラーム表示処理==============================
-
-//アラート表示
--(void)showAlert:(NSString*)TITLE_Str MESSAGE_Str:(NSString*)MESSAGE_Str CANCEL_Str:(NSString*)CANCEL_Str OTHER_Str:(NSString*)OTHER_Str
-{
-    //アラート
-    UIAlertView *alert;
-    /*
-    alert =[[UIAlertView alloc]
-            initWithTitle:@"エラー"
-            message:@"ネットワークに接続していません\n再試行しますか？"
-            delegate:self
-            cancelButtonTitle:@"後で"
-            otherButtonTitles:@"はい",
-            nil];
-     */
-    
-    alert =[[UIAlertView alloc]
-            initWithTitle:TITLE_Str
-            message:MESSAGE_Str
-            delegate:self
-            cancelButtonTitle:CANCEL_Str
-            otherButtonTitles:OTHER_Str,
-            nil];
-    
-    alert.alertViewStyle = UIAlertViewStyleDefault;
-    
-    
-    
-    [alert show];
-    
-}
 
 //アラートのボタンが押されたときの処理（イベント未選択のアラートとネットワーク接続確認のアラートの両方が実行する）
 -(void)alertView:(UIAlertView*)alertView
@@ -785,18 +755,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 -(void)nextPage1
 {
     Select_ID = 1;
-    
-    //MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
-    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 //下の献立に遷移
 -(void)nextPage2
 {
     Select_ID = 2;
-    
-    //MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
-    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 @end

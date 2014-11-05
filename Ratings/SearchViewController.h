@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MenuViewController.h"
+#import "JsonSerchClass.h"
+#import "ShowAppAlert.h"
 
 //ネットワーク接続確認のために必要
 #import "Reachability.h"

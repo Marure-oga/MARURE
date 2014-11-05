@@ -2,6 +2,7 @@
 #import "MenuViewController.h"
 #import "SearchViewController.h"
 #import "WebViewController.h"
+#import "ShowAppAlert.h"
 
 //ネットワーク接続確認のために必要
 #import "Reachability.h"

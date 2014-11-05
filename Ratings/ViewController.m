@@ -19,7 +19,7 @@ Boolean firstcheck = true;
 
 // 08/08 by yo
 MarureKeyS *mrks;
-
+ShowAppAlert *saa;
 //以上 08/08 by yo
 
 //プログレスバー
@@ -201,17 +201,9 @@ dispatch_queue_t subQueue;
 //アラートの表示
 -(void)showAlert
 {
-    alert =[[UIAlertView alloc]
-            initWithTitle:@"エラー"
-            message:@"ネットワークに接続していません\n再試行しますか？"
-            delegate:self
-            cancelButtonTitle:@"いいえ"
-            otherButtonTitles:@"はい",
-            nil];
-    alert.alertViewStyle = UIAlertViewStyleDefault;
+    saa = [[ShowAppAlert alloc]init];
     
-    [alert show];
-    
+    [saa showAlert:@"エラー"MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？"CANCEL_Str:@"いいえ"OTHER_Str:@"はい"];
 }
 
 //アラートのボタンが押されたときの処理
@@ -236,6 +228,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 //ネットワーク接続ができているかどうかとそれに対応する処理
 -(void)networkaccessHantei:(Boolean)accessstate
 {
+    saa = [[ShowAppAlert alloc]init];
+    
     if(accessstate){
         if(firstcheck){
             //最初の確認でネットワーク接続ができているとき1.2秒後画面遷移
@@ -260,7 +254,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
             //最初の確認でネットワーク接続ができていないときアラート表示
             timer2 = [NSTimer scheduledTimerWithTimeInterval:0.5
                                             target:self
-                                             selector:@selector(showAlert)
+                                            selector:@selector(showAlert)
                                             userInfo:nil
                                             repeats:NO];
         }else{

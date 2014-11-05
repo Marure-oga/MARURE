@@ -10,6 +10,7 @@
 		6338D64A1999048300C486A7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338D6491999048300C486A7 /* SearchViewController.m */; };
 		6358762719A23DED0007EE28 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762619A23DED0007EE28 /* MenuViewController.m */; };
 		6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762919A23E410007EE28 /* RecipeViewController.m */; };
+		63B68C7A1A0A88990075536D /* ShowAppAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B68C791A0A88990075536D /* ShowAppAlert.m */; };
 		AB818C15198E79930077E016 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AB818C14198E79930077E016 /* Reachability.m */; };
 		AB818C17198E7B650077E016 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB818C16198E7B650077E016 /* SystemConfiguration.framework */; };
 		ABA2A71619AF7DA0005018F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA2A71519AF7DA0005018F7 /* QuartzCore.framework */; };
@@ -59,6 +60,8 @@
 		6358762619A23DED0007EE28 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		6358762819A23E410007EE28 /* RecipeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeViewController.h; sourceTree = "<group>"; };
 		6358762919A23E410007EE28 /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
+		63B68C781A0A88990075536D /* ShowAppAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowAppAlert.h; sourceTree = "<group>"; };
+		63B68C791A0A88990075536D /* ShowAppAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowAppAlert.m; sourceTree = "<group>"; };
 		AB818C13198E798C0077E016 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AB818C14198E79930077E016 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AB818C16198E7B650077E016 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -179,6 +182,15 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
+		63B68C7B1A0A88A20075536D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				63B68C781A0A88990075536D /* ShowAppAlert.h */,
+				63B68C791A0A88990075536D /* ShowAppAlert.m */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
 		ABB838F3197CFF9000878CB0 = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +227,7 @@
 		ABB83905197CFF9000878CB0 /* Ratings */ = {
 			isa = PBXGroup;
 			children = (
+				63B68C7B1A0A88A20075536D /* Config */,
 				ABE0AF9519EA8A0100640E25 /* picture */,
 				F2EB999619AB3639001B1F19 /* WEBVIEW */,
 				6358763119A240610007EE28 /* Reachability */,
@@ -408,6 +421,7 @@
 				ABB83910197CFF9000878CB0 /* AppDelegate.m in Sources */,
 				AB818C15198E79930077E016 /* Reachability.m in Sources */,
 				F2EB999919AB366C001B1F19 /* WebViewController.m in Sources */,
+				63B68C7A1A0A88990075536D /* ShowAppAlert.m in Sources */,
 				F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */,
 				6358762719A23DED0007EE28 /* MenuViewController.m in Sources */,
 				6338D64A1999048300C486A7 /* SearchViewController.m in Sources */,

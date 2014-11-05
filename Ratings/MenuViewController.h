@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #import "JsonSerchClass.h"
 #import "SearchViewController.h"
+#import "ShowAppAlert.h"
 
 //ネットワーク接続確認のために必要
 #import "Reachability.h"
@@ -64,8 +65,6 @@ extern NSMutableArray *indexnumber;
 -(void)networkaccessHantei:(Boolean)accessstate;
 
 
-//アラート表示
--(void)showAlert:(NSString*)TITLE_Str MESSAGE_Str:(NSString*)MESSAGE_Str CANCEL_Str:(NSString*)CANCEL_Str OTHER_Str:(NSString*)OTHER_Str;
 //アラートのボタンが押されたときの処理
 -(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 

@@ -7,8 +7,6 @@
 //
 
 #import "SearchViewController.h"
-#import "MenuViewController.h"
-#import "JsonSerchClass.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SearchViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -45,8 +43,7 @@ dispatch_queue_t mainQueue;
 //並列処理　サブ処理
 dispatch_queue_t subQueue;
 
-//355行目からのアラート表示に使用
-MenuViewController *MVC_Ctl;
+ShowAppAlert *saa;
 
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -230,8 +227,8 @@ MenuViewController *MVC_Ctl;
     }
     //検索条件不正
     else{
-        MVC_Ctl = [[MenuViewController alloc]init];
-        [MVC_Ctl showAlert:@"エラー" MESSAGE_Str:@"イベントを選択してください。" CANCEL_Str:@"確認" OTHER_Str:nil];
+        saa = [[ShowAppAlert alloc]init];
+        [saa showAlert:@"エラー" MESSAGE_Str:@"イベントを選択してください。" CANCEL_Str:@"確認" OTHER_Str:nil];
     }
 }
 
@@ -326,14 +323,15 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 //ネットワーク接続ができているかどうか
 -(void)networkaccessHantei:(Boolean)accessstate
 {
+    saa = [[ShowAppAlert alloc]init];
+    
     if(accessstate){
         NSLog(@"画面2:ネットワーク接続確認OK");dispatch_async(mainQueue,^{
             [self nextPage];
         });
     }else{
         dispatch_async(mainQueue,^{
-            MVC_Ctl = [[MenuViewController alloc]init];
-            [MVC_Ctl showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
+            [saa showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
         });
         
     }

@@ -22,6 +22,8 @@ dispatch_queue_t subQueue;
 //どのボタンが押されたかを数字で保存
 int recipebuttontapped = -1;
 
+ShowAppAlert *saa;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -302,25 +304,6 @@ int recipebuttontapped = -1;
     return networkaccess;
 }
 
-//ネットワーク接続エラーのアラート表示
--(void)showAlert
-{
-    //アラート
-    UIAlertView *alert;
-    
-    alert =[[UIAlertView alloc]
-            initWithTitle:@"エラー"
-            message:@"ネットワークに接続していません\n再試行しますか？"
-            delegate:self
-            cancelButtonTitle:@"後で"
-            otherButtonTitles:@"はい",
-            nil];
-    alert.alertViewStyle = UIAlertViewStyleDefault;
-    
-    [alert show];
-    
-}
-
 //アラートのボタンが押されたときの処理（イベント未選択のアラートとネットワーク接続確認のアラートの両方が実行する）
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -340,6 +323,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 //ネットワーク接続ができているかどうか
 -(void)networkaccessHantei:(Boolean)accessstate
 {
+    saa = [[ShowAppAlert alloc]init];
+    
     if(accessstate){
         NSLog(@"ネットワーク接続確認OK");
         dispatch_async(mainQueue,^{
@@ -366,7 +351,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         });
     }else{
         dispatch_async(mainQueue,^{
-            [self showAlert];
+            [saa showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
         });
     }
     
