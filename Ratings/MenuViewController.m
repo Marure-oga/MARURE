@@ -786,8 +786,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 {
     Select_ID = 1;
     
-    MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
-    [self.navigationController pushViewController:viewCont animated:YES];
+    //MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
+    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 //下の献立に遷移
@@ -795,8 +795,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 {
     Select_ID = 2;
     
-    MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
-    [self.navigationController pushViewController:viewCont animated:YES];
+    //MenuViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
+    //[self.navigationController pushViewController:viewCont animated:YES];
 }
 
 @end

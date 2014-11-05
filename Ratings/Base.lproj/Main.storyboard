@@ -87,7 +87,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="Menu_01:" destination="vAs-IH-Lcm" eventType="touchDown" id="ofE-ga-WmX"/>
+                                    <action selector="Menu_01:" destination="vAs-IH-Lcm" eventType="touchUpInside" id="rvd-af-5Yh"/>
                                     <segue destination="5SS-wT-re8" kind="push" id="Xdm-SI-lI7"/>
                                 </connections>
                             </button>
@@ -97,7 +97,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="Menu_02:" destination="vAs-IH-Lcm" eventType="touchDown" id="lVD-VU-bQi"/>
+                                    <action selector="Menu_02:" destination="vAs-IH-Lcm" eventType="touchUpInside" id="hQa-MB-MEo"/>
                                     <segue destination="5SS-wT-re8" kind="push" id="vPV-kw-6gB"/>
                                 </connections>
                             </button>
