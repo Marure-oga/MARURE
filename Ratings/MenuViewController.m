@@ -361,6 +361,9 @@ bool syokai = true;
     }
     //ランダム切り替えの処理を行えるようにする
     syokai = false;
+    NSLog(@"ybefore = %f",pickPos.y);
+    pickPos.y = 0;
+    NSLog(@"yafter = %f",pickPos.y);
     
     NSLog(@"--------------------------------");
     //NSLog(@"Send?flg%d",Send_Flag);
@@ -557,7 +560,7 @@ bool syokai = true;
     bool hantei = false;
     
     //初回表示もしくはスワイプされた側の献立をランダムに設定　スワイプされなかった側の献立は今の値を取得
-    if(syokai || (pickPos.y < 320 && ImgNumber < 4) || (pickPos.y >= 320 && ImgNumber >= 4)){
+    if(syokai || (70 <= pickPos.y && pickPos.y < 320 && ImgNumber < 4) || (pickPos.y >= 320 && ImgNumber >= 4)){
     
         //まだ選ばれていないレシピ番号が出るまで乱数を発生させる
         do{
