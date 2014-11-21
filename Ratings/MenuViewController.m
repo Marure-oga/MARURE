@@ -72,8 +72,6 @@ NSMutableArray *indexnumber;
 //今表示されている料理の画像の番号
 NSMutableArray *nownumber;
 
-//ネットワークに接続しているかを判断する時間（秒）
-double searchTime;
 //並列処理　メイン処理
 dispatch_queue_t mainQueue;
 //並列処理　サブ処理
@@ -88,6 +86,8 @@ bool hantei0 = true;
 CGPoint pickPos;
 //初回表示かどうか
 bool syokai = true;
+
+NetworkConCheck *ncc;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -421,6 +421,8 @@ bool syokai = true;
 {
     [super viewDidLoad];
     
+    pickPos.y = 0;
+    
     if (Ambience_NO == -1) {
         Merge_Text = Event_Str;
     }
@@ -474,7 +476,6 @@ bool syokai = true;
     swipeleft.numberOfTouchesRequired = 1;
     [self.view addGestureRecognizer:swipeleft];
     
-    searchTime = 5.0;
     buttontapped = -1;
     
     //メイン処理とサブ処理を設定
@@ -490,6 +491,10 @@ bool syokai = true;
                                   target:self
                                   action:@selector(BackBtn)];
     self.navigationItem.leftBarButtonItems = @[backButton];
+    
+    //ボタンを押した瞬間にタッチ座標を変えるメソッドを呼ぶ
+    [_Menu_01 addTarget:self action:@selector(PointSet01) forControlEvents:UIControlEventTouchDown];
+    [_Menu_02 addTarget:self action:@selector(PointSet02) forControlEvents:UIControlEventTouchDown];
     
 }
 
@@ -507,6 +512,16 @@ bool syokai = true;
 -(void)BackBtn
 {
     [self previousPage];
+}
+
+//ボタンを押した瞬間にタッチ座標を80に変える
+-(void)PointSet01{
+    pickPos.y = 80;
+}
+
+//ボタンを押した瞬間に立タッチ座標を330に変える
+-(void)PointSet02{
+    pickPos.y = 330;
 }
 
 - (IBAction)Menu_01:(id)sender {
@@ -603,96 +618,60 @@ bool syokai = true;
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
 -(void)mainQueueMethod
 {
-    [self network_first];
+    ncc = [[NetworkConCheck alloc]init];
+    bool hantei = false;
+    hantei = [ncc network_first];
+    
+    [self networkconHantei:hantei];
 }
 
 //サブ処理　ネットワーク接続確認（２回目以降）を実行
 -(void)subQueueMethod
 {
-    [self network];
+    bool hantei = false;
+    hantei = [ncc network];
+    
+    [self networkconHantei:hantei];
 }
 
-//ネットワーク接続判定１回目
--(void)network_first
+//ネットワーク確認後の処理振り分け
+-(void)BranchProcess
 {
-    Boolean accessstate = false;
-    
-    //networksearchメソッドの呼び出し
-    accessstate = [self networksearch];
-    //networkaccessHanteiメソッドの呼び出し
-    [self networkaccessHantei:accessstate];
-    
-}
-
-//ネットワーク接続判定２回目以降
--(void)network
-{
-    //ネットワーク接続が確認できたかどうか
-    Boolean accessstate = false;
-    
-    //このメソッドが呼び出された時間の変数
-    NSDate *startDate;
-    //startDateからどれほど時間がたったかをはかるための変数
-    NSDate *endDate;
-    //startDateからendDateまでにかかっった時間
-    NSTimeInterval interval;
-    
-    startDate = [NSDate date];
-    
-    //ネットワーク接続確認がとれるかserrchTimeで設定した時間がたつまで　networksearchメソッドを呼び出すことを繰り返す
-    do{
-        accessstate = [self networksearch];
-        endDate = [NSDate date];
-        interval = [endDate timeIntervalSinceDate:startDate];
-    }while(accessstate == false && interval <= searchTime);
-    NSLog(@"ループを抜けた");
-    
-    //networkaccsessHanteiメソッドの呼び出し
-    [self networkaccessHantei:accessstate];
-}
-
-//ネットワーク接続判定を行うメソッド
--(Boolean)networksearch
-{
-    //ネットワーク接続ができているかどうかの変数
-    Boolean networkaccess = false;
-    
-    //ネットワーク接続確認
-    Reachability *curReach = [Reachability reachabilityForInternetConnection];
-    NetworkStatus netStatus =[curReach currentReachabilityStatus];
-    
-    if(netStatus == NotReachable){
-        //ネットワーク説毒ができていないとき
-        networkaccess = false;
+    if(buttontapped == 0){
+        [self Menu_Img_Show];
+    }else if(buttontapped == 1){
+        [self nextPage1];
+    }else if(buttontapped == 2){
+        [self nextPage2];
     }else{
-        //ネットワーク接続ができているとき
-        networkaccess = true;
+        NSLog(@"buttontappedが不正です buttontapped = %d",buttontapped);
     }
-    
-    return networkaccess;
 }
 
 //ネットワーク接続ができているかどうか
--(void)networkaccessHantei:(Boolean)accessstate
+-(void)networkconHantei:(Boolean)constate
 {
     saa = [[ShowAppAlert alloc]init];
     
-    if(accessstate){
+    if(constate){
         NSLog(@"画面3:ネットワーク接続確認OK");
         dispatch_async(mainQueue,^{
-            if(buttontapped == 0){
-                [self Menu_Img_Show];
-            }else if(buttontapped == 1){
-                [self nextPage1];
-            }else if(buttontapped == 2){
-                [self nextPage2];
-            }else{
-                NSLog(@"buttontappedが不正です buttontapped = %d",buttontapped);
-            }
+            [self BranchProcess];
         });
     }else{
         dispatch_async(mainQueue,^{
-            [saa showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
+            //[saa showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
+            UIAlertView* alert =[[UIAlertView alloc]
+                                 initWithTitle:@"エラー"
+                                 message:@"ネットワークに接続していません\n再試行しますか？"
+                                 delegate:self
+                                 cancelButtonTitle:@"後で"
+                                 otherButtonTitles:@"はい",
+                                 nil];
+            
+            alert.alertViewStyle = UIAlertViewStyleDefault;
+            
+            [alert show];
         });
     }
     

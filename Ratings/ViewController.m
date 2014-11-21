@@ -13,7 +13,7 @@ NSTimer *timer2;
 //プログレスバー進捗度（０〜１）
 double progresslevel = 0;
 //ネットワークに接続しているかを判断する時間（秒）
-double searchTime;
+//double searchTime;
 //最初のネットワーク接続確認を行っているかどうかの判定
 Boolean firstcheck = true;
 
@@ -33,6 +33,8 @@ dispatch_queue_t mainQueue;
 
 //並列処理　サブ処理
 dispatch_queue_t subQueue;
+
+NetworkConCheck *ncc;
 
 - (void)viewDidLoad
 {
@@ -92,8 +94,18 @@ dispatch_queue_t subQueue;
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
 -(void)mainQueueMethod
 {
+    ncc = [[NetworkConCheck alloc]init];
+    bool hantei = false;
+    hantei = [ncc network_first];
+    if(hantei){
+        //最初のときプログレスバーの進行
+        progresslevel = progresslevel + 0.5;
+        [progressView setProgress:progresslevel animated:YES];
+        [self.view addSubview:progressView];
+
+    }
     
-    [self network_first];
+    [self networkconHantei:hantei];
     
     [progressView setProgress:progresslevel animated:YES];
     [self.view addSubview:progressView];
@@ -102,7 +114,20 @@ dispatch_queue_t subQueue;
 //サブ処理　ネットワーク接続確認（２回目以降）を実行
 -(void)subQueueMethod
 {
-    [self network];
+    firstcheck = false;
+    
+    bool hantei = false;
+    hantei = [ncc network];
+    if(hantei){
+        //２回目以降のときメイン処理でプログレスバーの進行　メイン処理側で実行
+        dispatch_async(mainQueue,^{
+            progresslevel = progresslevel + 0.5;
+            [progressView setProgress:progresslevel animated:YES];
+            [self.view addSubview:progressView];
+        });
+    }
+    
+    [self networkconHantei:hantei];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,85 +142,9 @@ dispatch_queue_t subQueue;
 {
     progresslevel = 0;
     firstcheck = true;
-    searchTime = 5.0;
+    //searchTime = 5.0;
     
     progresslevel = progresslevel + 0.5;
-}
-
-//ネットワーク接続判定１回目
--(void)network_first
-{
-    //ネットワーク接続確認できたかどうか
-    Boolean accessstate = false;
-    
-    //networksearchメソッドの呼び出し
-    accessstate = [self networksearch];
-    //networkaccessHanteiメソッドの呼び出し
-    [self networkaccessHantei:accessstate];
-    
-}
-
-//ネットワーク接続判定２回目以降
--(void)network
-{
-    firstcheck = false;
-    
-    //ネットワーク接続が確認できたかどうか
-    Boolean accessstate = false;
-    
-    //このメソッドが呼び出された時間の変数
-    NSDate *startDate;
-    //startDateからどれほど時間がたったかをはかるための変数
-    NSDate *endDate;
-    //startDateからendDateまでにかかっった時間
-    NSTimeInterval interval;
-    
-    startDate = [NSDate date];
-    
-    //ネットワーク接続確認がとれるかserrchTimeで設定した時間がたつまで　networksearchメソッドを呼び出すことを繰り返す
-    do{
-        accessstate = [self networksearch];
-        endDate = [NSDate date];
-        interval = [endDate timeIntervalSinceDate:startDate];
-    }while(accessstate == false && interval <= searchTime);
-    
-    //networkaccsessHanteiメソッドの呼び出し
-    [self networkaccessHantei:accessstate];
-}
-
-
-//ネットワーク接続判定を行うメソッド
--(Boolean)networksearch
-{
-    //ネットワーク接続ができているかどうかの変数
-    Boolean networkaccess = false;
-    
-    //ネットワーク接続確認
-    Reachability *curReach = [Reachability reachabilityForInternetConnection];
-    NetworkStatus netStatus =[curReach currentReachabilityStatus];
-    
-    if(netStatus == NotReachable){
-        //ネットワーク説毒ができていないとき
-        networkaccess = false;
-    }else{
-        //ネットワーク接続ができているとき
-        networkaccess = true;
-        if(firstcheck){
-            //最初のときプログレスバーの進行
-            progresslevel = progresslevel + 0.5;
-            [progressView setProgress:progresslevel animated:YES];
-            [self.view addSubview:progressView];
-        }else{
-            //２回目以降のときメイン処理でプログレスバーの進行　メイン処理側で実行
-            dispatch_async(mainQueue,^{
-                progresslevel = progresslevel + 0.5;
-                [progressView setProgress:progresslevel animated:YES];
-                [self.view addSubview:progressView];
-            });
-        }
-    }
-    
-    return networkaccess;
 }
 
 //アラートの表示
@@ -203,7 +152,19 @@ dispatch_queue_t subQueue;
 {
     saa = [[ShowAppAlert alloc]init];
     
-    [saa showAlert:@"エラー"MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？"CANCEL_Str:@"いいえ"OTHER_Str:@"はい"];
+    //[saa showAlert:@"エラー"MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？"CANCEL_Str:@"いいえ"OTHER_Str:@"はい"];
+    alert =[[UIAlertView alloc]
+            initWithTitle:@"エラー"
+            message:@"ネットワークに接続していません\n再試行しますか？"
+            delegate:self
+            cancelButtonTitle:@"いいえ"
+            otherButtonTitles:@"はい",
+            nil];
+    
+    alert.alertViewStyle = UIAlertViewStyleDefault;
+    
+    [alert show];
+
 }
 
 //アラートのボタンが押されたときの処理
@@ -226,11 +187,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
 
 //ネットワーク接続ができているかどうかとそれに対応する処理
--(void)networkaccessHantei:(Boolean)accessstate
+-(void)networkconHantei:(Boolean)constate
 {
     saa = [[ShowAppAlert alloc]init];
     
-    if(accessstate){
+    if(constate){
         if(firstcheck){
             //最初の確認でネットワーク接続ができているとき1.2秒後画面遷移
             timer = [NSTimer scheduledTimerWithTimeInterval:1.2

@@ -4,6 +4,7 @@
 
 //ネットワーク接続確認のために必要
 #import "Reachability.h"
+#import "NetworkConCheck.h"
 @class Reachability;
 
 @interface WebViewController : UIViewController<UIWebViewDelegate>

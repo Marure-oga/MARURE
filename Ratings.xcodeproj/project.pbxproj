@@ -13,6 +13,7 @@
 		63B68C7A1A0A88990075536D /* ShowAppAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B68C791A0A88990075536D /* ShowAppAlert.m */; };
 		AB818C15198E79930077E016 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AB818C14198E79930077E016 /* Reachability.m */; };
 		AB818C17198E7B650077E016 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB818C16198E7B650077E016 /* SystemConfiguration.framework */; };
+		AB8C950E1A18E06700D69547 /* NetworkConCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = AB8C950D1A18E06700D69547 /* NetworkConCheck.m */; };
 		ABA2A71619AF7DA0005018F7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA2A71519AF7DA0005018F7 /* QuartzCore.framework */; };
 		ABB83900197CFF9000878CB0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB838FF197CFF9000878CB0 /* Foundation.framework */; };
 		ABB83902197CFF9000878CB0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB83901197CFF9000878CB0 /* CoreGraphics.framework */; };
@@ -65,6 +66,8 @@
 		AB818C13198E798C0077E016 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		AB818C14198E79930077E016 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		AB818C16198E7B650077E016 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AB8C950C1A18E06700D69547 /* NetworkConCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkConCheck.h; sourceTree = "<group>"; };
+		AB8C950D1A18E06700D69547 /* NetworkConCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkConCheck.m; sourceTree = "<group>"; };
 		ABA2A71519AF7DA0005018F7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ABB838FC197CFF9000878CB0 /* Ratings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ratings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABB838FF197CFF9000878CB0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -187,6 +190,8 @@
 			children = (
 				63B68C781A0A88990075536D /* ShowAppAlert.h */,
 				63B68C791A0A88990075536D /* ShowAppAlert.m */,
+				AB8C950C1A18E06700D69547 /* NetworkConCheck.h */,
+				AB8C950D1A18E06700D69547 /* NetworkConCheck.m */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -416,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB8C950E1A18E06700D69547 /* NetworkConCheck.m in Sources */,
 				6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */,
 				ABB83916197CFF9000878CB0 /* ViewController.m in Sources */,
 				ABB83910197CFF9000878CB0 /* AppDelegate.m in Sources */,
