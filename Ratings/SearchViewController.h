@@ -24,8 +24,7 @@ extern int Display_ID;
 
 extern NSString *Event_Str;
 extern NSString *Ambience_Str;
-
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *Ac;
+@property UIActivityIndicatorView *Ac;
 
 @property (weak, nonatomic) IBOutlet UITableView *Event_Table;
 @property (weak, nonatomic) IBOutlet UITableView *Ambience_Table;

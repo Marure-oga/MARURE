@@ -108,9 +108,7 @@ NetworkConCheck *ncc;
     transition.type = kCATransitionMoveIn;
     transition.subtype = kCATransitionFromLeft;
     
-    WebViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController pushViewController:push animated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 //ナビゲーションバーの戻るボタンを押したときの処理　前の画面に戻る
@@ -233,16 +231,4 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         });
     }
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 @end

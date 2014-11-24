@@ -27,6 +27,7 @@ int Event_NO = -1,
 int Display_ID = 1;
 
 NSString *Event_Str,*Ambience_Str;
+UIActivityIndicatorView *Ac;
 
 //検索条件判定フラグ
 //true : 遷移可能
@@ -42,7 +43,6 @@ dispatch_queue_t mainQueue;
 dispatch_queue_t subQueue;
 
 ShowAppAlert *saa;
-
 NetworkConCheck *ncc;
 
 
@@ -89,9 +89,13 @@ NetworkConCheck *ncc;
     [self.navigationItem setHidesBackButton:YES animated:NO];
 }
 
+-(void) viewWillAppear:(BOOL)animated{
+    [Ac stopAnimating];
+}
+
 - (void) viewDidAppear:(BOOL)animated
 {
-    if(Display_ID == 3){
+    if(Display_ID > 2){
         NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
         [self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
     }
@@ -203,13 +207,13 @@ NetworkConCheck *ncc;
     }
 }
 
-//次へボタンがタップされたとき
+//次へボタンがタッチアップされたとき
 -(IBAction)Button_Tapped:(id)sender {
-
     //検索条件が正しい場合
     if(Selected_flag){
+        Display_ID = 2;
         
-        UIActivityIndicatorView *Ac = [[UIActivityIndicatorView alloc] init];
+        Ac = [[UIActivityIndicatorView alloc] init];
         Ac.frame = CGRectMake(0, 0, 50, 50);
         Ac.center = self.view.center;
         Ac.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
@@ -217,7 +221,7 @@ NetworkConCheck *ncc;
         [self.view addSubview:Ac];
         
         [Ac startAnimating];
-        
+
         NSLog(@"イベント：%d / 雰囲気 %d",Event_NO,Ambience_NO);
         dispatch_async(mainQueue,^{
             [self mainQueueMethod];
@@ -298,9 +302,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 -(void)nextPage
 {
     Display_ID = 2;
-    
-    SearchViewController *viewCont =[self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
-    [self.navigationController pushViewController:viewCont animated:YES];
+    MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
+    [self.navigationController pushViewController:menuViewController animated:YES];
 }
 
 @end

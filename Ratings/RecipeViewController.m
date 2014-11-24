@@ -54,23 +54,14 @@ NetworkConCheck *ncc;
     title.textColor = [UIColor whiteColor];
     title.text = Merge_Text;
     [title sizeToFit];
-    
     self.navigationItem.titleView = title;
-    
     recipebuttontapped = -1;
     
+    NSInteger i;
+    NSString *Title_Text;
     //メイン処理とサブ処理を設定
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);
-    
-    //NSLog(@"\n【Fig4】Select_URL_COUNT = %d\n",[Select_URL count]);
-    
-    MenuViewController *mvc;
-    mvc = [[MenuViewController alloc]init];
-
-    int i;
-    
-    NSString *Title_Text;
     
     if(Select_ID == 1){
         i = 0;
@@ -148,12 +139,6 @@ NetworkConCheck *ncc;
 
 //最初に戻るのボタンを押したとき
 - (IBAction)BackStart:(id)sender {
-    RecipeViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"search"];
-    
-    push.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:push];
-    [self presentViewController:navigation animated:YES completion:nil];
-    
     [Select_URL_1 removeAllObjects];
     [Select_URL_2 removeAllObjects];
     [Select_URL_3 removeAllObjects];
@@ -168,11 +153,18 @@ NetworkConCheck *ncc;
     [Recipe_URL_2 removeAllObjects];
     [Recipe_URL_3 removeAllObjects];
     [Recipe_URL_4 removeAllObjects];
+    
+    [nownumber removeAllObjects];
+    [indexnumber removeAllObjects];
+    
+    //検索画面に戻る
+    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 }
 
 //画面4から別画面へ遷移前の処理
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    Display_ID = 4;
     int i = 0;
     
     //画面3で2つ目の献立を選択された場合
@@ -182,20 +174,23 @@ NetworkConCheck *ncc;
     
     if ([[segue identifier] isEqualToString:@"Select_Recipe_01"]) {
         WebViewController *vcntl = [segue destinationViewController];
-        
         //画面3で選択された献立が下だった場合、インデックスを4に設定
         if(Select_ID == 2) i = 4;
+        Select_Flag = 1;
         vcntl.getUrl = [Recipe_URL_1 objectAtIndex:[[indexnumber objectAtIndex:i+0] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_02"]){
+        Select_Flag = 2;
         WebViewController *vcntl = [segue destinationViewController];
         vcntl.getUrl = [Recipe_URL_2 objectAtIndex:[[indexnumber objectAtIndex:i+1] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_03"]){
+        Select_Flag = 3;
         WebViewController *vcntl = [segue destinationViewController];
         vcntl.getUrl = [Recipe_URL_3 objectAtIndex:[[indexnumber objectAtIndex:i+2] intValue]];
     }
     if([[segue identifier] isEqualToString:@"Select_Recipe_04"]){
+        Select_Flag = 4;
         WebViewController *vcntl = [segue destinationViewController];
         vcntl.getUrl = [Recipe_URL_4 objectAtIndex:[[indexnumber objectAtIndex:i+3] intValue]];
     }
@@ -321,9 +316,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 
 -(void)previousPage
 {
-    //遷移元画面ID設定
-    Display_ID = 4;
-    
     CATransition * transition = [CATransition animation];
     
     transition.duration = 0.4;
@@ -332,40 +324,27 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     transition.type = kCATransitionMoveIn;
     transition.subtype = kCATransitionFromLeft;
     
-    RecipeViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController pushViewController:push animated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)nextPage1
 {
     //遷移元画面ID設定
-    Display_ID = 4;
-    
-    Select_Flag = 1;
+    //Select_Flag = 1;
 }
 
 -(void)nextPage2
 {
-    //遷移元画面ID設定
-    Display_ID = 4;
-    
-    Select_Flag = 2;
+    //Select_Flag = 2;
 }
 
 -(void)nextPage3
 {
-    //遷移元画面ID設定
-    Display_ID = 4;
-    
-    Select_Flag = 3;
+    //Select_Flag = 3;
 }
 
 -(void)nextPage4
 {
-    //遷移元画面ID設定
-    Display_ID = 4;
-    
-    Select_Flag = 4;
+    //Select_Flag = 4;
 }
 @end

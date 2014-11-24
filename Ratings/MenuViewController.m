@@ -1,11 +1,3 @@
-//
-//  MenuViewController.m
-//  Ratings
-//
-//  Created by MASTER on 2014/08/18.
-//  Copyright (c) 2014年 Yuta.Kasiwabara. All rights reserved.
-//
-
 #import "MenuViewController.h"
 //左から表示させるアニメーションのために必要
 #import <QuartzCore/QuartzCore.h>
@@ -19,7 +11,7 @@
 // 0 : 初期値
 // 1 : 献立（上）
 // 2 : 献立（下）
-int Select_ID = 0;
+NSInteger Select_ID = 0;
 
 NSString *Url_Str;
 NSString *Name_Str;
@@ -31,39 +23,23 @@ NSURL *Img_URL;
 NSData *Img_Data;
 UIImage *Recipe_Img;
 
-MarureKeyS *mrks;
-ShowAppAlert *saa;
-
-
 //料理の画像URL格納用配列
-//主菜
-NSMutableArray *Select_URL_1;
-//副菜
-NSMutableArray *Select_URL_2;
-//デザート
-NSMutableArray *Select_URL_3;
-//ドリンク
-NSMutableArray *Select_URL_4;
+NSMutableArray *Select_URL_1;//主菜
+NSMutableArray *Select_URL_2;//副菜
+NSMutableArray *Select_URL_3;//デザート
+NSMutableArray *Select_URL_4;//ドリンク
 
 //ウェブサイトのURL格納配列
-//主菜
-NSMutableArray *Recipe_URL_1;
-//副菜
-NSMutableArray *Recipe_URL_2;
-//デザート
-NSMutableArray *Recipe_URL_3;
-//ドリンク
-NSMutableArray *Recipe_URL_4;
+NSMutableArray *Recipe_URL_1;//主菜
+NSMutableArray *Recipe_URL_2;//副菜
+NSMutableArray *Recipe_URL_3;//デザート
+NSMutableArray *Recipe_URL_4;//ドリンク
 
 //レシピタイトルの格納配列
-//主菜
-NSMutableArray *Recipe_Title_Arr_1;
-//副菜
-NSMutableArray *Recipe_Title_Arr_2;
-//デザート
-NSMutableArray *Recipe_Title_Arr_3;
-//ドリンク
-NSMutableArray *Recipe_Title_Arr_4;
+NSMutableArray *Recipe_Title_Arr_1;//主菜
+NSMutableArray *Recipe_Title_Arr_2;//副菜
+NSMutableArray *Recipe_Title_Arr_3;//デザート
+NSMutableArray *Recipe_Title_Arr_4;//ドリンク
 
 //Menu_Image_01〜Menu_Image_08に対応するレシピ番号
 //(0:1つ目の献立の主菜　1:1つ目の献立の副菜　2:1つ目の献立のデザート　3:1つ目の献立のドリンク)
@@ -76,9 +52,9 @@ NSMutableArray *nownumber;
 dispatch_queue_t mainQueue;
 //並列処理　サブ処理
 dispatch_queue_t subQueue;
+
 //どのボタンが押されたかを数字で保存
 int buttontapped = -1;
-
 //最初にMenu_Img_Changeを呼び出したときnownumberResetを呼び出す
 bool hantei0 = true;
 
@@ -101,13 +77,12 @@ NetworkConCheck *ncc;
 //献立の情報取得
 - (Boolean)Menu_Img_GET
 {
-    mrks = [[MarureKeyS alloc]init];
+    MarureKeyS *mrks = [[MarureKeyS alloc]init];
     
     Select_URL_1 = [NSMutableArray array];
     Select_URL_2 = [NSMutableArray array];
     Select_URL_3 = [NSMutableArray array];
     Select_URL_4 = [NSMutableArray array];
-    
     
     Recipe_URL_1 = [NSMutableArray array];
     Recipe_URL_2 = [NSMutableArray array];
@@ -220,8 +195,6 @@ NetworkConCheck *ncc;
         NSLog(@"ERROR!!\nKey4UrlArr COUNT = %d\n",[mrks.key4UrlArr count]);
         return false;
     }
-    
-    
     //==================================================
     
 
@@ -390,31 +363,15 @@ NetworkConCheck *ncc;
     }
     
     //====================献立.1====================
-    //主菜
-    self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:0] intValue]];
-    
-    //副菜
-    self.Menu_Image_02.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:1] intValue]];
-    
-    //デザート
-    self.Menu_Image_03.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:2] intValue]];
-
-    //ドリンク
-    self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:3] intValue]];
-    
+    self.Menu_Image_01.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:0] intValue]];//主菜
+    self.Menu_Image_02.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:1] intValue]];//副菜
+    self.Menu_Image_03.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:2] intValue]];//デザート
+    self.Menu_Image_04.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:3] intValue]];//ドリンク
     //====================献立.2====================
-    //主菜
-    self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:4] intValue]];
-
-    //副菜
-    self.Menu_Image_06.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:5] intValue]];
-    
-    //デザート
-    self.Menu_Image_07.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:6] intValue]];
-
-    //ドリンク
-    self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:7] intValue]];
-    
+    self.Menu_Image_05.image = [Select_URL_1 objectAtIndex:[[indexnumber objectAtIndex:4] intValue]];//主菜
+    self.Menu_Image_06.image = [Select_URL_2 objectAtIndex:[[indexnumber objectAtIndex:5] intValue]];//副菜
+    self.Menu_Image_07.image = [Select_URL_3 objectAtIndex:[[indexnumber objectAtIndex:6] intValue]];//デザート
+    self.Menu_Image_08.image = [Select_URL_4 objectAtIndex:[[indexnumber objectAtIndex:7] intValue]];//ドリンク
 }
 
 - (void)viewDidLoad
@@ -441,7 +398,7 @@ NetworkConCheck *ncc;
     //画面2から遷移した場合
     if(Display_ID == 2)
     {
-        saa = [[ShowAppAlert alloc]init];
+        ShowAppAlert *saa = [[ShowAppAlert alloc]init];
         //取得した文字列から画像表示するための前処理
         if([self Menu_Img_GET]){
             //APIからの返却数が正常だった場合
@@ -651,8 +608,6 @@ NetworkConCheck *ncc;
 //ネットワーク接続ができているかどうか
 -(void)networkconHantei:(Boolean)constate
 {
-    saa = [[ShowAppAlert alloc]init];
-    
     if(constate){
         NSLog(@"画面3:ネットワーク接続確認OK");
         dispatch_async(mainQueue,^{
@@ -660,7 +615,6 @@ NetworkConCheck *ncc;
         });
     }else{
         dispatch_async(mainQueue,^{
-            //[saa showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];
             UIAlertView* alert =[[UIAlertView alloc]
                                  initWithTitle:@"エラー"
                                  message:@"ネットワークに接続していません\n再試行しますか？"
@@ -702,6 +656,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
 //前のページに遷移
 -(void)previousPage
 {
+    //遷移元画面設定
+    Display_ID = 3;
+    
     CATransition * transition = [CATransition animation];
     
     transition.duration = 0.4;
@@ -709,10 +666,6 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
     transition.type = kCATransitionMoveIn;
     transition.subtype = kCATransitionFromLeft;
-    
-    MenuViewController *push =[self.storyboard instantiateViewControllerWithIdentifier:@"search"];
-    [self.navigationController.view.layer addAnimation:transition forKey:nil];
-    [self.navigationController pushViewController:push animated:NO];
     
     [Select_URL_1 removeAllObjects];
     [Select_URL_2 removeAllObjects];
@@ -729,20 +682,27 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     [Recipe_URL_3 removeAllObjects];
     [Recipe_URL_4 removeAllObjects];
     
-    //遷移元画面設定
-    Display_ID = 3;
+    [nownumber removeAllObjects];
+    [indexnumber removeAllObjects];
+
+    //前の画面に遷移
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-//上の献立に遷移
+//上の献立の詳細に遷移
 -(void)nextPage1
 {
     Select_ID = 1;
+    RecipeViewController *recipeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
+    [self.navigationController pushViewController:recipeViewController animated:YES];
 }
 
-//下の献立に遷移
+//下の献立の詳細に遷移
 -(void)nextPage2
 {
     Select_ID = 2;
+    RecipeViewController *recipeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"recipe"];
+    [self.navigationController pushViewController:recipeViewController animated:YES];
 }
 
 @end

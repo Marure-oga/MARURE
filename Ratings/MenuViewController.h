@@ -2,6 +2,7 @@
 #import <UIKit/UIKit.h>
 #import "JsonSerchClass.h"
 #import "SearchViewController.h"
+#import "RecipeViewController.h"
 #import "ShowAppAlert.h"
 #import "NetworkConCheck.h"
 
@@ -30,6 +31,7 @@ extern NSMutableArray *Recipe_Title_Arr_3;
 extern NSMutableArray *Recipe_Title_Arr_4;
 
 extern NSMutableArray *indexnumber;
+extern NSMutableArray *nownumber;
 
 @property (weak, nonatomic) IBOutlet UIImageView *Menu_Image_01;
 @property (weak, nonatomic) IBOutlet UIImageView *Menu_Image_02;
