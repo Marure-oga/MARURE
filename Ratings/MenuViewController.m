@@ -398,6 +398,8 @@ NetworkConCheck *ncc;
     //画面2から遷移した場合
     if(Display_ID == 2)
     {
+        syokai = true;
+        hantei0 = true;
         ShowAppAlert *saa = [[ShowAppAlert alloc]init];
         //取得した文字列から画像表示するための前処理
         if([self Menu_Img_GET]){
