@@ -177,7 +177,6 @@
                                 </state>
                                 <connections>
                                     <action selector="Recipe_Button_01:" destination="5SS-wT-re8" eventType="touchUpInside" id="JY7-pc-ntS"/>
-                                    <segue destination="e9o-Pa-bQb" kind="push" identifier="Select_Recipe_01" id="YcR-EH-Whu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LeI-fL-7D1">
@@ -187,7 +186,6 @@
                                 </state>
                                 <connections>
                                     <action selector="Recipe_Button_02:" destination="5SS-wT-re8" eventType="touchUpInside" id="x5H-Rm-Zkp"/>
-                                    <segue destination="e9o-Pa-bQb" kind="push" identifier="Select_Recipe_02" id="4dO-Rr-QDs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ey3-Ar-rVR">
@@ -247,7 +245,6 @@
                                 </state>
                                 <connections>
                                     <action selector="Recipe_Button_03:" destination="5SS-wT-re8" eventType="touchUpInside" id="xjC-c3-jzE"/>
-                                    <segue destination="e9o-Pa-bQb" kind="push" identifier="Select_Recipe_03" id="Pw9-x2-WyQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6W-6O-9Ga">
@@ -257,7 +254,6 @@
                                 </state>
                                 <connections>
                                     <action selector="Recipe_Button_04:" destination="5SS-wT-re8" eventType="touchUpInside" id="UBc-oC-7eg"/>
-                                    <segue destination="e9o-Pa-bQb" kind="push" identifier="Select_Recipe_04" id="H2z-UM-UyS"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -396,8 +392,5 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="H2z-UM-UyS"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

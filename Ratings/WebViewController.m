@@ -21,6 +21,8 @@ int webbuttontapped = -1;
 
 UIWebView *webView;
 
+NSString *getUrl;
+
 NetworkConCheck *ncc;
 
 - (void)viewDidLoad
@@ -78,8 +80,8 @@ NetworkConCheck *ncc;
     self.webView.delegate = self;
     self.webView.scalesPageToFit = YES;
     NSURL *url = [NSURL URLWithString:@"http://www.apple.jp"];
-    if (self.getUrl) {
-        url = [NSURL URLWithString:self.getUrl];
+    if (getUrl.length > 0) {
+        url = [NSURL URLWithString:getUrl];
     }
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];

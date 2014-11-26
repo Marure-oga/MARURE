@@ -258,6 +258,7 @@ NetworkConCheck *ncc;
 clickedButtonAtIndex:(NSInteger)buttonIndex{
     switch(buttonIndex){
         case 0:
+            [Ac stopAnimating];
             break;
         case 1:
             //はいが押されたらサブ処理でネットワーク接続確認を再試行

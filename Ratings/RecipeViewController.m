@@ -1,4 +1,3 @@
-
 #import "RecipeViewController.h"
 
 //左から表示させるアニメーションのために必要
@@ -12,6 +11,7 @@
 //ユーザーが選択した単品
 // 0 : 初期値
 int Select_Flag = 0;
+int i=0;
 
 //並列処理　メイン処理
 dispatch_queue_t mainQueue;
@@ -37,7 +37,7 @@ NetworkConCheck *ncc;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    if(Select_ID == 2) i = 4;
     //デフォルトのBACKボタンの非表示
     [self.navigationItem setHidesBackButton:YES animated:NO];
     //戻るボタンの追加
@@ -161,44 +161,10 @@ NetworkConCheck *ncc;
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 }
 
-//画面4から別画面へ遷移前の処理
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    Display_ID = 4;
-    int i = 0;
-    
-    //画面3で2つ目の献立を選択された場合
-    if(Select_ID == 2){
-        i =4;
-    }
-    
-    if ([[segue identifier] isEqualToString:@"Select_Recipe_01"]) {
-        WebViewController *vcntl = [segue destinationViewController];
-        //画面3で選択された献立が下だった場合、インデックスを4に設定
-        if(Select_ID == 2) i = 4;
-        Select_Flag = 1;
-        vcntl.getUrl = [Recipe_URL_1 objectAtIndex:[[indexnumber objectAtIndex:i+0] intValue]];
-    }
-    if([[segue identifier] isEqualToString:@"Select_Recipe_02"]){
-        Select_Flag = 2;
-        WebViewController *vcntl = [segue destinationViewController];
-        vcntl.getUrl = [Recipe_URL_2 objectAtIndex:[[indexnumber objectAtIndex:i+1] intValue]];
-    }
-    if([[segue identifier] isEqualToString:@"Select_Recipe_03"]){
-        Select_Flag = 3;
-        WebViewController *vcntl = [segue destinationViewController];
-        vcntl.getUrl = [Recipe_URL_3 objectAtIndex:[[indexnumber objectAtIndex:i+2] intValue]];
-    }
-    if([[segue identifier] isEqualToString:@"Select_Recipe_04"]){
-        Select_Flag = 4;
-        WebViewController *vcntl = [segue destinationViewController];
-        vcntl.getUrl = [Recipe_URL_4 objectAtIndex:[[indexnumber objectAtIndex:i+3] intValue]];
-    }
-}
-
 //料理1のボタンを選択
 - (IBAction)Recipe_Button_01:(id)sender {
     recipebuttontapped = 1;
+    getUrl = [Recipe_URL_1 objectAtIndex:[[indexnumber objectAtIndex:i+0] intValue]];
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
@@ -206,6 +172,7 @@ NetworkConCheck *ncc;
 //料理2のボタンを選択
 - (IBAction)Recipe_Button_02:(id)sender {
     recipebuttontapped = 2;
+    getUrl = [Recipe_URL_2 objectAtIndex:[[indexnumber objectAtIndex:i+1] intValue]];
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
@@ -213,6 +180,7 @@ NetworkConCheck *ncc;
 //料理3のボタンを選択
 - (IBAction)Recipe_Button_03:(id)sender {
     recipebuttontapped = 3;
+    getUrl = [Recipe_URL_3 objectAtIndex:[[indexnumber objectAtIndex:i+2] intValue]];
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
@@ -220,6 +188,7 @@ NetworkConCheck *ncc;
 //料理4のボタンを選択
 - (IBAction)Recipe_Button_04:(id)sender {
     recipebuttontapped = 4;
+    getUrl = [Recipe_URL_4 objectAtIndex:[[indexnumber objectAtIndex:i+3] intValue]];
     dispatch_async(mainQueue,^{
         [self mainQueueMethod];
     });
@@ -267,6 +236,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(recipebuttontapped == 0){
         //画面3へ遷移
         [self previousPage];
+        /*
         //料理1を選択時
     }else if(recipebuttontapped == 1){
         [self nextPage1];
@@ -278,9 +248,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
         [self nextPage3];
         //料理4を選択時
     }else if(recipebuttontapped == 4){
-        [self nextPage4];
+        [self nextPage4];*/
     }else{
-        NSLog(@"buttontappedが不正です");
+        //NSLog(@"buttontappedが不正です");
+        WebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"web"];
+        [self.navigationController pushViewController:webViewController animated:YES];
     }
 }
 
@@ -326,25 +298,24 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     [self.navigationController popViewControllerAnimated:YES];
 }
-
+/*
 -(void)nextPage1
 {
-    //遷移元画面ID設定
-    //Select_Flag = 1;
+
 }
 
 -(void)nextPage2
 {
-    //Select_Flag = 2;
+
 }
 
 -(void)nextPage3
 {
-    //Select_Flag = 3;
+
 }
 
 -(void)nextPage4
 {
-    //Select_Flag = 4;
-}
+
+}*/
 @end
