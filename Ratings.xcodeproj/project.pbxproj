@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63219D6E1A32CFE000D1578B /* NewJsonSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 63219D6D1A32CFE000D1578B /* NewJsonSearch.m */; };
+		63219D701A32F56100D1578B /* KeyDefine.json in Resources */ = {isa = PBXBuildFile; fileRef = 63219D6F1A32F56100D1578B /* KeyDefine.json */; };
 		6338D64A1999048300C486A7 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6338D6491999048300C486A7 /* SearchViewController.m */; };
 		6358762719A23DED0007EE28 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762619A23DED0007EE28 /* MenuViewController.m */; };
 		6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762919A23E410007EE28 /* RecipeViewController.m */; };
@@ -55,6 +57,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63219D6C1A32CFE000D1578B /* NewJsonSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewJsonSearch.h; path = Ratings/NewJsonSearch.h; sourceTree = "<group>"; };
+		63219D6D1A32CFE000D1578B /* NewJsonSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewJsonSearch.m; path = Ratings/NewJsonSearch.m; sourceTree = "<group>"; };
+		63219D6F1A32F56100D1578B /* KeyDefine.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = KeyDefine.json; path = Ratings/KeyDefine.json; sourceTree = "<group>"; };
 		6338D6481999048300C486A7 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		6338D6491999048300C486A7 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		6358762519A23DED0007EE28 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -131,6 +136,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63219D711A33688400D1578B /* old */ = {
+			isa = PBXGroup;
+			children = (
+				F2494D841994EB4900DD568A /* JsonSerchClass.h */,
+				F2494D851994EB4900DD568A /* JsonSerchClass.m */,
+				F2494D861994EB4900DD568A /* MARUREJson.json */,
+			);
+			name = old;
+			sourceTree = "<group>";
+		};
 		6358762B19A23E710007EE28 /* View No4 */ = {
 			isa = PBXGroup;
 			children = (
@@ -297,9 +312,10 @@
 		F2494D831994EB2B00DD568A /* Json */ = {
 			isa = PBXGroup;
 			children = (
-				F2494D841994EB4900DD568A /* JsonSerchClass.h */,
-				F2494D851994EB4900DD568A /* JsonSerchClass.m */,
-				F2494D861994EB4900DD568A /* MARUREJson.json */,
+				63219D711A33688400D1578B /* old */,
+				63219D6F1A32F56100D1578B /* KeyDefine.json */,
+				63219D6C1A32CFE000D1578B /* NewJsonSearch.h */,
+				63219D6D1A32CFE000D1578B /* NewJsonSearch.m */,
 			);
 			name = Json;
 			sourceTree = "<group>";
@@ -395,6 +411,7 @@
 				F2494D881994EB4900DD568A /* MARUREJson.json in Resources */,
 				ABE0AFA319EA8A0100640E25 /* marure_bak.png in Resources */,
 				ABE0AFA519EA8A0100640E25 /* marure_mood.jpg in Resources */,
+				63219D701A32F56100D1578B /* KeyDefine.json in Resources */,
 				ABB83918197CFF9000878CB0 /* Images.xcassets in Resources */,
 				ABE0AFA219EA8A0100640E25 /* marure_4.png in Resources */,
 				F22144DB199D0D490075D67B /* webapi.json in Resources */,
@@ -421,6 +438,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63219D6E1A32CFE000D1578B /* NewJsonSearch.m in Sources */,
 				AB8C950E1A18E06700D69547 /* NetworkConCheck.m in Sources */,
 				6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */,
 				ABB83916197CFF9000878CB0 /* ViewController.m in Sources */,

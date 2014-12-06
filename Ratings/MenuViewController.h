@@ -5,6 +5,7 @@
 #import "RecipeViewController.h"
 #import "ShowAppAlert.h"
 #import "NetworkConCheck.h"
+#import "NewJsonSearch.h"
 
 //ネットワーク接続確認のために必要
 #import "Reachability.h"

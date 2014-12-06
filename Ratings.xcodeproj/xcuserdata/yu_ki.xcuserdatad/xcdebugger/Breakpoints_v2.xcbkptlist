@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Ratings/MenuViewController.m"
-            timestampString = "438455704.884644"
+            timestampString = "439551641.911229"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>

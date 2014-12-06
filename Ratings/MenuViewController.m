@@ -77,7 +77,8 @@ NetworkConCheck *ncc;
 //献立の情報取得
 - (Boolean)Menu_Img_GET
 {
-    MarureKeyS *mrks = [[MarureKeyS alloc]init];
+    //MarureKeyS *mrks = [[MarureKeyS alloc]init];
+    NewJsonSearch *njs = [[NewJsonSearch alloc]init];
     
     Select_URL_1 = [NSMutableArray array];
     Select_URL_2 = [NSMutableArray array];
@@ -97,146 +98,147 @@ NetworkConCheck *ncc;
     int i;
     
     //ユーザーが選択した検索条件をAPIに投げる
-    [mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
+    //[mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
+    [njs SetMarureKeyword:Event_NO moody:Ambience_NO];
     
     //=========================nilチェック=========================
-    if ([mrks.key1ImgArr count] > 0) {
-        NSLog(@"Key1ImgArr COUNT = %d\n",[mrks.key1ImgArr count]);
+    if ([njs.key1ImgArr count] > 0) {
+        NSLog(@"Key1ImgArr COUNT = %d\n",[njs.key1ImgArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey1ImgArr COUNT = %d\n",[mrks.key1ImgArr count]);
+        NSLog(@"ERROR!!\nKey1ImgArr COUNT = %d\n",[njs.key1ImgArr count]);
         return false;
     }
     
-    if ([mrks.key2ImgArr count] > 0) {
-        NSLog(@"Key2ImgArr COUNT = %d\n",[mrks.key2ImgArr count]);
+    if ([njs.key2ImgArr count] > 0) {
+        NSLog(@"Key2ImgArr COUNT = %d\n",[njs.key2ImgArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey2ImgArr COUNT = %d\n",[mrks.key2ImgArr count]);
+        NSLog(@"ERROR!!\nKey2ImgArr COUNT = %d\n",[njs.key2ImgArr count]);
         return false;
     }
     
-    if ([mrks.key3ImgArr count] > 0) {
-        NSLog(@"Key3ImgArr COUNT = %d\n",[mrks.key3ImgArr count]);
+    if ([njs.key3ImgArr count] > 0) {
+        NSLog(@"Key3ImgArr COUNT = %d\n",[njs.key3ImgArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey3ImgArr COUNT = %d\n",[mrks.key3ImgArr count]);
+        NSLog(@"ERROR!!\nKey3ImgArr COUNT = %d\n",[njs.key3ImgArr count]);
         return false;
     }
     
-    if ([mrks.key4ImgArr count] > 0) {
-        NSLog(@"Key4ImgArr COUNT = %d\n",[mrks.key4ImgArr count]);
+    if ([njs.key4ImgArr count] > 0) {
+        NSLog(@"Key4ImgArr COUNT = %d\n",[njs.key4ImgArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey4ImgArr COUNT = %d\n",[mrks.key4ImgArr count]);
+        NSLog(@"ERROR!!\nKey4ImgArr COUNT = %d\n",[njs.key4ImgArr count]);
         return false;
     }
     
-    if ([mrks.key1NameArr count] > 0) {
-        NSLog(@"Key1NameArr COUNT = %d\n",[mrks.key1NameArr count]);
+    if ([njs.key1NameArr count] > 0) {
+        NSLog(@"Key1NameArr COUNT = %d\n",[njs.key1NameArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey1NameArr COUNT = %d\n",[mrks.key1NameArr count]);
+        NSLog(@"ERROR!!\nKey1NameArr COUNT = %d\n",[njs.key1NameArr count]);
         return false;
     }
     
-    if ([mrks.key2NameArr count] > 0) {
-        NSLog(@"Key2NameArr COUNT = %d\n",[mrks.key2NameArr count]);
+    if ([njs.key2NameArr count] > 0) {
+        NSLog(@"Key2NameArr COUNT = %d\n",[njs.key2NameArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey2NameArr COUNT = %d\n",[mrks.key2NameArr count]);
+        NSLog(@"ERROR!!\nKey2NameArr COUNT = %d\n",[njs.key2NameArr count]);
         return false;
     }
     
-    if ([mrks.key3NameArr count] > 0) {
-        NSLog(@"Key3NameArr COUNT = %d\n",[mrks.key3NameArr count]);
+    if ([njs.key3NameArr count] > 0) {
+        NSLog(@"Key3NameArr COUNT = %d\n",[njs.key3NameArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey3NameArr COUNT = %d\n",[mrks.key3NameArr count]);
+        NSLog(@"ERROR!!\nKey3NameArr COUNT = %d\n",[njs.key3NameArr count]);
         return false;
     }
     
-    if ([mrks.key4NameArr count] > 0) {
-        NSLog(@"Key4NameArr COUNT = %d\n",[mrks.key4NameArr count]);
+    if ([njs.key4NameArr count] > 0) {
+        NSLog(@"Key4NameArr COUNT = %d\n",[njs.key4NameArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey4NameArr COUNT = %d\n",[mrks.key4NameArr count]);
+        NSLog(@"ERROR!!\nKey4NameArr COUNT = %d\n",[njs.key4NameArr count]);
         return false;
     }
     
-    if ([mrks.key1UrlArr count] > 0) {
-        NSLog(@"Key1UrlArr COUNT = %d\n",[mrks.key1UrlArr count]);
+    if ([njs.key1UrlArr count] > 0) {
+        NSLog(@"Key1UrlArr COUNT = %d\n",[njs.key1UrlArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey1UrlArr COUNT = %d\n",[mrks.key1NameArr count]);
+        NSLog(@"ERROR!!\nKey1UrlArr COUNT = %d\n",[njs.key1NameArr count]);
         return false;
     }
     
-    if ([mrks.key2UrlArr count] > 0) {
-        NSLog(@"Key2UrlArr COUNT = %d\n",[mrks.key2UrlArr count]);
+    if ([njs.key2UrlArr count] > 0) {
+        NSLog(@"Key2UrlArr COUNT = %d\n",[njs.key2UrlArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey2UrlArr COUNT = %d\n",[mrks.key2UrlArr count]);
+        NSLog(@"ERROR!!\nKey2UrlArr COUNT = %d\n",[njs.key2UrlArr count]);
         return false;
     }
     
-    if ([mrks.key3UrlArr count] > 0) {
-        NSLog(@"Key3UrlArr COUNT = %d\n",[mrks.key3UrlArr count]);
+    if ([njs.key3UrlArr count] > 0) {
+        NSLog(@"Key3UrlArr COUNT = %d\n",[njs.key3UrlArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey3UrlArr COUNT = %d\n",[mrks.key3UrlArr count]);
+        NSLog(@"ERROR!!\nKey3UrlArr COUNT = %d\n",[njs.key3UrlArr count]);
         return false;
     }
     
-    if ([mrks.key4UrlArr count] > 0) {
-        NSLog(@"Key4UrlArr COUNT = %d\n",[mrks.key4UrlArr count]);
+    if ([njs.key4UrlArr count] > 0) {
+        NSLog(@"Key4UrlArr COUNT = %d\n",[njs.key4UrlArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey4UrlArr COUNT = %d\n",[mrks.key4UrlArr count]);
+        NSLog(@"ERROR!!\nKey4UrlArr COUNT = %d\n",[njs.key4UrlArr count]);
         return false;
     }
     //==================================================
     
 
     //APIからの返却数までループ
-    for(i = 0;i < [mrks.key1ImgArr count];i++){
+    for(i = 0;i < [njs.key1ImgArr count];i++){
         
         //主菜の画像URLの文字列格納
-        Url_Str = [mrks.key1ImgArr objectAtIndex:i];
+        Url_Str = [njs.key1ImgArr objectAtIndex:i];
         //主菜のレシピタイトルの文字列格納
-        Name_Str = [mrks.key1NameArr objectAtIndex:i];
+        Name_Str = [njs.key1NameArr objectAtIndex:i];
         //主菜のレシピURLの文字列格納
-        R_Url_Str = [mrks.key1UrlArr objectAtIndex:i];
+        R_Url_Str = [njs.key1UrlArr objectAtIndex:i];
 
         [self Menu_Img_UrlSet:0];
     }
-    for(i = 0;i < [mrks.key2ImgArr count];i++){
+    for(i = 0;i < [njs.key2ImgArr count];i++){
         //副菜の画像URLの文字列格納
-        Url_Str = [mrks.key2ImgArr objectAtIndex:i];
+        Url_Str = [njs.key2ImgArr objectAtIndex:i];
         //副菜のレシピタイトルの文字列格納
-        Name_Str = [mrks.key2NameArr objectAtIndex:i];
+        Name_Str = [njs.key2NameArr objectAtIndex:i];
         //副菜のレシピURLの文字列格納
-        R_Url_Str = [mrks.key2UrlArr objectAtIndex:i];
+        R_Url_Str = [njs.key2UrlArr objectAtIndex:i];
                 
         [self Menu_Img_UrlSet:1];
     }
-    for (i = 0; i < [mrks.key3ImgArr count]; i++) {
+    for (i = 0; i < [njs.key3ImgArr count]; i++) {
         //デザートの画像URLの文字列格納
-        Url_Str = [mrks.key3ImgArr objectAtIndex:i];
+        Url_Str = [njs.key3ImgArr objectAtIndex:i];
         //デザートのレシピタイトルの文字列格納
-        Name_Str = [mrks.key3NameArr objectAtIndex:i];
+        Name_Str = [njs.key3NameArr objectAtIndex:i];
         //デザートのレシピURLの文字列格納
-        R_Url_Str = [mrks.key3UrlArr objectAtIndex:i];
+        R_Url_Str = [njs.key3UrlArr objectAtIndex:i];
                 
         [self Menu_Img_UrlSet:2];
     }
-    for (i = 0; i < [mrks.key4ImgArr count]; i++) {
+    for (i = 0; i < [njs.key4ImgArr count]; i++) {
         //ドリンクの画像URLの文字列格納
-        Url_Str = [mrks.key4ImgArr objectAtIndex:i];
+        Url_Str = [njs.key4ImgArr objectAtIndex:i];
         //ドリンクのレシピタイトルの文字列格納
-        Name_Str = [mrks.key4NameArr objectAtIndex:i];
+        Name_Str = [njs.key4NameArr objectAtIndex:i];
         //ドリンクのレシピURLの文字列格納
-        R_Url_Str = [mrks.key4UrlArr objectAtIndex:i];
+        R_Url_Str = [njs.key4UrlArr objectAtIndex:i];
         
         [self Menu_Img_UrlSet:3];
     }
