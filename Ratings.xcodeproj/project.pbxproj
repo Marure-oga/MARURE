@@ -31,6 +31,7 @@
 		ABB83921197CFF9000878CB0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABB83903197CFF9000878CB0 /* UIKit.framework */; };
 		ABB83929197CFF9000878CB0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = ABB83927197CFF9000878CB0 /* InfoPlist.strings */; };
 		ABB8392B197CFF9000878CB0 /* RatingsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB8392A197CFF9000878CB0 /* RatingsTests.m */; };
+		ABD2F50B1A31F8420039049A /* RecipeSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = ABD2F50A1A31F8420039049A /* RecipeSelect.m */; };
 		ABE0AF9F19EA8A0100640E25 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE0AF9619EA8A0100640E25 /* Back.png */; };
 		ABE0AFA019EA8A0100640E25 /* main_menu.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ABE0AF9719EA8A0100640E25 /* main_menu.jpg */; };
 		ABE0AFA119EA8A0100640E25 /* marure_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ABE0AF9819EA8A0100640E25 /* marure_1.jpg */; };
@@ -93,6 +94,8 @@
 		ABB83926197CFF9000878CB0 /* RatingsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RatingsTests-Info.plist"; sourceTree = "<group>"; };
 		ABB83928197CFF9000878CB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ABB8392A197CFF9000878CB0 /* RatingsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatingsTests.m; sourceTree = "<group>"; };
+		ABD2F5091A31F8420039049A /* RecipeSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecipeSelect.h; sourceTree = "<group>"; };
+		ABD2F50A1A31F8420039049A /* RecipeSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeSelect.m; sourceTree = "<group>"; };
 		ABE0AF9619EA8A0100640E25 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
 		ABE0AF9719EA8A0100640E25 /* main_menu.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = main_menu.jpg; sourceTree = "<group>"; };
 		ABE0AF9819EA8A0100640E25 /* marure_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = marure_1.jpg; sourceTree = "<group>"; };
@@ -207,6 +210,8 @@
 				63B68C791A0A88990075536D /* ShowAppAlert.m */,
 				AB8C950C1A18E06700D69547 /* NetworkConCheck.h */,
 				AB8C950D1A18E06700D69547 /* NetworkConCheck.m */,
+				ABD2F5091A31F8420039049A /* RecipeSelect.h */,
+				ABD2F50A1A31F8420039049A /* RecipeSelect.m */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -444,6 +449,7 @@
 				ABB83916197CFF9000878CB0 /* ViewController.m in Sources */,
 				ABB83910197CFF9000878CB0 /* AppDelegate.m in Sources */,
 				AB818C15198E79930077E016 /* Reachability.m in Sources */,
+				ABD2F50B1A31F8420039049A /* RecipeSelect.m in Sources */,
 				F2EB999919AB366C001B1F19 /* WebViewController.m in Sources */,
 				63B68C7A1A0A88990075536D /* ShowAppAlert.m in Sources */,
 				F2494D871994EB4900DD568A /* JsonSerchClass.m in Sources */,
