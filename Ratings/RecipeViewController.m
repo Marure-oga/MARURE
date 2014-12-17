@@ -157,6 +157,13 @@ NetworkConCheck *ncc;
     [nownumber removeAllObjects];
     [indexnumber removeAllObjects];
     
+    if(recipeselectact)
+    {
+        Ambience_NO = -1;
+        Ambience_Str = nil;
+    }
+
+    
     //検索画面に戻る
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
 }
@@ -296,7 +303,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     transition.type = kCATransitionMoveIn;
     transition.subtype = kCATransitionFromLeft;
     
+    
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 /*
 -(void)nextPage1

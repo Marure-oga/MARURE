@@ -688,6 +688,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     [nownumber removeAllObjects];
     [indexnumber removeAllObjects];
+    
+    if(recipeselectact)
+    {
+        Ambience_NO = -1;
+        Ambience_Str = nil;
+    }
 
     //前の画面に遷移
     [self.navigationController popViewControllerAnimated:YES];

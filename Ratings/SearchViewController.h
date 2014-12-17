@@ -11,6 +11,7 @@
 #import "JsonSerchClass.h"
 #import "ShowAppAlert.h"
 #import "NetworkConCheck.h"
+#import "RecipeSelect.h"
 
 //ネットワーク接続確認のために必要
 #import "Reachability.h"
@@ -24,6 +25,9 @@ extern int Display_ID;
 
 extern NSString *Event_Str;
 extern NSString *Ambience_Str;
+
+extern Boolean recipeselectact;
+
 @property UIActivityIndicatorView *Ac;
 
 @property (weak, nonatomic) IBOutlet UITableView *Event_Table;

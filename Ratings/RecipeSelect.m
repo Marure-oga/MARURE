@@ -18,18 +18,11 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)recipeselect:(NSInteger)eventnum modynum:(NSInteger)modynum
+-(int)recipeselect
 {
-    int number = 0;
-    if(modynum == -1)
-    {
-        int rnd = arc4random() % 3;
-        number = eventnum * 3 + rnd;
-    }
-    else
-    {
-        number = eventnum * 3 + modynum;
-    }
+     int rnd = arc4random() % 3;
+    return rnd;
+    
 }
 
 /*

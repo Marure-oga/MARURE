@@ -19,6 +19,8 @@
 int Event_NO = -1,
     Ambience_NO = -1;
 
+Boolean recipeselectact = false;//雰囲気未選択時にtrueになる
+
 //画面ID：遷移元情報
 // 1 : 画面1
 // 2 : 画面2
@@ -44,6 +46,7 @@ dispatch_queue_t subQueue;
 
 ShowAppAlert *saa;
 NetworkConCheck *ncc;
+RecipeSelect *rs;
 
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -212,6 +215,15 @@ NetworkConCheck *ncc;
     //検索条件が正しい場合
     if(Selected_flag){
         Display_ID = 2;
+        
+        recipeselectact = false;
+        if(Ambience_NO == -1)
+        {
+            rs = [[RecipeSelect alloc]init];
+            Ambience_NO = [rs recipeselect];
+            Ambience_Str = self.dataSourceAmbience[Ambience_NO];
+            recipeselectact = true;
+        }
         
         Ac = [[UIActivityIndicatorView alloc] init];
         Ac.frame = CGRectMake(0, 0, 50, 50);
