@@ -271,6 +271,13 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     switch(buttonIndex){
         case 0:
             [Ac stopAnimating];
+            
+            if(recipeselectact)
+            {
+                Ambience_NO = -1;
+                Ambience_Str = nil;
+            }
+            
             break;
         case 1:
             //はいが押されたらサブ処理でネットワーク接続確認を再試行
@@ -294,6 +301,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     }else{
         dispatch_async(mainQueue,^{
             /*[saa showAlert:@"エラー" MESSAGE_Str:@"ネットワークに接続していません\n再試行しますか？" CANCEL_Str:@"後で" OTHER_Str:@"はい"];*/
+            
             UIAlertView* alert =[[UIAlertView alloc]
                     initWithTitle:@"エラー"
                     message:@"ネットワークに接続していません\n再試行しますか？"
