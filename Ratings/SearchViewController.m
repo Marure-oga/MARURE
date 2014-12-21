@@ -16,8 +16,7 @@
 @implementation SearchViewController
 
 
-int Event_NO = -1,
-    Ambience_NO = -1;
+int Event_NO = -1, Ambience_NO = -1;
 
 Boolean recipeselectact = false;//雰囲気未選択時にtrueになる
 
@@ -70,7 +69,7 @@ RecipeSelect *rs;
 
     self.dataSourceEvent = @[@"女子会", @"誕生日", @"クリスマス"];
     self.dataSourceAmbience = @[@"わいわい", @"和やか", @"ロマンチック"];
-    
+
     //メイン処理とサブ処理を設定
     mainQueue = dispatch_get_main_queue();
     subQueue = dispatch_queue_create("sub1",0);

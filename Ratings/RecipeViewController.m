@@ -307,24 +307,4 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-/*
--(void)nextPage1
-{
-
-}
-
--(void)nextPage2
-{
-
-}
-
--(void)nextPage3
-{
-
-}
-
--(void)nextPage4
-{
-
-}*/
 @end

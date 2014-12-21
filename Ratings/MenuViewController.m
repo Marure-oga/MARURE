@@ -101,6 +101,12 @@ NetworkConCheck *ncc;
     //[mrks SetEventAndMoody:Event_NO moody:Ambience_NO];
     [njs SetMarureKeyword:Event_NO moody:Ambience_NO];
     
+    if([njs.key1NameArr count] > 0){
+        for (int i = 0 ; i < [njs.key1NameArr count]; i++) {
+            NSLog(@"%@",[njs.key1NameArr objectAtIndex:i]);
+        }
+    }
+    
     //=========================nilチェック=========================
     if ([njs.key1ImgArr count] > 0) {
         NSLog(@"Key1ImgArr COUNT = %d\n",[njs.key1ImgArr count]);
@@ -382,7 +388,7 @@ NetworkConCheck *ncc;
     
     pickPos.y = 0;
     
-    if (Ambience_NO == -1) {
+    if (recipeselectact) {
         Merge_Text = Event_Str;
     }
     else{
