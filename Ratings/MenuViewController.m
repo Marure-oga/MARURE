@@ -109,98 +109,98 @@ NetworkConCheck *ncc;
     
     //=========================nilチェック=========================
     if ([njs.key1ImgArr count] > 0) {
-        NSLog(@"Key1ImgArr COUNT = %d\n",[njs.key1ImgArr count]);
+        NSLog(@"Key1ImgArr COUNT = %lu\n",(unsigned long)[njs.key1ImgArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey1ImgArr COUNT = %d\n",[njs.key1ImgArr count]);
+        NSLog(@"ERROR!!\nKey1ImgArr COUNT = %lu\n",(unsigned long)[njs.key1ImgArr count]);
         return false;
     }
     
     if ([njs.key2ImgArr count] > 0) {
-        NSLog(@"Key2ImgArr COUNT = %d\n",[njs.key2ImgArr count]);
+        NSLog(@"Key2ImgArr COUNT = %lu\n",(unsigned long)[njs.key2ImgArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey2ImgArr COUNT = %d\n",[njs.key2ImgArr count]);
+        NSLog(@"ERROR!!\nKey2ImgArr COUNT = %lu\n",(unsigned long)[njs.key2ImgArr count]);
         return false;
     }
     
     if ([njs.key3ImgArr count] > 0) {
-        NSLog(@"Key3ImgArr COUNT = %d\n",[njs.key3ImgArr count]);
+        NSLog(@"Key3ImgArr COUNT = %lu\n",(unsigned long)[njs.key3ImgArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey3ImgArr COUNT = %d\n",[njs.key3ImgArr count]);
+        NSLog(@"ERROR!!\nKey3ImgArr COUNT = %lu\n",(unsigned long)[njs.key3ImgArr count]);
         return false;
     }
     
     if ([njs.key4ImgArr count] > 0) {
-        NSLog(@"Key4ImgArr COUNT = %d\n",[njs.key4ImgArr count]);
+        NSLog(@"Key4ImgArr COUNT = %lu\n",(unsigned long)[njs.key4ImgArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey4ImgArr COUNT = %d\n",[njs.key4ImgArr count]);
+        NSLog(@"ERROR!!\nKey4ImgArr COUNT = %lu\n",(unsigned long)[njs.key4ImgArr count]);
         return false;
     }
     
     if ([njs.key1NameArr count] > 0) {
-        NSLog(@"Key1NameArr COUNT = %d\n",[njs.key1NameArr count]);
+        NSLog(@"Key1NameArr COUNT = %lu\n",(unsigned long)[njs.key1NameArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey1NameArr COUNT = %d\n",[njs.key1NameArr count]);
+        NSLog(@"ERROR!!\nKey1NameArr COUNT = %lu\n",(unsigned long)[njs.key1NameArr count]);
         return false;
     }
     
     if ([njs.key2NameArr count] > 0) {
-        NSLog(@"Key2NameArr COUNT = %d\n",[njs.key2NameArr count]);
+        NSLog(@"Key2NameArr COUNT = %lu\n",(unsigned long)[njs.key2NameArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey2NameArr COUNT = %d\n",[njs.key2NameArr count]);
+        NSLog(@"ERROR!!\nKey2NameArr COUNT = %lu\n",(unsigned long)[njs.key2NameArr count]);
         return false;
     }
     
     if ([njs.key3NameArr count] > 0) {
-        NSLog(@"Key3NameArr COUNT = %d\n",[njs.key3NameArr count]);
+        NSLog(@"Key3NameArr COUNT = %lu\n",(unsigned long)[njs.key3NameArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey3NameArr COUNT = %d\n",[njs.key3NameArr count]);
+        NSLog(@"ERROR!!\nKey3NameArr COUNT = %lu\n",(unsigned long)[njs.key3NameArr count]);
         return false;
     }
     
     if ([njs.key4NameArr count] > 0) {
-        NSLog(@"Key4NameArr COUNT = %d\n",[njs.key4NameArr count]);
+        NSLog(@"Key4NameArr COUNT = %lu\n",(unsigned long)[njs.key4NameArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey4NameArr COUNT = %d\n",[njs.key4NameArr count]);
+        NSLog(@"ERROR!!\nKey4NameArr COUNT = %lu\n",(unsigned long)[njs.key4NameArr count]);
         return false;
     }
     
     if ([njs.key1UrlArr count] > 0) {
-        NSLog(@"Key1UrlArr COUNT = %d\n",[njs.key1UrlArr count]);
+        NSLog(@"Key1UrlArr COUNT = %lu\n",(unsigned long)[njs.key1UrlArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey1UrlArr COUNT = %d\n",[njs.key1NameArr count]);
+        NSLog(@"ERROR!!\nKey1UrlArr COUNT = %lu\n",(unsigned long)[njs.key1NameArr count]);
         return false;
     }
     
     if ([njs.key2UrlArr count] > 0) {
-        NSLog(@"Key2UrlArr COUNT = %d\n",[njs.key2UrlArr count]);
+        NSLog(@"Key2UrlArr COUNT = %lu\n",(unsigned long)[njs.key2UrlArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey2UrlArr COUNT = %d\n",[njs.key2UrlArr count]);
+        NSLog(@"ERROR!!\nKey2UrlArr COUNT = %lu\n",(unsigned long)[njs.key2UrlArr count]);
         return false;
     }
     
     if ([njs.key3UrlArr count] > 0) {
-        NSLog(@"Key3UrlArr COUNT = %d\n",[njs.key3UrlArr count]);
+        NSLog(@"Key3UrlArr COUNT = %lu\n",(unsigned long)[njs.key3UrlArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey3UrlArr COUNT = %d\n",[njs.key3UrlArr count]);
+        NSLog(@"ERROR!!\nKey3UrlArr COUNT = %lu\n",(unsigned long)[njs.key3UrlArr count]);
         return false;
     }
     
     if ([njs.key4UrlArr count] > 0) {
-        NSLog(@"Key4UrlArr COUNT = %d\n",[njs.key4UrlArr count]);
+        NSLog(@"Key4UrlArr COUNT = %lu\n",(unsigned long)[njs.key4UrlArr count]);
     }
     else{
-        NSLog(@"ERROR!!\nKey4UrlArr COUNT = %d\n",[njs.key4UrlArr count]);
+        NSLog(@"ERROR!!\nKey4UrlArr COUNT = %lu\n",(unsigned long)[njs.key4UrlArr count]);
         return false;
     }
     //==================================================
@@ -268,7 +268,7 @@ NetworkConCheck *ncc;
         Img_URL = [NSURL URLWithString:Url_Str];
     }
     else{
-        NSLog(@"ERROR!! Url_Str.LENGTH = %d",Url_Str.length);
+        NSLog(@"ERROR!! Url_Str.LENGTH = %lu",(unsigned long)Url_Str.length);
         return false;
     }
     

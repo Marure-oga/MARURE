@@ -13,7 +13,7 @@
 
 @interface MenuViewController : UIViewController
 
-extern int Select_ID;
+extern NSInteger Select_ID;
 extern NSString *Merge_Text;
 
 extern NSMutableArray *Select_URL_1;
