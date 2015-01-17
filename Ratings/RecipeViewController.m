@@ -37,7 +37,14 @@ NetworkConCheck *ncc;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if(Select_ID == 2) i = 4;
+    if(Select_ID == 1)
+    {
+        i = 0;
+    }
+    else if(Select_ID == 2)
+    {
+        i = 4;
+    }
     //デフォルトのBACKボタンの非表示
     [self.navigationItem setHidesBackButton:YES animated:NO];
     //戻るボタンの追加
