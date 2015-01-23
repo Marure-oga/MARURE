@@ -47,6 +47,11 @@ ShowAppAlert *saa;
 NetworkConCheck *ncc;
 RecipeSelect *rs;
 
+NSMutableArray *icon_event;//イベントアイコン（白黒）
+NSMutableArray *icon_event_color;//イベントアイコン（カラー）
+NSIndexPath *previousIndexPath;
+
+
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -66,6 +71,9 @@ RecipeSelect *rs;
     
     self.Ambience_Table.delegate = self;
     self.Ambience_Table.dataSource = self;
+    
+    [self set_icon];
+    previousIndexPath = nil;
 
     self.dataSourceEvent = @[@"女子会", @"誕生日", @"クリスマス"];
     self.dataSourceAmbience = @[@"わいわい", @"和やか", @"ロマンチック"];
@@ -137,6 +145,7 @@ RecipeSelect *rs;
         case 0:
             cell.textLabel.text = self.dataSourceEvent[indexPath.row];
             cell.textLabel.font = [UIFont systemFontOfSize:13];
+            cell.imageView.image = [UIImage imageNamed:[icon_event_color objectAtIndex:indexPath.row]];
             if(Display_ID == 3){
                 NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
                 [self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
@@ -173,16 +182,32 @@ RecipeSelect *rs;
             Event_Str = nil;
             NSLog(@"Event_NO : %d\n",Event_NO);
             
+            previousIndexPath = nil;
+            
+            UITableViewCell *cell = [self.Event_Table cellForRowAtIndexPath:indexPath];
+            cell.imageView.image = [UIImage imageNamed:[icon_event_color objectAtIndex:indexPath.row]];
+            
             //選択条件：不正
             Selected_flag = false;
         }
         else{
+            if(previousIndexPath != nil){
+                UITableViewCell *cell = [self.Event_Table cellForRowAtIndexPath:previousIndexPath];
+                cell.imageView.image = [UIImage imageNamed:[icon_event_color objectAtIndex:previousIndexPath.row]];
+            }
+            
             //選択された最新indexを格納
             Event_NO = (int)indexPath.row;
             Event_Str = nil;
             Event_Str = self.dataSourceEvent[indexPath.row];
             NSLog(@"Event_NO : %d\n",Event_NO);
             NSLog(@"Event_Str : %@\n",Event_Str);
+            
+            previousIndexPath =indexPath;
+            
+            UITableViewCell *cell = [self.Event_Table cellForRowAtIndexPath:indexPath];
+            cell.imageView.image = [UIImage imageNamed:[icon_event objectAtIndex:indexPath.row]];
+            
             
             //選択条件：正
             Selected_flag = true;
@@ -243,6 +268,22 @@ RecipeSelect *rs;
         saa = [[ShowAppAlert alloc]init];
         [saa showAlert:@"エラー" MESSAGE_Str:@"イベントを選択してください。" CANCEL_Str:@"確認" OTHER_Str:nil];
     }
+}
+
+-(void)set_icon
+{
+    icon_event = [NSMutableArray arrayWithObjects:
+                  @"event_03.png",@"event_05.png",@"event_07.png",@"event_09.png",@"event_11.png",
+                  @"event_18.png",@"event_19.png",@"event_20.png",@"event_21.png",@"event_22.png",
+                  @"event_28.png",@"event_29.png",@"event_30.png",@"event_31.png",@"event_32.png",
+                  @"event_38.png",@"event_39.png",@"event_40.png",nil];
+    
+    icon_event_color = [NSMutableArray arrayWithObjects:
+                        @"event_color_03.png",@"event_color_05.png",@"event_color_07.png",@"event_color_09.png",
+                        @"event_color_11.png",@"event_color_18.png",@"event_color_19.png",@"event_color_20.png",
+                        @"event_color_21.png",@"event_color_22.png",@"event_color_28.png",@"event_color_29.png",
+                        @"event_color_30.png",@"event_color_31.png",@"event_color_32.png",@"event_color_38.png",
+                        @"event_color_39.png",@"event_color_40.png",nil];
 }
 
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
