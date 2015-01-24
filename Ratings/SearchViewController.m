@@ -75,7 +75,12 @@ NSIndexPath *previousIndexPath;
     [self set_icon];
     previousIndexPath = nil;
 
-    self.dataSourceEvent = @[@"女子会", @"誕生日", @"クリスマス"];
+    self.dataSourceEvent = @[@"女子会", @"誕生日", @"クリスマス",
+                             @"結婚",@"同窓会",@"打ち上げ",
+                             @"恋人記念日",@"オフ会",@"肉会",
+                             @"鍋パーティ",@"宅飲み",@"失恋",
+                             @"就職",@"お祝い",@"定年退職",
+                             @"国際交流",@"引越し",@"出産"];
     self.dataSourceAmbience = @[@"わいわい", @"和やか", @"ロマンチック"];
 
     //メイン処理とサブ処理を設定
@@ -101,14 +106,6 @@ NSIndexPath *previousIndexPath;
 
 -(void) viewWillAppear:(BOOL)animated{
     [Ac stopAnimating];
-}
-
-- (void) viewDidAppear:(BOOL)animated
-{
-    if(Display_ID > 2){
-        NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
-        [self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-    }
 }
 
 -(void)didReceiveMemoryWarning
@@ -148,7 +145,7 @@ NSIndexPath *previousIndexPath;
             cell.imageView.image = [UIImage imageNamed:[icon_event_color objectAtIndex:indexPath.row]];
             if(Display_ID == 3){
                 NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
-                [self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+                //[self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             }
             break;
         case 1:
@@ -156,7 +153,7 @@ NSIndexPath *previousIndexPath;
             cell.textLabel.font = [UIFont systemFontOfSize:13];
             if(Display_ID == 3){
                 NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Ambience_NO inSection:0];
-                [self.Ambience_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+                //[self.Ambience_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
             }
             break;
         default:

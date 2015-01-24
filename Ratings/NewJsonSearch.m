@@ -58,7 +58,7 @@
         NSDictionary * SelectEventDic = [arrayEvent objectAtIndex:eventindex];
         
         //※雰囲気インデックスのランダム機能が出来るまでの対応
-        if(moodyindex < 0) moodyindex = 0;
+        //if(moodyindex < 0) moodyindex = 0;
         
         //主菜のAPI用カテゴリIDを格納
         NSArray * arraySyusai01 = [SelectEventDic objectForKey:@"Syusai01"];
