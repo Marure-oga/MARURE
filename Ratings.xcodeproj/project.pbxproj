@@ -13,7 +13,6 @@
 		6358762719A23DED0007EE28 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762619A23DED0007EE28 /* MenuViewController.m */; };
 		6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762919A23E410007EE28 /* RecipeViewController.m */; };
 		63B68C7A1A0A88990075536D /* ShowAppAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B68C791A0A88990075536D /* ShowAppAlert.m */; };
-		AB70F37B1A7296CA0073C143 /* event.psd in Resources */ = {isa = PBXBuildFile; fileRef = AB70F3561A7296CA0073C143 /* event.psd */; };
 		AB70F37C1A7296CA0073C143 /* event_03.png in Resources */ = {isa = PBXBuildFile; fileRef = AB70F3571A7296CA0073C143 /* event_03.png */; };
 		AB70F37D1A7296CA0073C143 /* event_05.png in Resources */ = {isa = PBXBuildFile; fileRef = AB70F3581A7296CA0073C143 /* event_05.png */; };
 		AB70F37E1A7296CA0073C143 /* event_07.png in Resources */ = {isa = PBXBuildFile; fileRef = AB70F3591A7296CA0073C143 /* event_07.png */; };
@@ -106,7 +105,6 @@
 		6358762919A23E410007EE28 /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
 		63B68C781A0A88990075536D /* ShowAppAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowAppAlert.h; sourceTree = "<group>"; };
 		63B68C791A0A88990075536D /* ShowAppAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowAppAlert.m; sourceTree = "<group>"; };
-		AB70F3561A7296CA0073C143 /* event.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = event.psd; sourceTree = "<group>"; };
 		AB70F3571A7296CA0073C143 /* event_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_03.png; sourceTree = "<group>"; };
 		AB70F3581A7296CA0073C143 /* event_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_05.png; sourceTree = "<group>"; };
 		AB70F3591A7296CA0073C143 /* event_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_07.png; sourceTree = "<group>"; };
@@ -293,7 +291,6 @@
 		AB70F3551A7296CA0073C143 /* event_icon */ = {
 			isa = PBXGroup;
 			children = (
-				AB70F3561A7296CA0073C143 /* event.psd */,
 				AB70F3571A7296CA0073C143 /* event_03.png */,
 				AB70F3581A7296CA0073C143 /* event_05.png */,
 				AB70F3591A7296CA0073C143 /* event_07.png */,
@@ -529,7 +526,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB70F37B1A7296CA0073C143 /* event.psd in Resources */,
 				AB70F38A1A7296CA0073C143 /* event_32.png in Resources */,
 				AB70F3921A7296CA0073C143 /* event_color_11.png in Resources */,
 				ABE0AF9F19EA8A0100640E25 /* Back.png in Resources */,

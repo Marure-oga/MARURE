@@ -65,6 +65,11 @@ bool syokai = true;
 
 NetworkConCheck *ncc;
 
+//アラート
+UIAlertView* alert;
+UIAlertView* saa;
+
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -205,7 +210,6 @@ NetworkConCheck *ncc;
     }
     //==================================================
     
-
     //APIからの返却数までループ
     for(i = 0;i < [njs.key1ImgArr count];i++){
         
@@ -216,7 +220,11 @@ NetworkConCheck *ncc;
         //主菜のレシピURLの文字列格納
         R_Url_Str = [njs.key1UrlArr objectAtIndex:i];
 
-        [self Menu_Img_UrlSet:0];
+        //[self Menu_Img_UrlSet:0];
+        if(![self Menu_Img_UrlSet:0])
+        {
+            return false;
+        }
     }
     for(i = 0;i < [njs.key2ImgArr count];i++){
         //副菜の画像URLの文字列格納
@@ -226,7 +234,11 @@ NetworkConCheck *ncc;
         //副菜のレシピURLの文字列格納
         R_Url_Str = [njs.key2UrlArr objectAtIndex:i];
                 
-        [self Menu_Img_UrlSet:1];
+        //[self Menu_Img_UrlSet:1];
+        if(![self Menu_Img_UrlSet:1])
+        {
+            return false;
+        }
     }
     for (i = 0; i < [njs.key3ImgArr count]; i++) {
         //デザートの画像URLの文字列格納
@@ -236,7 +248,11 @@ NetworkConCheck *ncc;
         //デザートのレシピURLの文字列格納
         R_Url_Str = [njs.key3UrlArr objectAtIndex:i];
                 
-        [self Menu_Img_UrlSet:2];
+        //[self Menu_Img_UrlSet:2];
+        if(![self Menu_Img_UrlSet:2])
+        {
+            return false;
+        }
     }
     for (i = 0; i < [njs.key4ImgArr count]; i++) {
         //ドリンクの画像URLの文字列格納
@@ -246,7 +262,11 @@ NetworkConCheck *ncc;
         //ドリンクのレシピURLの文字列格納
         R_Url_Str = [njs.key4UrlArr objectAtIndex:i];
         
-        [self Menu_Img_UrlSet:3];
+        //[self Menu_Img_UrlSet:3];
+        if(![self Menu_Img_UrlSet:3])
+        {
+            return false;
+        }
     }
     return true;
 }
@@ -408,7 +428,7 @@ NetworkConCheck *ncc;
     {
         syokai = true;
         hantei0 = true;
-        ShowAppAlert *saa = [[ShowAppAlert alloc]init];
+        //ShowAppAlert *saa = [[ShowAppAlert alloc]init];
         //取得した文字列から画像表示するための前処理
         if([self Menu_Img_GET]){
             //APIからの返却数が正常だった場合
@@ -417,8 +437,19 @@ NetworkConCheck *ncc;
         }
         else{
             NSLog(@"API取得値が不正\n");
-            [saa showAlert:@"エラー" MESSAGE_Str:@"献立の取得に失敗しました。" CANCEL_Str:nil OTHER_Str:@"はい"];
-            [self previousPage];
+            //[saa showAlert:@"エラー" MESSAGE_Str:@"献立の取得に失敗しました。" CANCEL_Str:nil OTHER_Str:@"はい"];
+            saa =[[UIAlertView alloc]
+                                 initWithTitle:@"エラー"
+                                 message:@"献立の取得に失敗しました。"
+                                 delegate:self
+                                 cancelButtonTitle:nil
+                                 otherButtonTitles:@"はい",
+                                 nil];
+            saa.alertViewStyle = UIAlertViewStyleDefault;
+            
+            [saa show];
+            
+            //[self previousPage];
         }
     }
     //画面4から遷移した場合
@@ -540,7 +571,7 @@ NetworkConCheck *ncc;
 {
     int random = 0;
     bool hantei = false;
-    
+    NSLog(@"maxNumber = %d",maxNumber);
     //初回表示もしくはスワイプされた側の献立をランダムに設定　スワイプされなかった側の献立は今の値を取得
     if(syokai || (70 <= pickPos.y && pickPos.y < 320 && ImgNumber < 4) || (pickPos.y >= 320 && ImgNumber >= 4)){
     
@@ -625,7 +656,7 @@ NetworkConCheck *ncc;
         });
     }else{
         dispatch_async(mainQueue,^{
-            UIAlertView* alert =[[UIAlertView alloc]
+            alert =[[UIAlertView alloc]
                                  initWithTitle:@"エラー"
                                  message:@"ネットワークに接続していません\n再試行しますか？"
                                  delegate:self
@@ -646,16 +677,21 @@ NetworkConCheck *ncc;
 //アラートのボタンが押されたときの処理（イベント未選択のアラートとネットワーク接続確認のアラートの両方が実行する）
 -(void)alertView:(UIAlertView*)alertView
 clickedButtonAtIndex:(NSInteger)buttonIndex{
-    switch(buttonIndex){
-        case 0:
-            break;
-        case 1:
-            //はいが押されたらサブ処理でネットワーク接続確認を再試行
-            dispatch_async(subQueue,^{
-                [self subQueueMethod];
+    if(alertView == alert){
+        switch(buttonIndex){
+            case 0:
+                break;
+            case 1:
+                //はいが押されたらサブ処理でネットワーク接続確認を再試行
+                dispatch_async(subQueue,^{
+                    [self subQueueMethod];
                 
-            });
-            break;
+                });
+                break;
+        }
+    }else if(alertView == saa)
+    {
+        [self previousPage];
     }
 }
 

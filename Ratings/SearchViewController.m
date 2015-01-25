@@ -48,8 +48,8 @@ NetworkConCheck *ncc;
 RecipeSelect *rs;
 
 NSMutableArray *icon_event;//イベントアイコン（白黒）
-NSMutableArray *icon_event_color;//イベントアイコン（カラー）
-NSIndexPath *previousIndexPath;
+NSMutableArray *icon_event_gray;//イベントアイコン（カラー）
+NSIndexPath *previousIndexPath; //直前に選択されていたセルのindexpath
 
 
 
@@ -142,7 +142,7 @@ NSIndexPath *previousIndexPath;
         case 0:
             cell.textLabel.text = self.dataSourceEvent[indexPath.row];
             cell.textLabel.font = [UIFont systemFontOfSize:13];
-            cell.imageView.image = [UIImage imageNamed:[icon_event_color objectAtIndex:indexPath.row]];
+            cell.imageView.image = [UIImage imageNamed:[icon_event objectAtIndex:indexPath.row]];
             if(Display_ID == 3){
                 NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
                 //[self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
@@ -182,7 +182,7 @@ NSIndexPath *previousIndexPath;
             previousIndexPath = nil;
             
             UITableViewCell *cell = [self.Event_Table cellForRowAtIndexPath:indexPath];
-            cell.imageView.image = [UIImage imageNamed:[icon_event_color objectAtIndex:indexPath.row]];
+            cell.imageView.image = [UIImage imageNamed:[icon_event objectAtIndex:indexPath.row]];
             
             //選択条件：不正
             Selected_flag = false;
@@ -190,7 +190,7 @@ NSIndexPath *previousIndexPath;
         else{
             if(previousIndexPath != nil){
                 UITableViewCell *cell = [self.Event_Table cellForRowAtIndexPath:previousIndexPath];
-                cell.imageView.image = [UIImage imageNamed:[icon_event_color objectAtIndex:previousIndexPath.row]];
+                cell.imageView.image = [UIImage imageNamed:[icon_event objectAtIndex:previousIndexPath.row]];
             }
             
             //選択された最新indexを格納
@@ -203,7 +203,7 @@ NSIndexPath *previousIndexPath;
             previousIndexPath =indexPath;
             
             UITableViewCell *cell = [self.Event_Table cellForRowAtIndexPath:indexPath];
-            cell.imageView.image = [UIImage imageNamed:[icon_event objectAtIndex:indexPath.row]];
+            cell.imageView.image = [UIImage imageNamed:[icon_event_gray objectAtIndex:indexPath.row]];
             
             
             //選択条件：正
@@ -275,12 +275,18 @@ NSIndexPath *previousIndexPath;
                   @"event_28.png",@"event_29.png",@"event_30.png",@"event_31.png",@"event_32.png",
                   @"event_38.png",@"event_39.png",@"event_40.png",nil];
     
-    icon_event_color = [NSMutableArray arrayWithObjects:
+    icon_event_gray = [NSMutableArray arrayWithObjects:
+                  @"event_03.png",@"event_05.png",@"event_07.png",@"event_09.png",@"event_11.png",
+                  @"event_18.png",@"event_19.png",@"event_20.png",@"event_21.png",@"event_22.png",
+                  @"event_28.png",@"event_29.png",@"event_30.png",@"event_31.png",@"event_32.png",
+                  @"event_38.png",@"event_39.png",@"event_40.png",nil];
+    
+    /*icon_event_gray = [NSMutableArray arrayWithObjects:
                         @"event_color_03.png",@"event_color_05.png",@"event_color_07.png",@"event_color_09.png",
                         @"event_color_11.png",@"event_color_18.png",@"event_color_19.png",@"event_color_20.png",
                         @"event_color_21.png",@"event_color_22.png",@"event_color_28.png",@"event_color_29.png",
                         @"event_color_30.png",@"event_color_31.png",@"event_color_32.png",@"event_color_38.png",
-                        @"event_color_39.png",@"event_color_40.png",nil];
+                        @"event_color_39.png",@"event_color_40.png",nil];*/
 }
 
 //メイン処理　最初のネットワーク接続確認を実行　プログレスバーの表示
