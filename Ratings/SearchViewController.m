@@ -102,6 +102,15 @@ NSIndexPath *previousIndexPath; //直前に選択されていたセルのindexpa
     
     //デフォルトのBACKボタンの非表示
     [self.navigationItem setHidesBackButton:YES animated:NO];
+    
+    //楽天クレジット表示
+    UIWebView *webView;
+    webView.scalesPageToFit = YES;
+    webView = [[UIWebView alloc] initWithFrame:CGRectMake(250,60,100,50)];
+    webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"banner" ofType:@"html"];
+    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
+    [self.view addSubview:webView];
 }
 
 -(void) viewWillAppear:(BOOL)animated{

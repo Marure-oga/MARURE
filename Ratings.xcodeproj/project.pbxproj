@@ -13,6 +13,7 @@
 		6358762719A23DED0007EE28 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762619A23DED0007EE28 /* MenuViewController.m */; };
 		6358762A19A23E410007EE28 /* RecipeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6358762919A23E410007EE28 /* RecipeViewController.m */; };
 		63B68C7A1A0A88990075536D /* ShowAppAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 63B68C791A0A88990075536D /* ShowAppAlert.m */; };
+		AB3F63F01ABF065A00AD500C /* banner.html in Resources */ = {isa = PBXBuildFile; fileRef = AB3F63EF1ABF065A00AD500C /* banner.html */; };
 		AB70F37C1A7296CA0073C143 /* event_03.png in Resources */ = {isa = PBXBuildFile; fileRef = AB70F3571A7296CA0073C143 /* event_03.png */; };
 		AB70F37D1A7296CA0073C143 /* event_05.png in Resources */ = {isa = PBXBuildFile; fileRef = AB70F3581A7296CA0073C143 /* event_05.png */; };
 		AB70F37E1A7296CA0073C143 /* event_07.png in Resources */ = {isa = PBXBuildFile; fileRef = AB70F3591A7296CA0073C143 /* event_07.png */; };
@@ -105,6 +106,7 @@
 		6358762919A23E410007EE28 /* RecipeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecipeViewController.m; sourceTree = "<group>"; };
 		63B68C781A0A88990075536D /* ShowAppAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowAppAlert.h; sourceTree = "<group>"; };
 		63B68C791A0A88990075536D /* ShowAppAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowAppAlert.m; sourceTree = "<group>"; };
+		AB3F63EF1ABF065A00AD500C /* banner.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = banner.html; sourceTree = "<group>"; };
 		AB70F3571A7296CA0073C143 /* event_03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_03.png; sourceTree = "<group>"; };
 		AB70F3581A7296CA0073C143 /* event_05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_05.png; sourceTree = "<group>"; };
 		AB70F3591A7296CA0073C143 /* event_07.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = event_07.png; sourceTree = "<group>"; };
@@ -288,6 +290,14 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		AB3F63EE1ABF065A00AD500C /* html */ = {
+			isa = PBXGroup;
+			children = (
+				AB3F63EF1ABF065A00AD500C /* banner.html */,
+			);
+			path = html;
+			sourceTree = SOURCE_ROOT;
+		};
 		AB70F3551A7296CA0073C143 /* event_icon */ = {
 			isa = PBXGroup;
 			children = (
@@ -368,6 +378,7 @@
 		ABB83905197CFF9000878CB0 /* Ratings */ = {
 			isa = PBXGroup;
 			children = (
+				AB3F63EE1ABF065A00AD500C /* html */,
 				AB70F3551A7296CA0073C143 /* event_icon */,
 				63B68C7B1A0A88A20075536D /* Config */,
 				ABE0AF9519EA8A0100640E25 /* picture */,
@@ -534,6 +545,7 @@
 				AB70F3811A7296CA0073C143 /* event_18.png in Resources */,
 				AB70F3861A7296CA0073C143 /* event_28.png in Resources */,
 				AB70F3821A7296CA0073C143 /* event_19.png in Resources */,
+				AB3F63F01ABF065A00AD500C /* banner.html in Resources */,
 				AB70F37E1A7296CA0073C143 /* event_07.png in Resources */,
 				AB70F38F1A7296CA0073C143 /* event_color_05.png in Resources */,
 				AB70F3881A7296CA0073C143 /* event_30.png in Resources */,
