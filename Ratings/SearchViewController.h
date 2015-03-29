@@ -11,6 +11,7 @@
 #import "JsonSerchClass.h"
 #import "ShowAppAlert.h"
 #import "NetworkConCheck.h"
+#import "WebViewController.h"
 #import "RecipeSelect.h"
 
 //ネットワーク接続確認のために必要

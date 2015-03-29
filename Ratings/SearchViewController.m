@@ -104,13 +104,11 @@ NSIndexPath *previousIndexPath; //直前に選択されていたセルのindexpa
     [self.navigationItem setHidesBackButton:YES animated:NO];
     
     //楽天クレジット表示
-    UIWebView *webView;
-    webView.scalesPageToFit = YES;
-    webView = [[UIWebView alloc] initWithFrame:CGRectMake(250,60,100,50)];
-    webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"banner" ofType:@"html"];
-    [webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:path]]];
-    [self.view addSubview:webView];
+    UIButton *customView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 27)];
+    [customView setBackgroundImage:[UIImage imageNamed:@"credit_4936.gif"] forState:UIControlStateNormal];
+    [customView addTarget:self action:@selector(nextWebCredit) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem* buttonItem = [[UIBarButtonItem alloc] initWithCustomView:customView];
+    self.navigationItem.rightBarButtonItem = buttonItem;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
@@ -152,18 +150,18 @@ NSIndexPath *previousIndexPath; //直前に選択されていたセルのindexpa
             cell.textLabel.text = self.dataSourceEvent[indexPath.row];
             cell.textLabel.font = [UIFont systemFontOfSize:13];
             cell.imageView.image = [UIImage imageNamed:[icon_event objectAtIndex:indexPath.row]];
-            if(Display_ID == 3){
-                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
+            //if(Display_ID == 3){
+                //NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Event_NO inSection:0];
                 //[self.Event_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-            }
+            //}
             break;
         case 1:
             cell.textLabel.text = self.dataSourceAmbience[indexPath.row];
             cell.textLabel.font = [UIFont systemFontOfSize:13];
-            if(Display_ID == 3){
-                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Ambience_NO inSection:0];
-                //[self.Ambience_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
-            }
+//            if(Display_ID == 3){
+//                NSIndexPath* indexPath = [NSIndexPath indexPathForRow:Ambience_NO inSection:0];
+//                //[self.Ambience_Table selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+//            }
             break;
         default:
             break;
@@ -377,6 +375,15 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     Display_ID = 2;
     MenuViewController *menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"menu"];
     [self.navigationController pushViewController:menuViewController animated:YES];
+}
+
+//クレジットサイトへ遷移
+-(void)nextWebCredit{
+    Display_ID = 2;
+    getUrl = @"http://webservice.rakuten.co.jp/";
+    Merge_Text = @"楽天WebService";
+    WebViewController *webViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"web"];
+    [self.navigationController pushViewController:webViewController animated:YES];
 }
 
 @end
